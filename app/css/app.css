@@ -1,0 +1,11 @@
+/* app css stylesheet */
+
+.no-bottom-margin {
+    margin-bottom: 0px;
+    border-radius: 0px;
+}
+
+.thumb img {
+    height: 100px;
+    width: 100px;
+}

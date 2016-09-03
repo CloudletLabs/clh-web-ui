@@ -1,0 +1,26 @@
+div(ng-include='', src="'partials/nav.html'")
+div(ng-include='', src="'partials/header.html'")
+.container-fluid
+    .row
+        .col-md-10.col-md-offset-1
+            .panel.panel-info
+                .panel-heading User
+                .row
+                    .col-md-10.col-md-offset-1
+                        form.form(ng-submit='vm.updateUser()', role='form')
+                            fieldset
+                                legend User {{vm.userDetails.name}}
+                                .form-group
+                                    label Name:
+                                    input.form-control(type='text', ng-model='vm.userDetails.name', placeholder='Type name...', required='')
+                                .form-group
+                                    label EMail:
+                                    input.form-control(type='email', ng-model='vm.userDetails.email', placeholder='Type email...', required='')
+                                .form-group
+                                    label Avatar:
+                                    input.form-control(type='text', ng-model='vm.userDetails.avatar', placeholder='Type avatar url...', required='')
+                                .form-group
+                                    label Password:
+                                    input.form-control(type='password', ng-model='vm.userDetails.plainTextPassword', placeholder='Type password...', required='')
+                                input.btn.btn-primary(type='submit', value='Done')
+div(ng-include='', src="'partials/footer.html'")

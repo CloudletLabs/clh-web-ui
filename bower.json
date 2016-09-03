@@ -1,0 +1,25 @@
+{
+  "name": "bdn-web",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "angular": "=1.5.6",
+    "angular-mocks": "=1.5.6",
+    "angular-route": "=1.5.6",
+    "angular-animate": "=1.5.6",
+    "angular-local-storage": "=0.2.7",
+    "angular-toastr": "1.7.0",
+    "jquery": "=2.2.4",
+    "bootstrap": "=3.3.6",
+    "cryptojslib": "=3.1.2",
+    "requirejs": "=2.2.0",
+    "markdown": "=0.5.0"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

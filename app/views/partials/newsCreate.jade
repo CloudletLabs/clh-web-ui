@@ -1,0 +1,20 @@
+div(ng-include='', src="'partials/nav.html'")
+div(ng-include='', src="'partials/header.html'")
+.container-fluid
+    .row
+        .col-md-10.col-md-offset-1
+            .row
+                .col-md-12
+                    .row
+                        .col-md-12
+                            .panel.panel-default
+                                .panel-heading
+                                    .row
+                                        .col-md-1.pull-left
+                                            button.btn.btn-primary.btn-sm(type='button', ng-click='vm.createNews()')
+                                                span.glyphicon.glyphicon-pencil
+                                                |  Create
+                                        input.col-md-6.form-control(type='text', ng-model='vm.newNews.subject', required='')
+                                .panel-body
+                                    textarea.form-control(type='text', ng-model='vm.newNews.text', required='')
+div(ng-include='', src="'partials/footer.html'")

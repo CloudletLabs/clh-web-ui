@@ -1,0 +1,52 @@
+div(ng-include='', src="'partials/nav.html'")
+div(ng-include='', src="'partials/header.html'")
+.container-fluid
+    .row
+        .col-md-10.col-md-offset-1
+            .row
+                .col-md-12
+                    .row
+                        .col-md-12
+                            .panel.panel-info
+                                // Default panel contents
+                                .panel-heading Users
+                                table.table.table-condensed
+                                    thead
+                                        tr
+                                            th.text-center(width='15%') Name
+                                            th.text-center(width='20%') EMail
+                                            th.text-center(width='35%') Avatar
+                                            th.text-center(width='15%')
+                                                span.glyphicon.glyphicon-pencil
+                                            th.text-center(width='15%')
+                                                span.glyphicon.glyphicon-trash
+                                    tbody
+                                        tr(ng-repeat='user in vm.users')
+                                            td.text-center(ng-hide='user.modify') {{user.name}}
+                                            td.text-center(ng-hide='user.modify') {{user.email}}
+                                            td.text-center(ng-hide='user.modify')
+                                                a.thumb(href='#/users/{{user.username}}')
+                                                    img(ng-src='{{user.avatar}}', alt='{{user.name}}')
+                                            td.text-center(ng-hide='user.modify')
+                                                button.btn.btn-primary.btn-sm(type='button', ng-click='vm.updateUser($index,true)')
+                                                    span.glyphicon.glyphicon-pencil
+                                                    |  Modify
+                                            td.text-center(ng-hide='user.modify')
+                                                button.btn.btn-danger.btn-sm(type='button', ng-click='vm.deleteUser($index)')
+                                                    span.glyphicon.glyphicon-trash
+                                                    |  Delete
+                                            td.text-center(ng-show='user.modify')
+                                                input.form-control(type='text', ng-model='user.name', placeholder='{{user.name}}', required='')
+                                            td.text-center(ng-show='user.modify')
+                                                input.form-control(type='text', ng-model='user.email', placeholder='{{user.email}}', required='')
+                                            td.text-center(ng-show='user.modify')
+                                                input.form-control(type='text', ng-model='user.avatar', placeholder='{{user.avatar}}', required='')
+                                            td.text-center(ng-show='user.modify')
+                                                button.btn.btn-primary.btn-sm(type='button', ng-click='vm.updateUser($index,false)')
+                                                    span.glyphicon.glyphicon-pencil
+                                                    |  Update
+                                            td.text-center(ng-show='user.modify')
+                                                button.btn.btn-danger.btn-sm(ng-disabled='true', type='button')
+                                                    span.glyphicon.glyphicon-trash
+                                                    |  Delete
+div(ng-include='', src="'partials/footer.html'")

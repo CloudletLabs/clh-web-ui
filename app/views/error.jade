@@ -1,0 +1,12 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset='utf8')
+    base(href='/')
+    title BodyNizer
+    link(rel='stylesheet', href='bower/css/bootstrap/dist/css/bootstrap.css')
+  body
+    h1= message
+      if error
+        h2= error.status
+        pre #{error.stack}
