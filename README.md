@@ -1,20 +1,8 @@
 # web
 
-# Installing NodeJS
+# Installing NodeJS and NPM
 
-https://nodejs.org/en/
-
-# Installing DB
-
-We use MongoDB: https://www.mongodb.org/
-
-To start Mongo please use following cmd:
-
-```
-mongod --dbpath <path to DB directory>
-# For example:
-mongod.exe --dbpath C:\MongoDB
-```
+https://nodejs.org/en/ or https://github.com/creationix/nvm
 
 # Running app
 
@@ -22,3 +10,5 @@ mongod.exe --dbpath C:\MongoDB
 npm install # install dependencies
 npm start # start application
 ```
+
+You may want to edit ```app/env.js``` to customize some settings

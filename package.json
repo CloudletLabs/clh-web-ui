@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "postinstall": "bower install"
+    "postinstall": "bower install",
+    "start": "grunt"
   },
   "devDependencies": {
     "jade": "=1.11.0",
