@@ -101,7 +101,7 @@ module.exports = function (grunt) {
         connect: {
             server: {
                 options: {
-                    port: 4000,
+                    port: process.env.PORT || '8088',
                     base: 'build',
                     hostname: '*'
                 }
