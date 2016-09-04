@@ -48,6 +48,9 @@ define([
     bdnApp.config(['$logProvider', function ($logProvider) {
         $logProvider.debugEnabled(__env.enableDebug);
     }]);
+    bdnApp.config(['$compileProvider', function ($compileProvider) {
+        $compileProvider.debugInfoEnabled(__env.enableDebug);
+    }]);
 
     /**
      * Configure http interceptor to inject auth token
