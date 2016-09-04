@@ -1,4 +1,4 @@
-# clh-web-ui
+# clh-web-ui - AngularJS frontend
 
 # Installing NodeJS and NPM
 
