@@ -61,51 +61,51 @@ define(['angular'], function (angular) {
         // Route angular services to API calls
         return {
             login: function (user) {
-                return _ajaxRequest('POST', '/api/current/auth_token', user, null);
+                return _ajaxRequest('POST', '/auth_token', user, null);
             },
             register: function (user) {
-                return _ajaxRequest('POST', '/api/current/users', user, null);
+                return _ajaxRequest('POST', '/users', user, null);
             },
             getCurrentUser: function () {
-                return _promisesGetter('GET', '/api/current/user', null, "currentUser", true);
+                return _promisesGetter('GET', '/user', null, "currentUser", true);
             },
             getUsers: function (refresh) {
-                return _promisesGetter('GET', '/api/current/users', null, "users", refresh);
+                return _promisesGetter('GET', '/users', null, "users", refresh);
             },
             getUserDetails: function (username, refresh) {
                 return _promisesGetter('GET',
-                    '/api/current/users/' + username,
+                    '/users/' + username,
                     null,
                     "user_" + username,
                     refresh);
             },
             updateUser: function (user) {
-                return _ajaxRequest('PUT', '/api/current/users/' + user.username, user, null);
+                return _ajaxRequest('PUT', '/users/' + user.username, user, null);
             },
             deleteUser: function (username) {
-                return _ajaxRequest('DELETE', '/api/current/users/' + username, null, null);
+                return _ajaxRequest('DELETE', '/users/' + username, null, null);
             },
             createUser: function (user) {
-                return _ajaxRequest('POST', '/api/current/users', user, null);
+                return _ajaxRequest('POST', '/users', user, null);
             },
             getNews: function (refresh) {
-                return _promisesGetter('GET', '/api/current/news', null, "news", refresh);
+                return _promisesGetter('GET', '/news', null, "news", refresh);
             },
             getNewsBySlug: function (slug, refresh) {
                 return _promisesGetter('GET',
-                    '/api/current/news/' + slug,
+                    '/news/' + slug,
                     null,
                     "news_" + slug,
                     refresh);
             },
             updateNews: function (news) {
-                return _ajaxRequest('PUT', '/api/current/news/' + news.slug, news, null);
+                return _ajaxRequest('PUT', '/news/' + news.slug, news, null);
             },
             createNews: function (news) {
-                return _ajaxRequest('POST', '/api/current/news', news, null);
+                return _ajaxRequest('POST', '/news', news, null);
             },
             deleteNews: function (slug) {
-                return _ajaxRequest('DELETE', '/api/current/news/' + slug, null, null);
+                return _ajaxRequest('DELETE', '/news/' + slug, null, null);
             }
         }
     }
@@ -128,7 +128,7 @@ define(['angular'], function (angular) {
                 return response || $q.when(response);
             },
             responseError: function (response) {
-                if (response.config.url !== "/api/current/auth_token" && response.status === 401) {
+                if (response.config.url !== "/auth_token" && response.status === 401) {
                     localStorageService.clearAll();
                     $location.path("/login");
                 }

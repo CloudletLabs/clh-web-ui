@@ -8,16 +8,15 @@ require.config({
         'directives': 'js/app/directives',
         'filters': 'js/app/filters',
         'version': 'js/app/version',
-        'angular': 'bower/js/angular/angular',
-        'angularRoute': 'bower/js/angular-route/angular-route',
-        'angularLocalStorage': 'bower/js/angular-local-storage/dist/angular-local-storage',
-        'angularAnimate': 'bower/js/angular-animate/angular-animate',
-        'angularToastr': 'bower/js/angular-toastr/dist/angular-toastr.tpls',
-        // 'cryptojslib': 'bower/cryptojslib/rollups/pbkdf2',
-        'cryptojslib': 'bower/js/cryptojslib/rollups/rc4',
-        'jquery': 'bower/js/jquery/dist/jquery',
-        'bootstrap': 'bower/js/bootstrap/dist/js/bootstrap',
-        'markdown': 'bower/js/markdown/lib/markdown'
+        'angular': 'bower/angular/angular',
+        'angularRoute': 'bower/angular-route/angular-route',
+        'angularLocalStorage': 'bower/angular-local-storage/dist/angular-local-storage',
+        'angularAnimate': 'bower/angular-animate/angular-animate',
+        'angularToastr': 'bower/angular-toastr/dist/angular-toastr.tpls',
+        'cryptojslib': 'bower/cryptojslib/rollups/pbkdf2',
+        'jquery': 'bower/jquery/dist/jquery',
+        'bootstrap': 'bower/bootstrap/dist/js/bootstrap',
+        'markdown': 'bower/markdown/lib/markdown'
     },
     shim: {
         'angular': {

@@ -37,10 +37,14 @@ define([
         'bdnVersion'
     ]);
 
-    // Register environment in AngularJS as constant
+    /**
+     * Register environment in AngularJS as constant
+     */
     bdnApp.constant('__env', __env);
 
-    // Set logging level
+    /**
+     * Set logging level
+     */
     bdnApp.config(['$logProvider', function ($logProvider) {
         $logProvider.debugEnabled(__env.enableDebug);
     }]);

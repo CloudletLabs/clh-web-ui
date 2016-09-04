@@ -27,10 +27,6 @@ module.exports = function (grunt) {
         bower: {
             dev: {
                 dest: 'build/bower',
-                js_dest: 'build/bower/js',
-                css_dest: 'build/bower/css',
-                fonts_dest: 'build/bower/fonts/',
-                images_dest: 'build/bower/images/',
                 options: {
                     expand: true,
                     packageSpecific: {
@@ -44,6 +40,11 @@ module.exports = function (grunt) {
                         'markdown': {
                             files: [
                                 'lib/markdown.js'
+                            ]
+                        },
+                        'cryptojslib': {
+                            files: [
+                                'rollups/pbkdf2.js'
                             ]
                         }
                     }
