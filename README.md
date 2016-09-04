@@ -1,4 +1,4 @@
-# web
+# clh-web-ui
 
 # Installing NodeJS and NPM
 
