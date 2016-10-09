@@ -192,14 +192,20 @@ define(['angular'], function (angular) {
         if (modify) {
             // When pressed initially - just change the status to render another controls
             vm.currentNews.modify = true;
+            vm.currentNews.oldSlug = vm.currentNews.slug;
         } else {
+            var newsToSave = {
+                subject: vm.currentNews.subject,
+                text: vm.currentNews.text
+            };
             // When done editing - request to the server
-            vm.ResourceService.updateNews(vm.currentNews).then(function (news) {
+            vm.ResourceService.updateNews(vm.currentNews.oldSlug, newsToSave).then(function (news) {
                 // Updated, save new instance and render it
                 vm.currentNews = news;
                 vm.currentNews.html = vm.$sce.trustAsHtml(markdown.toHTML(vm.currentNews.text));
                 // Hide editing controls
                 vm.currentNews.modify = false;
+                delete vm.currentNews.oldSlug;
                 vm.toastr.success("News successfully updated!");
             }, function (err) {
                 if (err.status === 401) {

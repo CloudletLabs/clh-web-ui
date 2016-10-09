@@ -98,8 +98,8 @@ define(['angular'], function (angular) {
                     "news_" + slug,
                     refresh);
             },
-            updateNews: function (news) {
-                return _ajaxRequest('PUT', '/news/' + news.slug, news, null);
+            updateNews: function (slug, news) {
+                return _ajaxRequest('PUT', '/news/' + slug, news, null);
             },
             createNews: function (news) {
                 return _ajaxRequest('POST', '/news', news, null);
