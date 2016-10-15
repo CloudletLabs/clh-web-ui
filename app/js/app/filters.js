@@ -2,13 +2,13 @@ define(['angular'], function (angular) {
     'use strict';
 
     /* Filters */
-    var bdnFilters = angular.module('bdnFilters', []);
+    var clhFilters = angular.module('clhFilters', []);
 
-    bdnFilters.filter('apiVersion', ['apiVersion', function (apiVersion) {
+    clhFilters.filter('apiVersion', ['apiVersion', function (apiVersion) {
         return function (text) {
             return String(text).replace(/\%API_VERSION\%/mg, apiVersion);
         }
     }]);
 
-    return bdnFilters;
+    return clhFilters;
 });

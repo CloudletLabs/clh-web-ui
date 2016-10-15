@@ -3,7 +3,10 @@ require.config({
     paths: {
         'env': 'js/env',
         'app': 'js/app',
-        'controllers': 'js/app/controllers',
+        'indexControllers': 'js/app/controllers/indexControllers',
+        'loginControllers': 'js/app/controllers/loginControllers',
+        'usersControllers': 'js/app/controllers/usersControllers',
+        'newsControllers': 'js/app/controllers/newsControllers',
         'services': 'js/app/services',
         'directives': 'js/app/directives',
         'filters': 'js/app/filters',
@@ -39,8 +42,11 @@ require.config({
             exports: 'angularToastr'
         },
         'bootstrap': ['jquery'],
+        'indexControllers': {
+            deps: ['loginControllers', 'usersControllers', 'newsControllers']
+        },
         'app': {
-            deps: ['cryptojslib', 'angular', 'angularToastr', 'bootstrap', 'markdown', 'env', 'controllers', 'services']
+            deps: ['cryptojslib', 'angular', 'angularToastr', 'bootstrap', 'markdown', 'env', 'indexControllers', 'services']
         }
     },
     deps: ['js/bootstrap']

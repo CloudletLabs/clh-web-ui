@@ -8,7 +8,10 @@ define([
     'bootstrap',
     'markdown',
     'cryptojslib',
-    'controllers',
+    'indexControllers',
+    'loginControllers',
+    'usersControllers',
+    'newsControllers',
     'services',
     'directives',
     'filters',
@@ -25,44 +28,47 @@ define([
     /**
      * Define our app module
      */
-    var bdnApp = angular.module('bdnApp', [
+    var clhApp = angular.module('clhApp', [
         'ngRoute',
         'ngAnimate',
         'LocalStorageModule',
         'toastr',
-        'bdnControllers',
-        'bdnServices',
-        'bdnDirectives',
-        'bdnFilters',
-        'bdnVersion'
+        'clhIndexControllers',
+        'clhLoginControllers',
+        'clhUsersControllers',
+        'clhNewsControllers',
+        'clhServices',
+        'clhDirectives',
+        'clhFilters',
+        'clhVersion'
     ]);
 
     /**
      * Register environment in AngularJS as constant
      */
-    bdnApp.constant('__env', __env);
+    clhApp.constant('__env', __env);
 
     /**
      * Set logging level
      */
-    bdnApp.config(['$logProvider', function ($logProvider) {
+    clhApp.config(['$logProvider', function ($logProvider) {
         $logProvider.debugEnabled(__env.enableDebug);
     }]);
-    bdnApp.config(['$compileProvider', function ($compileProvider) {
+    clhApp.config(['$compileProvider', function ($compileProvider) {
         $compileProvider.debugInfoEnabled(__env.enableDebug);
     }]);
 
     /**
      * Configure http interceptor to inject auth token
      */
-    bdnApp.config(['$httpProvider', function ($httpProvider) {
+    clhApp.config(['$httpProvider', function ($httpProvider) {
         $httpProvider.interceptors.push('TokenInterceptor');
     }]);
 
     /**
      * Configure toastr
      */
-    bdnApp.config(function (toastrConfig) {
+    clhApp.config(function (toastrConfig) {
         angular.extend(toastrConfig, {
             allowHtml: false,
             closeButton: true,
@@ -98,7 +104,7 @@ define([
     /**
      * Configure routing
      */
-    bdnApp.config(['$routeProvider',
+    clhApp.config(['$routeProvider',
         function ($routeProvider) {
             $routeProvider.when('/login', {
                 templateUrl: 'partials/login.html',
@@ -198,7 +204,7 @@ define([
     /**
      * Intercept routing change to check if user have an access
      */
-    bdnApp.run(['$rootScope', '$location', 'AuthenticationService', function ($rootScope, $location, AuthenticationService) {
+    clhApp.run(['$rootScope', '$location', 'AuthenticationService', function ($rootScope, $location, AuthenticationService) {
         $rootScope.$on("$routeChangeStart", function (event, nextRoute, currentRoute) {
             if (nextRoute.redirectTo) {
                 // do nothing
@@ -216,5 +222,5 @@ define([
         });
     }]);
 
-    return bdnApp;
+    return clhApp;
 });
