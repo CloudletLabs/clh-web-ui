@@ -1,13 +1,13 @@
 define(['angular'], function (angular) {
     'use strict';
 
-    var bdnVersion = angular.module('bdnVersion', [
-        'bdnFilters',
-        'bdnDirectives'
+    var clhVersion = angular.module('clhVersion', [
+        'clhFilters',
+        'clhDirectives'
     ])
 
-    bdnVersion.value('version', '0.1');
-    bdnVersion.value('apiVersion', '1');
+    clhVersion.value('version', '0.1');
+    clhVersion.value('apiVersion', '1');
 
-    return bdnVersion;
+    return clhVersion;
 });

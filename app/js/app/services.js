@@ -3,12 +3,12 @@ define(['angular'], function (angular) {
 
     /* Services */
 
-    var bdnServices = angular.module('bdnServices', []);
-    bdnServices.service('Resolver', ['$q', Resolver]);
-    bdnServices.service('ResourceService', ['$q', '$http', ResourceService]);
-    bdnServices.service('TokenInterceptor', ['$q', '$location', 'localStorageService', TokenInterceptor]);
-    bdnServices.service('CryptoJSService', [CryptoJSService]);
-    bdnServices.service('AuthenticationService', ['localStorageService', AuthenticationService]);
+    var clhServices = angular.module('clhServices', []);
+    clhServices.service('Resolver', ['$q', Resolver]);
+    clhServices.service('ResourceService', ['$q', '$http', ResourceService]);
+    clhServices.service('TokenInterceptor', ['$q', '$location', 'localStorageService', TokenInterceptor]);
+    clhServices.service('CryptoJSService', [CryptoJSService]);
+    clhServices.service('AuthenticationService', ['localStorageService', AuthenticationService]);
 
     /**
      * Resolver service
@@ -169,5 +169,5 @@ define(['angular'], function (angular) {
         }
     }
 
-    return bdnServices;
+    return clhServices;
 });
