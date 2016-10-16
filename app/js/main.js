@@ -1,7 +1,6 @@
 require.config({
     baseUrl: '',
     paths: {
-        'env': 'js/env',
         'app': 'js/app',
         'indexControllers': 'js/app/controllers/indexControllers',
         'loginControllers': 'js/app/controllers/loginControllers',
@@ -16,6 +15,7 @@ require.config({
         'angularLocalStorage': 'bower/angular-local-storage/dist/angular-local-storage.min',
         'angularAnimate': 'bower/angular-animate/angular-animate.min',
         'angularToastr': 'bower/angular-toastr/dist/angular-toastr.tpls.min',
+        'angularEnvironment': 'bower/angular-environment/dist/angular-environment.min',
         'cryptojslib': 'bower/cryptojslib/rollups/pbkdf2',
         'jquery': 'bower/jquery/dist/jquery.min',
         'bootstrap': 'bower/bootstrap/dist/js/bootstrap.min',
@@ -41,12 +41,16 @@ require.config({
             deps: ['angularAnimate'],
             exports: 'angularToastr'
         },
+        'angularEnvironment': {
+            deps: ['angular', 'angularRoute', 'angularLocalStorage', 'angularAnimate', 'angularToastr'],
+            exports: 'angularEnvironment'
+        },
         'bootstrap': ['jquery'],
         'indexControllers': {
-            deps: ['loginControllers', 'usersControllers', 'newsControllers']
+            deps: ['cryptojslib', 'angularEnvironment', 'loginControllers', 'usersControllers', 'newsControllers']
         },
         'app': {
-            deps: ['cryptojslib', 'angular', 'angularToastr', 'bootstrap', 'markdown', 'env', 'indexControllers', 'services']
+            deps: ['bootstrap', 'markdown', 'indexControllers', 'services']
         }
     },
     deps: ['js/bootstrap']
