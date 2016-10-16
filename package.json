@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "postinstall": "bower install && grunt",
+    "preinstall": "npm prune",
+    "postinstall": "bower prune && bower install && grunt",
     "prestart": "npm install",
     "start": "grunt start",
     "pretest": "npm install",
