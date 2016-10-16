@@ -34,6 +34,11 @@ module.exports = function (grunt) {
                                 'dist/angular-toastr.min.css'
                             ]
                         },
+                        'angular-environment': {
+                            files: [
+                                'dist/angular-environment.min.js',
+                            ]
+                        },
                         'bootstrap': {
                             files: [
                                 'dist/css/bootstrap.min.css',

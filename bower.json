@@ -3,22 +3,17 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "angular": "=1.5.6",
-    "angular-route": "=1.5.6",
-    "angular-animate": "=1.5.6",
-    "angular-local-storage": "=0.2.7",
-    "angular-toastr": "1.7.0",
-    "jquery": "=2.2.4",
-    "bootstrap": "=3.3.6",
+    "angular": "=1.5.8",
+    "angular-route": "=1.5.8",
+    "angular-animate": "=1.5.8",
+    "angular-mocks": "1.5.8",
+    "angular-local-storage": "=0.5.0",
+    "angular-toastr": "2.1.1",
+    "angular-environment": "1.0.4",
+    "jquery": "=3.1.1",
+    "bootstrap": "=3.3.7",
     "cryptojslib": "=3.1.2",
-    "requirejs": "=2.2.0",
+    "requirejs": "=2.3.2",
     "markdown": "=0.5.0"
-  },
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ]
+  }
 }

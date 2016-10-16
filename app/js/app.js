@@ -4,6 +4,7 @@ define([
     'angularAnimate',
     'angularLocalStorage',
     'angularToastr',
+    'angularEnvironment',
     'jquery',
     'bootstrap',
     'markdown',
@@ -19,12 +20,6 @@ define([
 ], function (angular) {
     'use strict';
 
-    // Import variables if present (from env.js)
-    var __env = {};
-    if(window){
-        Object.assign(__env, window.__env);
-    }
-
     /**
      * Define our app module
      */
@@ -33,6 +28,7 @@ define([
         'ngAnimate',
         'LocalStorageModule',
         'toastr',
+        'environment',
         'clhIndexControllers',
         'clhLoginControllers',
         'clhUsersControllers',
@@ -44,18 +40,33 @@ define([
     ]);
 
     /**
-     * Register environment in AngularJS as constant
+     * Configure the app
+     * TODO: Add ERB marks for other envs
      */
-    clhApp.constant('__env', __env);
+    clhApp.config(['envServiceProvider', function(envServiceProvider) {
+        envServiceProvider.config({
+            domains: {
+                local: ['localhost']
+            },
+            vars: {
+                local: {
+                    apiVersion: 'current',
+                    apiUrl:  'https://clh-web-api-dev.herokuapp.com/api',
+                    enableDebug: true
+                }
+            }
+        });
+        envServiceProvider.check();
+    }]);
 
     /**
      * Set logging level
      */
-    clhApp.config(['$logProvider', function ($logProvider) {
-        $logProvider.debugEnabled(__env.enableDebug);
+    clhApp.config(['$logProvider', 'envServiceProvider', function ($logProvider, envServiceProvider) {
+        $logProvider.debugEnabled(envServiceProvider.read('enableDebug'));
     }]);
-    clhApp.config(['$compileProvider', function ($compileProvider) {
-        $compileProvider.debugInfoEnabled(__env.enableDebug);
+    clhApp.config(['$compileProvider', 'envServiceProvider', function ($compileProvider, envServiceProvider) {
+        $compileProvider.debugInfoEnabled(envServiceProvider.read('enableDebug'));
     }]);
 
     /**

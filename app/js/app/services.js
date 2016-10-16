@@ -1,11 +1,11 @@
-define(['angular'], function (angular) {
+define(['angular', 'angularEnvironment'], function (angular) {
     'use strict';
 
     /* Services */
 
     var clhServices = angular.module('clhServices', []);
     clhServices.service('Resolver', ['$q', Resolver]);
-    clhServices.service('ResourceService', ['$q', '$http', ResourceService]);
+    clhServices.service('ResourceService', ['envService', '$q', '$http', ResourceService]);
     clhServices.service('TokenInterceptor', ['$q', '$location', 'localStorageService', TokenInterceptor]);
     clhServices.service('CryptoJSService', [CryptoJSService]);
     clhServices.service('AuthenticationService', ['localStorageService', AuthenticationService]);
@@ -23,7 +23,9 @@ define(['angular'], function (angular) {
     /**
      * Resource server - query data from server and cache it
      */
-    function ResourceService($q, $http) {
+    function ResourceService(envService, $q, $http) {
+
+        var apiUrl = envService.read('apiUrl') + '/' + envService.read('apiVersion');
 
         var _promises = {};
 
@@ -46,7 +48,7 @@ define(['angular'], function (angular) {
         var _ajaxRequest = function (method, URL, data, key) {
             var deferred = $q.defer();
             // Request
-            $http({method: method, url: __env.apiUrl + URL, data: data}).success(function (data) {
+            $http({method: method, url: apiUrl + URL, data: data}).success(function (data) {
                 // Success
                 deferred.resolve(data);
                 // Save GET requests in cache
