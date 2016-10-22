@@ -129,7 +129,10 @@ define([
                 templateUrl: 'partials/register.html',
                 controller: 'RegistrationCtrl',
                 controllerAs: 'vm',
-                access: {requiredLogin: false}
+                access: {
+                    requiredLogin: false,
+                    requiredAdmin: false
+                }
             }).when('/', {
                 redirectTo: '/index'
             }).when('/index', {
@@ -222,13 +225,13 @@ define([
             } else if (nextRoute.access === undefined) {
                 // Fail fast - no access rules defined for this route
                 $location.path("/404");
+            } else if (nextRoute.access.requiredAdmin && !AuthenticationService.isAdmin()) {
+                // Pretend there is no such page if user is not an admin
+                $location.path("/404");
             } else if (nextRoute.access.requiredLogin && !AuthenticationService.isLogged()) {
                 // This route require access, and user is not logged in - redirect to login form
                 // TODO: preserve original path and redirect to it once authorised
                 $location.path("/login");
-            } else if (nextRoute.access.requiredAdmin && !AuthenticationService.isAdmin()) {
-                // Pretend there is no such page if user is not an admin
-                $location.path("/404");
             }
         });
     }]);

@@ -4,11 +4,15 @@
   "private": true,
   "scripts": {
     "preinstall": "npm prune",
-    "postinstall": "bower prune && bower install && grunt",
-    "prestart": "npm install",
+    "postinstall": "bower prune && bower install",
+    "clean": "rm -rf build",
+    "prebuild": "npm run-script clean && npm install",
+    "build": "grunt",
+    "prestart": "npm run-script clean && npm install",
     "start": "grunt start",
-    "pretest": "npm install",
-    "test": "karma start karma.conf.js"
+    "pretest": "npm run-script clean && npm install && grunt bower",
+    "test": "npm run-script test-only",
+    "test-only": "karma start karma.conf.js"
   },
   "devDependencies": {
     "jade": "=1.11.0",
