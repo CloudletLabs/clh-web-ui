@@ -6,7 +6,7 @@ define(['angular'], function (angular) {
     var clhIndexControllers = angular.module('clhIndexControllers', []);
 
     clhIndexControllers.controller('NavCtrl', ['$location', 'localStorageService', 'AuthenticationService', NavCtrl]);
-    clhIndexControllers.controller('IndexCtrl', ['$sce', 'ResourceService', 'data', 'toastr', IndexCtrl]);
+    clhIndexControllers.controller('IndexCtrl', ['$sce', 'ResourceService', 'data', IndexCtrl]);
 
     /**
      * Controller for navigation panel
@@ -21,21 +21,6 @@ define(['angular'], function (angular) {
     }
 
     /**
-     * Controller for an index page
-     */
-    function IndexCtrl($sce, ResourceService, data, toastr) {
-        var vm = this;
-        vm.ResourceService = ResourceService;
-        vm.toastr = toastr;
-
-        vm.news = data[0];
-        // Render markdown to html
-        vm.news.forEach(function (news) {
-            news.html = $sce.trustAsHtml(markdown.toHTML(news.text));
-        });
-    }
-
-    /**
      * When user press logout button
      */
     NavCtrl.prototype.logout = function () {
@@ -43,6 +28,20 @@ define(['angular'], function (angular) {
         vm.localStorageService.clearAll();
         vm.$location.path("/login");
     };
+
+    /**
+     * Controller for an index page
+     */
+    function IndexCtrl($sce, ResourceService, data) {
+        var vm = this;
+        vm.ResourceService = ResourceService;
+
+        vm.news = data[0];
+        // Render markdown to html
+        vm.news.forEach(function (news) {
+            news.html = $sce.trustAsHtml(markdown.toHTML(news.text));
+        });
+    }
 
     return clhIndexControllers;
 });

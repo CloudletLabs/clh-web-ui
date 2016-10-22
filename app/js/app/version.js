@@ -6,6 +6,7 @@ define(['angular'], function (angular) {
         'clhDirectives'
     ])
 
+    // TODO: Add ERB marks
     clhVersion.value('version', '0.1');
     clhVersion.value('apiVersion', '1');
 
