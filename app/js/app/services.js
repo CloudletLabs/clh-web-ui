@@ -8,7 +8,7 @@ define(['angular', 'angularEnvironment'], function (angular) {
     clhServices.service('ResourceService', ['envService', '$q', '$http', ResourceService]);
     clhServices.service('TokenInterceptor', ['$q', '$location', 'localStorageService', TokenInterceptor]);
     clhServices.service('CryptoJSService', [CryptoJSService]);
-    clhServices.service('AuthenticationService', ['localStorageService', AuthenticationService]);
+    clhServices.service('AuthenticationService', ['$location', 'CryptoJSService', 'ResourceService', 'localStorageService', 'toastr', AuthenticationService]);
 
     /**
      * Resolver service
@@ -149,8 +149,60 @@ define(['angular', 'angularEnvironment'], function (angular) {
     /**
      * Auth service - tell us is there a user and what kind of user is it
      */
-    function AuthenticationService(localStorageService) {
+    function AuthenticationService($location, CryptoJS, ResourceService, localStorageService, toastr) {
+        var self = this;
         return {
+            doLogin: function(username, password) {
+                // Calculate hash function for password
+                var enc_password = CryptoJS.PBKDF2(password, username, {keySize: 256 / 32});
+                var user = {
+                    username: username,
+                    password: enc_password.toString()
+                };
+
+                // Get a token
+                ResourceService.login(user).then(function (data) {
+                    // Got a token - save to local storage
+                    localStorageService.set("auth_token", data.auth_token);
+                    // Get a user for this token
+                    ResourceService.getCurrentUser().then(function (data) {
+                        // Got a user - save to local storage as well
+                        localStorageService.set("user", data);
+                        // TODO: redirect to a resource being requested originally
+                        $location.path("/index");
+                    }, function (err) {
+                        // Error getting a user for this token - probably expired?
+                        localStorageService.clearAll();
+                        $location.path("/login");
+                        toastr.error(err.data.message);
+                    });
+                }, function (err) {
+                    // Error getting a token
+                    if (err.status === 401) {
+                        toastr.error('Wrong username and/or password!');
+                    } else {
+                        toastr.error(err.data.message);
+                    }
+                })
+            },
+            doRegister: function(username, name, email, password, doLogin) {
+                // Calculate hash function for password
+                var enc_password = CryptoJS.PBKDF2(password, username, {keySize: 256 / 32});
+                var user = {
+                    username: username,
+                    name: name,
+                    email: email,
+                    password: enc_password.toString()
+                };
+
+                // Request to create a user
+                ResourceService.register(user).then(function () {
+                    toastr.success('User successfully registered!');
+                    doLogin(username, password);
+                }, function (err) {
+                    vm.toastr.error(err.data.message);
+                });
+            },
             isLogged: function () {
                 var authenticated = false;
                 if (localStorageService.get("auth_token") !== null) {
