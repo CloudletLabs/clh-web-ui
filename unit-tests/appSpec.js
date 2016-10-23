@@ -263,6 +263,73 @@ define(['angular', 'angularMock', 'app'], function(angular) {
             });
         });
 
+        describe('$routeProvider resolve', function() {
+            var $route;
+            var $location;
+            var $rootScope;
+            var $httpBackend;
+            beforeEach(function () {
+                module('ngRoute');
+
+                module('clhApp');
+                mockAuthenticationService = {
+                    isLogged: jasmine.createSpy('isLogged').and.returnValue(true),
+                    isAdmin: jasmine.createSpy('isAdmin').and.returnValue(true)
+                };
+                mockResolver = jasmine.createSpy('Resolver').and.returnValue([[]]);
+                mockResourceService = {
+                    getNews: jasmine.createSpy('getNews').and.returnValue(['news']),
+                    getNewsBySlug: jasmine.createSpy('getNewsBySlug').and.returnValue('news'),
+                    getUsers: jasmine.createSpy('getUsers').and.returnValue(['users']),
+                    getUserDetails: jasmine.createSpy('getUserDetails').and.returnValue('user')
+                };
+                module(function($provide){
+                    $provide.value('AuthenticationService', mockAuthenticationService);
+                    $provide.value('Resolver', mockResolver);
+                    $provide.value('ResourceService', mockResourceService);
+                });
+
+                inject(function (_$route_, _$location_, _$rootScope_, _$httpBackend_) {
+                    $route = _$route_;
+                    $location = _$location_;
+                    $rootScope = _$rootScope_;
+                    $httpBackend = _$httpBackend_;
+                });
+            });
+
+            it('/index', function () {
+                $httpBackend.expectGET('partials/index.html').respond('');
+                $location.path('/index');
+                $rootScope.$digest();
+                expect(mockResolver).toHaveBeenCalledWith([['news']]);
+                expect(mockResourceService.getNews).toHaveBeenCalledWith(true);
+            });
+
+            it('/news/:slug', function () {
+                $httpBackend.expectGET('partials/news.html').respond('');
+                $location.path('/news/qwe');
+                $rootScope.$digest();
+                expect(mockResolver).toHaveBeenCalledWith(['news']);
+                expect(mockResourceService.getNewsBySlug).toHaveBeenCalledWith('qwe', true);
+            });
+
+            it('/users', function () {
+                $httpBackend.expectGET('partials/userList.html').respond('');
+                $location.path('/users');
+                $rootScope.$digest();
+                expect(mockResolver).toHaveBeenCalledWith([['users']]);
+                expect(mockResourceService.getUsers).toHaveBeenCalledWith(true);
+            });
+
+            it('/users/:username', function () {
+                $httpBackend.expectGET('partials/userDetail.html').respond('');
+                $location.path('/users/qwe');
+                $rootScope.$digest();
+                expect(mockResolver).toHaveBeenCalledWith(['user']);
+                expect(mockResourceService.getUserDetails).toHaveBeenCalledWith('qwe', true);
+            });
+        });
+
         describe('$rootScope.$on', function() {
             var $routeProvider;
             var $route;
