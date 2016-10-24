@@ -123,11 +123,11 @@ module.exports = function (grunt) {
                 tasks: ['uglify']
             },
             css: {
-                files: 'css/**/*.css',
+                files: 'app/css/**/*.css',
                 tasks: ['copy']
             },
             img: {
-                files: 'img/**/*.*',
+                files: 'app/img/**/*.*',
                 tasks: ['copy']
             }
         }
