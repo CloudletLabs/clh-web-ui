@@ -1,0 +1,13 @@
+.footer-main{
+	background: #455168;
+	color: #C9CFDD;
+	border-top: 1px solid #C9CFDD;
+	border-bottom: 1px solid #C9CFDD;
+	background: linear-gradient(#7386A7, #455168, #7386A7);
+	/*padding: 2px 0;*/
+	/*margin-top: 50px;*/
+}
+.footer-main span {
+	color: #C9CFDD;
+
+}
