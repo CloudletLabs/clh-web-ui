@@ -1,0 +1,29 @@
+@font-face{
+	font-family: Ebrima;
+	src: url('fonts/ebrima.ttf');
+}
+@font-face{
+	font-family: EbrimaBD;
+	src: url('fonts/ebrimabd.ttf');
+}
+body{
+	font-family: Ebrima;
+	font-weight: normal;
+	
+	 
+}
+.navbar{
+	font-family: EbrimaBD;
+	font-weight: normal;
+	background: linear-gradient(#7386A7, #455168, #7386A7);
+	
+}
+.navbar-brand,
+.navbar-nav li a {
+	color: #C9CFDD !important;
+}
+
+.navbar-brand:hover,
+.navbar-nav li a:hover {
+	color: #fff!important;
+}

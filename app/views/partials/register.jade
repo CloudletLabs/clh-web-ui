@@ -1,24 +1,50 @@
 div(ng-include='', src="'partials/nav.html'")
-div(ng-include='', src="'partials/header.html'")
-.container-fluid
-    .row
-        .col-md-10.col-md-offset-1
-            form.form(role='form', ng-submit='vm.register()')
-                fieldset
-                    legend Register User
-                    .form-group
-                        label Username:
-                        input.form-control(type='text', ng-model='vm.username', placeholder='Type your username...', required='')
-                    .form-group
-                        label Name:
-                        input.form-control(type='text', ng-model='vm.name', placeholder='Type your name...', required='')
-                    .form-group
-                        label EMail:
-                        input.form-control(type='email', ng-model='vm.email', placeholder='Type your email...', required='')
-                    .form-group
-                        label Password:
-                        input.form-control(type='password', ng-model='vm.password', placeholder='Type your password...', required='')
-                    .form-group
-                        input.form-control(type='password', ng-model='vm.check_password', placeholder='Type your password again...', required='')
-                    input.btn.btn-primary(type='submit', value='Sign Up')
+
+.container-registration
+    .login-main
+        .row
+          .login-header
+            h4 By Cloudletlabs
+            | 
+            a(href='#/index')
+              img(src='img/login/close.png', alt='close')
+        | 
+        .row.top-text.text-center
+          h2(style='letter-spacing:5px') REGISTRATION
+        | 
+        form(ng-submit='vm.register()', role='form')
+          .row.registration-form
+            .registration-form-block
+              .registration-form-md
+                input.text-center(type='text', ng-model='vm.username', placeholder='Username', required='required')
+                | 
+                br
+                | 
+                input.text-center(type='text', ng-model='vm.name', placeholder='Name', required='required')
+                | 
+                br
+                | 
+                input.text-center(type='email', ng-model='vm.email', placeholder='E-mail', required='required')
+                | 
+                br
+                | 
+                input.text-center(type='password', ng-model='vm.password', placeholder='Password', required='required')
+                | 
+                br
+                | 
+                input.text-center(type='password', ng-model='vm.check_password', placeholder='Confirm password', required='required')
+              | 
+              .registration-form-right
+                input(type='submit', value='Sign Up')
+              | 
+              | 
+              .person-img-registration
+                img(src='img/login/person.png', width='')
+            | 
+            | 
+            .forgot-pass.text-center
+              a(href='#/index')
+                h5 &lt;&lt; Back
+
+
 div(ng-include='', src="'partials/footer.html'")

@@ -1,14 +1,43 @@
 div(ng-include='', src="'partials/nav.html'")
-div(ng-include='', src="'partials/header.html'")
-.container-fluid
-    .row
-        .col-md-10.col-md-offset-1
-            form.form-inline(ng-submit='vm.submit()', role='form')
-                fieldset
-                    legend Login
-                    .form-group
-                        input.form-control(type='text', ng-model='vm.username', placeholder='Type your username...', required='')
-                    .form-group
-                        input.form-control(type='password', ng-model='vm.password', placeholder='Type your password...', required='')
-                    input.btn.btn-primary(type='submit', value='Login')
+
+.container-login
+        .login-main
+          .row
+            .login-header
+              h4 By Cloudletlabs
+              | 
+              a(id='test' href='#/index')
+                img(src='../img/login/close.png', alt='close')
+          | 
+          .row.top-text.text-center
+            h2(style='letter-spacing:5px') PLEASE   LOGIN
+            | 
+            h5 Welcome to the CloudletHub
+          | 
+          form(ng-submit='vm.submit()', role='form')
+            .row.login-form
+              .form-block
+                .login-form-md
+                  input.text-center(type='text', ng-model='vm.username', placeholder='Username', required='required')
+                  | 
+                  br
+                  | 
+                  input.text-center(type='password', ng-model='vm.password', placeholder='Password', required='required')
+                | 
+                .login-form-right
+                  input#checkbox.checkbox(type='checkbox')
+                  | 
+                  label.text-nowrap(for='checkbox') Remember me
+                  | 
+                  input(type='submit', value='Login')
+                | 
+                | 
+                .person-img-login
+                  img(src='../img/login/person.png', width='')
+              | 
+              | 
+              .forgot-pass.text-center
+                a(href='#')
+                  h5 Forgot password?
+      | 
 div(ng-include='', src="'partials/footer.html'")

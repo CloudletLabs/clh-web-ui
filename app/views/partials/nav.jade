@@ -1,5 +1,6 @@
 nav.navbar.navbar-default.no-bottom-margin(ng-controller='NavCtrl as vm', role='navigation')
     .navbar-header
+        script(src='js/style/style.js')
         button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
             span.sr-only Toggle navigation
             span.icon-bar
@@ -9,9 +10,9 @@ nav.navbar.navbar-default.no-bottom-margin(ng-controller='NavCtrl as vm', role='
     .collapse.navbar-collapse.navbar-ex1-collapse
         ul.nav.navbar-nav
             li(ng-hide='vm.isAuthenticated')
-                a(href='#/login') Login
+                a#login(href='#/login') Login
             li(ng-hide='vm.isAuthenticated')
-                a(href='#/register') Register
+                a#register(href='#/register') Register
             li(ng-show='vm.isAdmin')
                 a(href='#/users') Users
             li.dropdown(ng-show='vm.isAuthenticated')
@@ -30,3 +31,4 @@ nav.navbar.navbar-default.no-bottom-margin(ng-controller='NavCtrl as vm', role='
                 ul.dropdown-menu(role='menu')
                     li
                         a(href='', ng-click='vm.logout()') Logout
+                        
