@@ -1,4 +1,4 @@
-define(['angular', 'angularMock', 'app'], function(angular) {
+define(['angularMock', 'app'], function(angular) {
 
     describe('clhLoginControllers', function() {
         var $controller;

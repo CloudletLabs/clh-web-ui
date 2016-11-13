@@ -46,17 +46,26 @@ define([
     clhApp.config(['envServiceProvider', function(envServiceProvider) {
         envServiceProvider.config({
             domains: {
-                local: ['localhost']
+                local: ['localhost', '127.0.0.1'],
+                dev: ['clh-web-ui-dev.herokuapp.com']
             },
             vars: {
                 local: {
                     apiVersion: 'current',
-                    apiUrl:  'https://clh-web-api-dev.herokuapp.com/api',
+                    apiUrl:  'http://localhost:8087/api',
                     enableDebug: true
+                },
+                dev: {
+                    apiVersion: 'current',
+                    apiUrl:  'https://clh-web-api-dev.herokuapp.com/api',
+                    enableDebug: false
                 }
             }
         });
+        // Check method will detect current env based on hostname
         envServiceProvider.check();
+        // Alternatively you can specifically set env you need
+        // envServiceProvider.set('dev');
     }]);
 
     /**

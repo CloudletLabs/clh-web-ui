@@ -29,7 +29,8 @@ require.config({
         'cryptojslib': 'build/bower/cryptojslib/rollups/pbkdf2',
         'jquery': 'build/bower/jquery/dist/jquery.min',
         'bootstrap': 'build/bower/bootstrap/dist/js/bootstrap.min',
-        'markdown': 'build/bower/markdown/lib/markdown'
+        'markdown': 'build/bower/markdown/lib/markdown',
+        'spechelper': 'unit-tests/spechelper'
     },
     shim: {
         'angular': {
@@ -65,6 +66,9 @@ require.config({
         },
         'app': {
             deps: ['bootstrap', 'markdown', 'indexControllers', 'services']
+        },
+        'spechelper': {
+            exports: 'spechelper'
         }
     },
     deps: tests,

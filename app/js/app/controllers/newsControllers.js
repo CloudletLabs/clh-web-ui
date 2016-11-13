@@ -31,37 +31,40 @@ define(['angular'], function (angular) {
     }
 
     /**
+     * Start updating current news
+     */
+    NewsCtrl.prototype.editCurrentNews = function () {
+        var vm = this;
+        vm.currentNews.modify = true;
+        vm.currentNews.oldSlug = vm.currentNews.slug;
+    };
+
+    /**
      * Update current news handler
      */
-    NewsCtrl.prototype.updateCurrentNews = function (modify) {
+    NewsCtrl.prototype.updateCurrentNews = function () {
         var vm = this;
 
-        if (modify) {
-            // When pressed initially - just change the status to render another controls
-            vm.currentNews.modify = true;
-            vm.currentNews.oldSlug = vm.currentNews.slug;
-        } else {
-            var newsToSave = {
-                subject: vm.currentNews.subject,
-                text: vm.currentNews.text
-            };
-            // When done editing - request to the server
-            vm.ResourceService.updateNews(vm.currentNews.oldSlug, newsToSave).then(function (news) {
-                // Updated, save new instance and render it
-                vm.currentNews = news;
-                vm.currentNews.html = vm.$sce.trustAsHtml(markdown.toHTML(vm.currentNews.text));
-                // Hide editing controls
-                vm.currentNews.modify = false;
-                delete vm.currentNews.oldSlug;
-                vm.toastr.success("News successfully updated!");
-            }, function (err) {
-                if (err.status === 401) {
-                    vm.toastr.error("You don't have access to perform this action");
-                } else {
-                    vm.toastr.error(err.data.message);
-                }
-            });
-        }
+        var newsToSave = {
+            subject: vm.currentNews.subject,
+            text: vm.currentNews.text
+        };
+        // When done editing - request to the server
+        vm.ResourceService.updateNews(vm.currentNews.oldSlug, newsToSave).then(function (news) {
+            // Updated, save new instance and render it
+            vm.currentNews = news;
+            vm.currentNews.html = vm.$sce.trustAsHtml(markdown.toHTML(vm.currentNews.text));
+            // Hide editing controls
+            vm.currentNews.modify = false;
+            delete vm.currentNews.oldSlug;
+            vm.toastr.success("News successfully updated!");
+        }, function (err) {
+            if (err.status === 401) {
+                vm.toastr.error("You don't have access to perform this action");
+            } else {
+                vm.toastr.error(err.data.message);
+            }
+        });
     };
 
     /**
@@ -92,6 +95,8 @@ define(['angular'], function (angular) {
         vm.$location = $location;
         vm.ResourceService = ResourceService;
         vm.toastr = toastr;
+
+        vm.newNews = {};
     }
 
     /**

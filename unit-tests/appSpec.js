@@ -20,20 +20,26 @@ define(['angular', 'angularMock', 'app'], function(angular) {
             it('configured', function() {
                 expect(envServiceProvider.config).toHaveBeenCalledWith({
                     domains: {
-                        local: ['localhost']
+                        local: ['localhost', '127.0.0.1'],
+                        dev: ['clh-web-ui-dev.herokuapp.com']
                     },
                     vars: {
                         local: {
                             apiVersion: 'current',
-                            apiUrl:  'https://clh-web-api-dev.herokuapp.com/api',
+                            apiUrl:  'http://localhost:8087/api',
                             enableDebug: true
+                        },
+                        dev: {
+                            apiVersion: 'current',
+                            apiUrl:  'https://clh-web-api-dev.herokuapp.com/api',
+                            enableDebug: false
                         }
                     }
                 });
                 expect(envServiceProvider.check).toHaveBeenCalled();
 
                 expect(envService.read('apiVersion')).toBe('current');
-                expect(envService.read('apiUrl')).toBe('https://clh-web-api-dev.herokuapp.com/api');
+                expect(envService.read('apiUrl')).toBe('http://localhost:8087/api');
                 expect(envService.read('enableDebug')).toBe(true);
             });
         });

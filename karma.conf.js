@@ -12,6 +12,7 @@ module.exports = function(config) {
             { pattern: './bower_components/angular-mocks/angular-mocks.js', included: false },
             { pattern: './build/bower/**/*.js', included: false },
             { pattern: './app/js/**/*.js', included: false },
+            { pattern: './unit-tests/spechelper.js', included: false },
             { pattern: './unit-tests/**/*Spec.js', included: false },
             './unit-tests/main-tests.js'
         ],
