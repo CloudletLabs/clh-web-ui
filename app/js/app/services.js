@@ -152,6 +152,17 @@ define(['angular', 'angularEnvironment'], function (angular) {
     function AuthenticationService($location, CryptoJS, ResourceService, localStorageService, toastr) {
         var self = this;
         return {
+            /**
+             * Read user password from plainTextPassword and save it as a hash
+             * Delete plainTextPassword once done
+             * Do nothing if plainTextPassword has newer been changed
+             */
+            encryptUserPassword: function(user) {
+                if (user.plainTextPassword !== user.password) {
+                    user.password = CryptoJS.PBKDF2(user.plainTextPassword, user.username, {keySize: 256 / 32}).toString();
+                }
+                delete user.plainTextPassword;
+            },
             doLogin: function(username, password) {
                 // Calculate hash function for password
                 var enc_password = CryptoJS.PBKDF2(password, username, {keySize: 256 / 32});

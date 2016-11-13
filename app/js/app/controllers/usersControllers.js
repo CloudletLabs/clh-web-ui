@@ -6,8 +6,8 @@ define(['angular'], function (angular) {
     var clhUsersControllers = angular.module('clhUsersControllers', []);
 
     clhUsersControllers.controller('UserListCtrl', ['ResourceService', 'data', 'toastr', UserListCtrl]);
-    clhUsersControllers.controller('UserCreateCtrl', ['$location', 'ResourceService', 'CryptoJSService', 'toastr', UserCreateCtrl]);
-    clhUsersControllers.controller('UserDetailsCtrl', ['ResourceService', 'CryptoJSService', 'data', 'toastr', UserDetailsCtrl]);
+    clhUsersControllers.controller('UserCreateCtrl', ['$location', 'ResourceService', 'AuthenticationService', 'toastr', UserCreateCtrl]);
+    clhUsersControllers.controller('UserDetailsCtrl', ['ResourceService', 'AuthenticationService', 'data', 'toastr', UserDetailsCtrl]);
 
     /**
      * Controller for the user list
@@ -66,11 +66,11 @@ define(['angular'], function (angular) {
     /**
      * Create user controller
      */
-    function UserCreateCtrl($location, ResourceService, CryptoJS, toastr) {
+    function UserCreateCtrl($location, ResourceService, AuthenticationService, toastr) {
         var vm = this;
         vm.$location = $location;
         vm.ResourceService = ResourceService;
-        vm.CryptoJS = CryptoJS;
+        vm.AuthenticationService = AuthenticationService;
         vm.toastr = toastr;
     }
 
@@ -81,13 +81,14 @@ define(['angular'], function (angular) {
         var vm = this;
 
         var user = vm.userDetails;
-        encryptUserPassword(user, CryptoJS);
+        var plainTextPassword = user.plainTextPassword;
+        vm.AuthenticationService.encryptUserPassword(user);
 
         vm.ResourceService.createUser(user).then(function () {
             vm.$location.path("/users");
             vm.toastr.success("User successfully created!");
         }, function (err) {
-            user.plainTextPassword = user.password;
+            user.plainTextPassword = plainTextPassword;
             if (err.status === 401) {
                 vm.toastr.error("You don't have access to perform this action");
             } else {
@@ -96,10 +97,10 @@ define(['angular'], function (angular) {
         });
     };
 
-    function UserDetailsCtrl(ResourceService, CryptoJS, data, toastr) {
+    function UserDetailsCtrl(ResourceService, AuthenticationService, data, toastr) {
         var vm = this;
         vm.ResourceService = ResourceService;
-        vm.CryptoJS = CryptoJS;
+        vm.AuthenticationService = AuthenticationService;
         vm.toastr = toastr;
 
         vm.userDetails = data[0];
@@ -115,7 +116,8 @@ define(['angular'], function (angular) {
         var vm = this;
 
         var user = vm.userDetails;
-        encryptUserPassword(user, CryptoJS);
+        var plainTextPassword = user.plainTextPassword;
+        vm.AuthenticationService.encryptUserPassword(user);
 
         vm.ResourceService.updateUser(user).then(function (user) {
             vm.userDetails = user;
@@ -123,7 +125,7 @@ define(['angular'], function (angular) {
             vm.toastr.success("User successfully updated!");
         }, function (err) {
             // As we lost this field before sending to server - create it again
-            vm.userDetails.plainTextPassword = user.password;
+            user.plainTextPassword = plainTextPassword;
             if (err.status === 401) {
                 vm.toastr.error("You don't have access to perform this action");
             } else {
@@ -131,18 +133,6 @@ define(['angular'], function (angular) {
             }
         });
     };
-
-    /**
-     * Read user password from plainTextPassword and save it as a hash
-     * Delete plainTextPassword once done
-     * Do nothing if plainTextPassword has newer been changed
-     */
-    function encryptUserPassword(user, CryptoJS) {
-        if (user.plainTextPassword !== user.password) {
-            user.password = CryptoJS.PBKDF2(user.plainTextPassword, user.username, {keySize: 256 / 32}).toString();
-        }
-        delete user.plainTextPassword;
-    }
 
     return clhUsersControllers;
 });
