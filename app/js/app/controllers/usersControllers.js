@@ -30,7 +30,7 @@ define(['angular'], function (angular) {
         if (modify) {
             vm.users[index].modify = true;
         } else {
-            vm.ResourceService.updateUser(user).then(function (user) {
+            vm.ResourceService.updateUser(user.username, user).then(function (user) {
                 vm.users[index] = user;
                 vm.users[index].modify = false;
                 vm.toastr.success("User successfully updated!");
@@ -119,7 +119,7 @@ define(['angular'], function (angular) {
         var plainTextPassword = user.plainTextPassword;
         vm.AuthenticationService.encryptUserPassword(user);
 
-        vm.ResourceService.updateUser(user).then(function (user) {
+        vm.ResourceService.updateUser(user.username, user).then(function (user) {
             vm.userDetails = user;
             vm.userDetails.plainTextPassword = user.password;
             vm.toastr.success("User successfully updated!");

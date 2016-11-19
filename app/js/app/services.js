@@ -55,7 +55,7 @@ define(['angular', 'angularEnvironment'], function (angular) {
                 if (method === 'GET') _genericCallback(key, data);
             }).error(function (data, status) {
                 // Ooops
-                deferred.reject({data: data, status: status});
+                deferred.reject({status: status, data: data});
             });
             return deferred.promise;
         };
@@ -81,14 +81,14 @@ define(['angular', 'angularEnvironment'], function (angular) {
                     "user_" + username,
                     refresh);
             },
-            updateUser: function (user) {
-                return _ajaxRequest('PUT', '/users/' + user.username, user, null);
+            createUser: function (user) {
+                return _ajaxRequest('POST', '/users', user, null);
+            },
+            updateUser: function (username, user) {
+                return _ajaxRequest('PUT', '/users/' + username, user, null);
             },
             deleteUser: function (username) {
                 return _ajaxRequest('DELETE', '/users/' + username, null, null);
-            },
-            createUser: function (user) {
-                return _ajaxRequest('POST', '/users', user, null);
             },
             getNews: function (refresh) {
                 return _promisesGetter('GET', '/news', null, "news", refresh);
@@ -100,11 +100,11 @@ define(['angular', 'angularEnvironment'], function (angular) {
                     "news_" + slug,
                     refresh);
             },
-            updateNews: function (slug, news) {
-                return _ajaxRequest('PUT', '/news/' + slug, news, null);
-            },
             createNews: function (news) {
                 return _ajaxRequest('POST', '/news', news, null);
+            },
+            updateNews: function (slug, news) {
+                return _ajaxRequest('PUT', '/news/' + slug, news, null);
             },
             deleteNews: function (slug) {
                 return _ajaxRequest('DELETE', '/news/' + slug, null, null);

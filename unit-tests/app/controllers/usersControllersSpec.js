@@ -200,7 +200,7 @@ define(['angularMock', 'app', 'spechelper'], function(angular) {
                 spyOn(vm.toastr, 'success');
                 vm.updateUser();
                 expect(vm.AuthenticationService.encryptUserPassword).toHaveBeenCalledWith(updatedUser);
-                expect(vm.ResourceService.updateUser).toHaveBeenCalledWith(updatedUser);
+                expect(vm.ResourceService.updateUser).toHaveBeenCalledWith(updatedUser.username, updatedUser);
                 expect(vm.userDetails.plainTextPassword).toBeDefined(vm.userDetails.password);
                 expect(vm.toastr.success).toHaveBeenCalledWith(jasmine.any(String));
             });
@@ -213,7 +213,7 @@ define(['angularMock', 'app', 'spechelper'], function(angular) {
                 spyOn(vm.toastr, 'error');
                 vm.updateUser();
                 expect(vm.AuthenticationService.encryptUserPassword).toHaveBeenCalledWith(updatedUser);
-                expect(vm.ResourceService.updateUser).toHaveBeenCalledWith(updatedUser);
+                expect(vm.ResourceService.updateUser).toHaveBeenCalledWith(updatedUser.username, updatedUser);
                 expect(vm.toastr.error).toHaveBeenCalledWith(jasmine.any(String));
             });
 
@@ -225,7 +225,7 @@ define(['angularMock', 'app', 'spechelper'], function(angular) {
                 spyOn(vm.toastr, 'error');
                 vm.updateUser();
                 expect(vm.AuthenticationService.encryptUserPassword).toHaveBeenCalledWith(updatedUser);
-                expect(vm.ResourceService.updateUser).toHaveBeenCalledWith(updatedUser);
+                expect(vm.ResourceService.updateUser).toHaveBeenCalledWith(updatedUser.username, updatedUser);
                 expect(vm.toastr.error).toHaveBeenCalledWith('123');
             });
 
