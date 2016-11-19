@@ -211,15 +211,11 @@ define(['angular', 'angularEnvironment'], function (angular) {
                     toastr.success('User successfully registered!');
                     doLogin(username, password);
                 }, function (err) {
-                    vm.toastr.error(err.data.message);
+                    toastr.error(err.data.message);
                 });
             },
             isLogged: function () {
-                var authenticated = false;
-                if (localStorageService.get("auth_token") !== null) {
-                    authenticated = true;
-                }
-                return authenticated;
+                return localStorageService.get("auth_token") !== null;
             },
             isAdmin: function () {
                 var admin = false;

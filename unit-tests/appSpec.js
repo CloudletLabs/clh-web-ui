@@ -404,12 +404,16 @@ define(['angular', 'angularMock', 'app'], function(angular) {
             });
 
             it('guest and !requiredLogin && !requiredAdmin', function() {
+                spyOn(AuthenticationService, 'isLogged').and.returnValue(false);
+                spyOn(AuthenticationService, 'isAdmin').and.returnValue(false);
                 $location.path('/_test_public');
                 $rootScope.$digest();
                 expect($location.path()).toBe('/_test_public');
             });
 
             it('guest and requiredLogin && !requiredAdmin', function() {
+                spyOn(AuthenticationService, 'isLogged').and.returnValue(false);
+                spyOn(AuthenticationService, 'isAdmin').and.returnValue(false);
                 $location.path('/_test_private');
                 $rootScope.$digest();
                 expect($location.path()).toBe('/login');
@@ -417,12 +421,15 @@ define(['angular', 'angularMock', 'app'], function(angular) {
 
             it('user and requiredLogin && !requiredAdmin', function() {
                 spyOn(AuthenticationService, 'isLogged').and.returnValue(true);
+                spyOn(AuthenticationService, 'isAdmin').and.returnValue(false);
                 $location.path('/_test_private');
                 $rootScope.$digest();
                 expect($location.path()).toBe('/_test_private');
             });
 
             it('guest and requiredLogin && requiredAdmin', function() {
+                spyOn(AuthenticationService, 'isLogged').and.returnValue(false);
+                spyOn(AuthenticationService, 'isAdmin').and.returnValue(false);
                 $location.path('/_test_admin');
                 $rootScope.$digest();
                 expect($location.path()).toBe('/404');
@@ -430,6 +437,7 @@ define(['angular', 'angularMock', 'app'], function(angular) {
 
             it('user and requiredLogin && requiredAdmin', function() {
                 spyOn(AuthenticationService, 'isLogged').and.returnValue(true);
+                spyOn(AuthenticationService, 'isAdmin').and.returnValue(false);
                 $location.path('/_test_admin');
                 $rootScope.$digest();
                 expect($location.path()).toBe('/404');
