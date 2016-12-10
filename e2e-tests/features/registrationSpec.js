@@ -1,0 +1,21 @@
+var feature = require('protractor-jasmine-cucumber').feature;
+
+feature('Registration')
+    .scenario('New Test User')
+        .given('I go to "#/register"')
+        .when('I fill in new test user')
+        .and('I click the "registration_submit_button" button')
+        .then('I should be on "#/index"')
+        .then('I should be logged in as new test user')
+    .scenario('User already exists')
+        .given('I go to "#/register"')
+        .when('I fill in new test user')
+        .and('I click the "registration_submit_button" button')
+        .then('I should be on "#/register"')
+        .then('I should get an error "User already exist"')
+    .scenario('Password check do not match')
+        .given('I go to "#/register"')
+        .when('I fill in new test user with wrong password check')
+        .and('I click the "registration_submit_button" button')
+        .then('I should be on "#/register"')
+        .then('I should get an error "Password must be the same in both fields!"');
