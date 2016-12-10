@@ -29,11 +29,10 @@ exports.config = {
         package: 'protractor-screenshoter-plugin',
         screenshotPath: 'test-results/e2e',
         screenshotOnExpect: 'failure',
-        screenshotOnSpec: 'none',
-        withLogs: 'true',
+        screenshotOnSpec: 'failure',
         writeReportFreq: 'asap',
         clearFoldersBeforeTest: true
     }],
-    baseURL: 'http://localhost:8088/',
+    baseUrl: 'http://localhost:8088/',
     specs: cucumber.injectFiles('e2e-tests/features/*Spec.js', 'e2e-tests/steps/*Definitions.js')
 };

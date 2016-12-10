@@ -157,6 +157,6 @@ module.exports = function (grunt) {
         ['bower', 'jade', 'copy', 'uglify']);
     grunt.registerTask('start', "Start server",
         ['bower', 'jade', 'copy', 'uglify', 'connect', 'watch']);
-    grunt.registerTask('e2e', "Start e2e",
-        ['bower', 'jade', 'copy', 'uglify', 'connect', 'protractor_webdriver:e2e', 'protractor:e2e']);
+    grunt.registerTask('e2e', "Run e2e",
+        ['protractor_webdriver:e2e', 'protractor:e2e']);
 };

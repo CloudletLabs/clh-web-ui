@@ -13,7 +13,7 @@
     "pretest": "npm run clean && npm install && grunt bower",
     "test": "npm run test-only",
     "test-only": "karma start karma.conf.js",
-    "pree2e": "npm run clean && npm install && webdriver-manager update",
+    "pree2e": "npm install && webdriver-manager update",
     "e2e": "npm run e2e-only",
     "e2e-only": "grunt e2e"
   },

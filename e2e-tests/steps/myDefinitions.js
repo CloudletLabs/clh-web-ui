@@ -1,18 +1,17 @@
 var featureSteps = require('protractor-jasmine-cucumber').featureSteps;
 
-featureSteps('Example')
+featureSteps('Login')
     .given('I go to "(.*)"', function (site) {
-        browser.get(site);
+        browser.get(browser.baseUrl + site);
     })
-    .when('I add "(.*)" in the task field', function (task) {
-        element(by.model('todoList.todoText')).sendKeys(task);
+    .when('I enter username "(.*)" and password "(.*)"', function (username, password) {
+        element(by.model('vm.username')).sendKeys(username);
+        element(by.model('vm.password')).sendKeys(password);
     })
-    .when('I click the add button', function () {
-        var el = element(by.css('[value="add"]'));
-        el.click();
+    .when('I click the Login button', function () {
+        element(by.id('login_submit_button')).click();
     })
-    .then('I should see my new task in the list', function () {
-        var todoList = element.all(by.repeater('todo in todoList.todos'));
-        expect(todoList.count()).toEqual(3);
-        expect(todoList.get(2).getText()).toEqual('Be Awesome');
+    .then('I should be logged in', function () {
+        var username = element(by.id('username_dropdown_toggler'));
+        expect(username.getText()).toEqual('Admin');
     });
