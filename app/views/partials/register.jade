@@ -20,5 +20,5 @@ div(ng-include='', src="'partials/header.html'")
                         input.form-control(type='password', ng-model='vm.password', placeholder='Type your password...', required='')
                     .form-group
                         input.form-control(type='password', ng-model='vm.check_password', placeholder='Type your password again...', required='')
-                    input.btn.btn-primary(type='submit', value='Sign Up')
+                    input#registration_submit_button.btn.btn-primary(type='submit', value='Sign Up')
 div(ng-include='', src="'partials/footer.html'")
