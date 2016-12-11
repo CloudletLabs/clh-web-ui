@@ -4,9 +4,12 @@ feature('News')
     .scenario('List')
         .given('I go to "#/index"')
         .then('I should see a news list')
-    .scenario('Slug')
+    .scenario('Slug hello-world')
         .given('I go to "#/news/hello-world"')
-        .then('I should see a single news');
+        .then('I should see a hello-world news')
+    .scenario('Slug second-news')
+        .given('I go to "#/news/second-news"')
+        .then('I should see a second-news news');
 
 feature('News: Admin')
     .scenario('Add test news')
@@ -22,4 +25,10 @@ feature('News: Admin')
         .given('I logged in as "admin"/"admin"')
         .when('I modify test news')
         .then('I should get a message "News successfully updated!"')
-        .then('I should see modified test news');
+        .then('I should see modified test news')
+    .scenario('Delete test news')
+        .given('I logged in as "admin"/"admin"')
+        .when('I delete test news')
+        .then('I should get a message "News successfully deleted!"')
+        .then('I should be on "#/index"')
+        .then('I should not see deleted test news');

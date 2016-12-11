@@ -22,11 +22,17 @@ featureSteps('News')
                 '<p><strong>This</strong> is a <strong>first</strong> test news! <code>Welcome!</code></p>');
         });
     })
-    .then('I should see a single news', function () {
+    .then('I should see a hello-world news', function () {
         expect(element(by.binding('vm.currentNews.subject')).getText()).toEqual('Hello World!');
         validateNewsProps(element(by.binding('vm.currentNews.creator.name')).getText(), 'Admin');
         expect(element(by.binding('vm.currentNews.html')).getAttribute('innerHTML')).toEqual(
             '<p><strong>This</strong> is a <strong>first</strong> test news! <code>Welcome!</code></p>');
+    })
+    .then('I should see a second-news news', function () {
+        expect(element(by.binding('vm.currentNews.subject')).getText()).toEqual('Second News');
+        validateNewsProps(element(by.binding('vm.currentNews.creator.name')).getText(), 'Admin');
+        expect(element(by.binding('vm.currentNews.html')).getAttribute('innerHTML')).toEqual(
+            '<p>This is a second test news!</p>');
     });
 
 featureSteps('News: Admin')
@@ -43,6 +49,10 @@ featureSteps('News: Admin')
         element(by.model('vm.currentNews.text')).clear().sendKeys('*Test* Text (updated)');
         this.when('I click the button "Update"');
     })
+    .when('I delete test news', function () {
+        this.given('I go to "#/news/test-news-' + onPrepareTimestamp + '"');
+        this.when('I click the button "Delete"');
+    })
     .then('I should see the new test news', function () {
         this.then('I should be on "#/news/test-news-' + onPrepareTimestamp + '"');
         expect(element(by.binding('vm.currentNews.subject')).getText()).toEqual('Test News ' + onPrepareTimestamp);
@@ -57,4 +67,9 @@ featureSteps('News: Admin')
         validateNewsProps(element(by.binding('vm.currentNews.creator.name')).getText(), 'Admin');
         expect(element(by.binding('vm.currentNews.html')).getAttribute('innerHTML')).toEqual(
             '<p><em>Test</em> Text (updated)</p>');
+    })
+    .then('I should not see deleted test news', function () {
+        this.given('I go to "#/news/test-news-' + onPrepareTimestamp + '"');
+        this.then('I should be on "#/404"');
+        this.then('I should get an error "News with thus slug not found"');
     });
