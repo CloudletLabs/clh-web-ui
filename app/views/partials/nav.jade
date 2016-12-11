@@ -24,7 +24,7 @@ nav.navbar.navbar-default.no-bottom-margin(ng-controller='NavCtrl as vm', role='
                     li
                         a(ng-show='vm.isAdmin', href='#/user') Add User
             li.dropdown(ng-show='vm.isAuthenticated')
-                a#username_dropdown_toggler.dropdown-toggle(href='', data-toggle='dropdown')
+                a.dropdown-toggle(href='', data-toggle='dropdown')
                     | {{vm.currentUser.name}}
                     span.caret
                 ul.dropdown-menu(role='menu')

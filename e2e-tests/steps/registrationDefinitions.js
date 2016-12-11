@@ -18,8 +18,7 @@ featureSteps('Registration')
         element(by.model('vm.email')).clear().sendKeys('qwe');
     })
     .then('I should be logged in as new test user', function () {
-        var username = element(by.id('username_dropdown_toggler'));
-        expect(username.getText()).toEqual('D_test_user_' + onPrepareTimestamp);
+        this.then('I should be logged in as "D_test_user_' + onPrepareTimestamp + '"');
     })
     .then('I should see email validator error', function () {
         var email = element(by.model('vm.email'));
