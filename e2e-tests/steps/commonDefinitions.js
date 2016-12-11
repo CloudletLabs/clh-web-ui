@@ -8,18 +8,22 @@ afterEach(function() {
 featureSteps()
     .given('I go to "(.*)"', function (site) {
         browser.get(browser.baseUrl + site);
+        browser.waitForAngular();
     })
-    .given('I should be logged in as "(.*)"/"(.*)"', function (username, password) {
+    .given('I logged in as "(.*)"/"(.*)"', function (username, password) {
         this.given('I go to "#/login"');
-        this.when("I enter \"username\" = \"${username}\"");
-        this.when("I enter \"password\" = \"${password}\"");
-        this.when('I click the "login_submit_button" button');
+        this.when('I enter "username" = "' + username + '"');
+        this.when('I enter "password" = "' + password + '"');
+        this.when('I click the "login_submit_button"');
+        browser.waitForAngular();
     })
     .when('I enter "(.*)" = "(.*)"', function (fieldModel, value) {
         element(by.model('vm.' + fieldModel)).sendKeys(value);
+        browser.waitForAngular();
     })
-    .when('I click the "(.*)" button', function (buttonId) {
-        element(by.id(buttonId)).click();
+    .when('I click the "(.*)"', function (id) {
+        element(by.id(id)).click();
+        browser.waitForAngular();
     })
     .then('I should be on "(.*)"', function (url) {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + url);
@@ -29,6 +33,6 @@ featureSteps()
         expect(username.getText()).toEqual(userDisplayName);
     })
     .then('I should get an error "(.*)"', function (message) {
-        var error = element(by.css('[class="toast-message"]'));
+        var error = element(by.css('.toast-message'));
         expect(error.getText()).toEqual(message);
     });

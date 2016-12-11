@@ -11,7 +11,7 @@ div(ng-include='', src="'partials/header.html'")
                                 .panel-heading
                                     .row
                                         .col-md-1.pull-left
-                                            button.btn.btn-primary.btn-sm(type='button', ng-click='vm.createNews()')
+                                            button#create_news_button.btn.btn-primary.btn-sm(type='button', ng-click='vm.createNews()')
                                                 span.glyphicon.glyphicon-pencil
                                                 |  Create
                                         input.col-md-6.form-control(type='text', ng-model='vm.newNews.subject', required='')

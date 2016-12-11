@@ -1,10 +1,8 @@
 var featureSteps = require('protractor-jasmine-cucumber').featureSteps;
 
-var timestamp = new Date().getTime();
-
 featureSteps('Registration')
     .when('I fill in new test user', function () {
-        var user = 'test_user_' + timestamp;
+        var user = 'test_user_' + onPrepareTimestamp;
         element(by.model('vm.username')).sendKeys(user);
         element(by.model('vm.name')).sendKeys('D_' + user);
         element(by.model('vm.email')).sendKeys(user + '@example.com');
@@ -17,5 +15,5 @@ featureSteps('Registration')
     })
     .then('I should be logged in as new test user', function () {
         var username = element(by.id('username_dropdown_toggler'));
-        expect(username.getText()).toEqual('D_test_user_' + timestamp);
+        expect(username.getText()).toEqual('D_test_user_' + onPrepareTimestamp);
     });
