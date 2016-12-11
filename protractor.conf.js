@@ -35,5 +35,5 @@ exports.config = {
         clearFoldersBeforeTest: true
     }],
     baseUrl: 'http://localhost:8088/',
-    specs: cucumber.injectFiles('e2e-tests/features/newsSpec.js', 'e2e-tests/steps/*Definitions.js')
+    specs: cucumber.injectFiles('e2e-tests/features/*Spec.js', 'e2e-tests/steps/*Definitions.js')
 };
