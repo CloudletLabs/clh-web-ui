@@ -30,11 +30,12 @@ module.exports = function(config) {
             'karma-requirejs',
             'karma-phantomjs-launcher',
             'karma-jasmine',
+            'karma-spec-reporter',
             'karma-coverage',
             'karma-junit-reporter'
         ],
 
-        reporters: ['progress', 'coverage', 'junit'],
+        reporters: ['spec', 'coverage', 'junit'],
 
         preprocessors: {
             './app/js/**/*.js': ['coverage']

@@ -246,7 +246,11 @@ define([
             });
             $rootScope.$on('$routeChangeError', function(event, currentRoute, previousRoute, rejection) {
                 $location.path("/404");
-                toastr.error(rejection.data.message);
+                if (rejection.hasOwnProperty('data') && rejection.data.hasOwnProperty('message')) {
+                    toastr.error(rejection.data.message);
+                } else {
+                    toastr.error(rejection);
+                }
             });
         }]
     );
