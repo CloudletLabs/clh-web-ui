@@ -28,4 +28,8 @@ feature('Login')
         .and('I enter "password" = "qwe"')
         .and('I click the button "Login"')
         .then('I should be on "#/login"')
-        .then('I should get an error "Wrong username and/or password!"');
+        .then('I should get an error "Wrong username and/or password!"')
+    .scenario('User - logout')
+        .given('I logged in as "user"/"user"')
+        .when('I log out')
+        .then('I am not logged in');
