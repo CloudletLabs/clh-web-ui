@@ -32,8 +32,8 @@ featureSteps('News')
 featureSteps('News: Admin')
     .when('I create test news', function () {
         this.given('I go to "#/news"');
-        element(by.model('vm.newNews.subject')).sendKeys('Test News ' + onPrepareTimestamp);
-        element(by.model('vm.newNews.text')).sendKeys('*Test* Text');
+        element(by.model('vm.newNews.subject')).clear().sendKeys('Test News ' + onPrepareTimestamp);
+        element(by.model('vm.newNews.text')).clear().sendKeys('*Test* Text');
         this.when('I click the "create_news_button"');
     })
     .then('I should see the new test news', function () {

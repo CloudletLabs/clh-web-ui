@@ -18,7 +18,7 @@ featureSteps()
         browser.waitForAngular();
     })
     .when('I enter "(.*)" = "(.*)"', function (fieldModel, value) {
-        element(by.model('vm.' + fieldModel)).sendKeys(value);
+        element(by.model('vm.' + fieldModel)).clear().sendKeys(value);
         browser.waitForAngular();
     })
     .when('I click the "(.*)"', function (id) {
@@ -34,5 +34,7 @@ featureSteps()
     })
     .then('I should get an error "(.*)"', function (message) {
         var error = element(by.css('.toast-message'));
+        browser.wait(protractor.ExpectedConditions.visibilityOf(error), 5000);
+        expect(error.isDisplayed()).toBeTruthy();
         expect(error.getText()).toEqual(message);
     });

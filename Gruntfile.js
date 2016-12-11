@@ -87,7 +87,7 @@ module.exports = function (grunt) {
         copy: {
             build: {
                 cwd: 'app',
-                src: ['!js/**/*.js', 'css/**/*.css', 'img/**/*.*', '!**/*.jade'],
+                src: ['!js/**/*.js', 'favicon.ico', 'css/**/*.css', 'img/**/*.*', '!**/*.jade'],
                 dest: 'build',
                 expand: true
             }
@@ -121,6 +121,10 @@ module.exports = function (grunt) {
             js: {
                 files: 'app/js/**/*.js',
                 tasks: ['uglify']
+            },
+            favicon: {
+                files: 'app/favicon.ico',
+                tasks: ['copy']
             },
             css: {
                 files: 'app/css/**/*.css',

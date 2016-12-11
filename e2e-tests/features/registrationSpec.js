@@ -18,4 +18,10 @@ feature('Registration')
         .when('I fill in new test user with wrong password check')
         .and('I click the "registration_submit_button"')
         .then('I should be on "#/register"')
-        .then('I should get an error "Password must be the same in both fields!"');
+        .then('I should get an error "Password must be the same in both fields!"')
+    .scenario('Email is not valid')
+        .given('I go to "#/register"')
+        .when('I fill in new test user with wrong email')
+        .and('I click the "registration_submit_button"')
+        .then('I should be on "#/register"')
+        .then('I should see email validator error');
