@@ -20,12 +20,6 @@ define(['angular'], function (angular) {
         vm.toastr = toastr;
 
         vm.currentNews = data[0];
-        // If a news with this slug not found on the server
-        if (!vm.currentNews) {
-            vm.$location.path("/404");
-            vm.toastr.error("This news no longer exist!");
-            return;
-        }
         // Render markdown to html
         vm.currentNews.html = $sce.trustAsHtml(markdown.toHTML(data[0].text));
     }

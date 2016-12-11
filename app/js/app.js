@@ -150,7 +150,7 @@ define([
                 controllerAs: 'vm',
                 resolve: {
                     data: function (Resolver, ResourceService) {
-                        return Resolver([ResourceService.getNews(true)])
+                        return Resolver([ResourceService.getNews(true)]);
                     }
                 },
                 access: {
@@ -163,7 +163,7 @@ define([
                 controllerAs: 'vm',
                 resolve: {
                     data: function ($route, Resolver, ResourceService) {
-                        return Resolver([ResourceService.getNewsBySlug($route.current.params.slug, true)])
+                        return Resolver([ResourceService.getNewsBySlug($route.current.params.slug, true)]);
                     }
                 },
                 access: {
@@ -184,7 +184,7 @@ define([
                 controllerAs: 'vm',
                 resolve: {
                     data: function (Resolver, ResourceService) {
-                        return Resolver([ResourceService.getUsers(true)])
+                        return Resolver([ResourceService.getUsers(true)]);
                     }
                 },
                 access: {
@@ -197,7 +197,7 @@ define([
                 controllerAs: 'vm',
                 resolve: {
                     data: function ($route, Resolver, ResourceService) {
-                        return Resolver([ResourceService.getUserDetails($route.current.params.username, true)])
+                        return Resolver([ResourceService.getUserDetails($route.current.params.username, true)]);
                     }
                 },
                 access: {
@@ -227,23 +227,33 @@ define([
     /**
      * Intercept routing change to check if user have an access
      */
-    clhApp.run(['$rootScope', '$location', 'AuthenticationService', function ($rootScope, $location, AuthenticationService) {
-        $rootScope.$on("$routeChangeStart", function (event, nextRoute, currentRoute) {
-            if (nextRoute.redirectTo) {
-                // do nothing
-            } else if (nextRoute.access === undefined) {
-                // Fail fast - no access rules defined for this route
+    clhApp.run(['$rootScope', '$location', 'AuthenticationService', 'toastr',
+        function ($rootScope, $location, AuthenticationService, toastr) {
+            $rootScope.$on("$routeChangeStart", function (event, nextRoute, currentRoute) {
+                if (nextRoute.redirectTo) {
+                    // do nothing
+                } else if (nextRoute.access === undefined) {
+                    // Fail fast - no access rules defined for this route
+                    $location.path("/404");
+                } else if (nextRoute.access.requiredAdmin && !AuthenticationService.isAdmin()) {
+                    // Pretend there is no such page if user is not an admin
+                    $location.path("/404");
+                } else if (nextRoute.access.requiredLogin && !AuthenticationService.isLogged()) {
+                    // This route require access, and user is not logged in - redirect to login form
+                    // TODO: preserve original path and redirect to it once authorised
+                    $location.path("/login");
+                }
+            });
+            $rootScope.$on('$routeChangeError', function(event, currentRoute, previousRoute, rejection) {
                 $location.path("/404");
-            } else if (nextRoute.access.requiredAdmin && !AuthenticationService.isAdmin()) {
-                // Pretend there is no such page if user is not an admin
-                $location.path("/404");
-            } else if (nextRoute.access.requiredLogin && !AuthenticationService.isLogged()) {
-                // This route require access, and user is not logged in - redirect to login form
-                // TODO: preserve original path and redirect to it once authorised
-                $location.path("/login");
-            }
-        });
-    }]);
+                if (rejection.hasOwnProperty('data') && rejection.data.hasOwnProperty('message')) {
+                    toastr.error(rejection.data.message);
+                } else {
+                    toastr.error(rejection);
+                }
+            });
+        }]
+    );
 
     return clhApp;
 });

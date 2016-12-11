@@ -4,12 +4,11 @@ div(ng-include='', src="'partials/header.html'")
     .row
         .col-md-10.col-md-offset-1
             .panel.panel-info
-                .panel-heading User
+                .panel-heading Create User
                 .row
                     .col-md-10.col-md-offset-1
                         form.form(ng-submit='vm.createUser()', role='form')
                             fieldset
-                                legend User {{vm.userDetails.name}}
                                 .form-group
                                     label Username:
                                     input.form-control(type='text', ng-model='vm.userDetails.username', placeholder='Type username...', required='')

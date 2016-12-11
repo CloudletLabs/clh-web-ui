@@ -51,13 +51,6 @@ define(['angularMock', 'app', 'spechelper'], function(angular) {
                     .toBe('<p><strong>This</strong> is a <strong>first</strong> test news! <code>Welcome!</code></p>');
             });
 
-            it('currentNews not exists', function() {
-                spyOn(vm.toastr, 'error');
-                vm = $controller('NewsCtrl', { data: [ ] });
-                expect($location.path()).toBe('/404');
-                expect(vm.toastr.error).toHaveBeenCalledWith(jasmine.any(String));
-            });
-
             it('currentNews start modify', function() {
                 vm.editCurrentNews();
                 expect(vm.currentNews.modify).toBe(true);

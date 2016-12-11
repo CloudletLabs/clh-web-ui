@@ -23,30 +23,26 @@ div(ng-include='', src="'partials/header.html'")
                                     tbody
                                         tr(ng-repeat='user in vm.users')
                                             td.text-center(ng-hide='user.modify') {{user.name}}
+                                            td.text-center(ng-show='user.modify')
+                                                input.form-control(type='text', ng-model='user.name', placeholder='{{user.name}}', required='')
                                             td.text-center(ng-hide='user.modify') {{user.email}}
+                                            td.text-center(ng-show='user.modify')
+                                                input.form-control(type='text', ng-model='user.email', placeholder='{{user.email}}', required='')
                                             td.text-center(ng-hide='user.modify')
                                                 a.thumb(href='#/users/{{user.username}}')
                                                     img(ng-src='{{user.avatar}}', alt='{{user.name}}')
+                                            td.text-center(ng-show='user.modify')
+                                                input.form-control(type='text', ng-model='user.avatar', placeholder='{{user.avatar}}', required='')
                                             td.text-center(ng-hide='user.modify')
                                                 button.btn.btn-primary.btn-sm(type='button', ng-click='vm.updateUser($index,true)')
                                                     span.glyphicon.glyphicon-pencil
                                                     |  Modify
-                                            td.text-center(ng-hide='user.modify')
-                                                button.btn.btn-danger.btn-sm(type='button', ng-click='vm.deleteUser($index)')
-                                                    span.glyphicon.glyphicon-trash
-                                                    |  Delete
-                                            td.text-center(ng-show='user.modify')
-                                                input.form-control(type='text', ng-model='user.name', placeholder='{{user.name}}', required='')
-                                            td.text-center(ng-show='user.modify')
-                                                input.form-control(type='text', ng-model='user.email', placeholder='{{user.email}}', required='')
-                                            td.text-center(ng-show='user.modify')
-                                                input.form-control(type='text', ng-model='user.avatar', placeholder='{{user.avatar}}', required='')
                                             td.text-center(ng-show='user.modify')
                                                 button.btn.btn-primary.btn-sm(type='button', ng-click='vm.updateUser($index,false)')
                                                     span.glyphicon.glyphicon-pencil
                                                     |  Update
-                                            td.text-center(ng-show='user.modify')
-                                                button.btn.btn-danger.btn-sm(ng-disabled='true', type='button')
+                                            td.text-center
+                                                button.btn.btn-danger.btn-sm(type='button', ng-disabled='user.modify', ng-click='vm.deleteUser($index)')
                                                     span.glyphicon.glyphicon-trash
                                                     |  Delete
 div(ng-include='', src="'partials/footer.html'")

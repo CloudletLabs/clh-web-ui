@@ -87,7 +87,7 @@ module.exports = function (grunt) {
         copy: {
             build: {
                 cwd: 'app',
-                src: ['!js/**/*.js', 'css/**/*.css', 'img/**/*.*', '!**/*.jade'],
+                src: ['!js/**/*.js', 'favicon.ico', 'css/**/*.css', 'img/**/*.*', '!**/*.jade'],
                 dest: 'build',
                 expand: true
             }
@@ -122,6 +122,10 @@ module.exports = function (grunt) {
                 files: 'app/js/**/*.js',
                 tasks: ['uglify']
             },
+            favicon: {
+                files: 'app/favicon.ico',
+                tasks: ['copy']
+            },
             css: {
                 files: 'app/css/**/*.css',
                 tasks: ['copy']
@@ -130,6 +134,18 @@ module.exports = function (grunt) {
                 files: 'app/img/**/*.*',
                 tasks: ['copy']
             }
+        },
+        protractor_webdriver: {
+            options: {},
+            e2e: {}
+        },
+        protractor: {
+            options: {
+                configFile: "protractor.conf.js",
+                keepAlive: true,
+                noColor: false
+            },
+            e2e: {}
         }
     });
     // These plugins provide necessary tasks.
@@ -139,8 +155,12 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks("grunt-contrib-watch");
+    grunt.loadNpmTasks('grunt-protractor-webdriver');
+    grunt.loadNpmTasks('grunt-protractor-runner');
     grunt.registerTask('default', "Default task to build a package",
         ['bower', 'jade', 'copy', 'uglify']);
     grunt.registerTask('start', "Start server",
         ['bower', 'jade', 'copy', 'uglify', 'connect', 'watch']);
+    grunt.registerTask('e2e', "Run e2e",
+        ['protractor_webdriver:e2e', 'protractor:e2e']);
 };

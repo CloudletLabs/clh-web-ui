@@ -336,7 +336,7 @@ define(['angular', 'angularMock', 'app'], function(angular) {
             });
         });
 
-        describe('$rootScope.$on', function() {
+        describe('$rootScope.$on $routeChangeStart', function() {
             var $routeProvider;
             var $route;
             var $location;
@@ -449,6 +449,38 @@ define(['angular', 'angularMock', 'app'], function(angular) {
                 $location.path('/_test_admin');
                 $rootScope.$digest();
                 expect($location.path()).toBe('/_test_admin');
+            });
+        });
+
+        describe('$rootScope.$on $routeChangeError', function() {
+            var $location;
+            var $rootScope;
+            var toastr;
+
+            beforeEach(function() {
+                module('ngRoute');
+                module('clhApp');
+                inject(function(_$location_, _$rootScope_, _toastr_) {
+                    $location = _$location_;
+                    $rootScope = _$rootScope_;
+                    toastr = _toastr_;
+                });
+            });
+
+            it('should catch api errors', function() {
+                // spyOn($location, 'path');
+                spyOn(toastr, 'error');
+                $rootScope.$emit('$routeChangeError', null, null, {data: {message: 'test_msg'}});
+                expect($location.path()).toBe('/404');
+                expect(toastr.error).toHaveBeenCalledWith('test_msg');
+            });
+
+            it('should catch general errors', function() {
+                // spyOn($location, 'path');
+                spyOn(toastr, 'error');
+                $rootScope.$emit('$routeChangeError', null, null, 'test_msg');
+                expect($location.path()).toBe('/404');
+                expect(toastr.error).toHaveBeenCalledWith('test_msg');
             });
         });
     });
