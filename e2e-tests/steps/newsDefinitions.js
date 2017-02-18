@@ -37,31 +37,31 @@ featureSteps('News')
 
 featureSteps('News: Admin')
     .when('I create test news', function () {
-        this.given('I go to "#/news"');
+        this.given('I go to "#!/news"');
         element(by.model('vm.newNews.subject')).clear().sendKeys('Test News ' + onPrepareTimestamp);
         element(by.model('vm.newNews.text')).clear().sendKeys('*Test* Text');
         this.when('I click the button "Create"');
     })
     .when('I modify test news', function () {
-        this.given('I go to "#/news/test-news-' + onPrepareTimestamp + '"');
+        this.given('I go to "#!/news/test-news-' + onPrepareTimestamp + '"');
         this.when('I click the button "Edit"');
         element(by.model('vm.currentNews.subject')).clear().sendKeys('Test News ' + onPrepareTimestamp + ' [UPDATED]');
         element(by.model('vm.currentNews.text')).clear().sendKeys('*Test* Text (updated)');
         this.when('I click the button "Update"');
     })
     .when('I delete test news', function () {
-        this.given('I go to "#/news/test-news-' + onPrepareTimestamp + '"');
+        this.given('I go to "#!/news/test-news-' + onPrepareTimestamp + '"');
         this.when('I click the button "Delete"');
     })
     .then('I should see the new test news', function () {
-        this.then('I should be on "#/news/test-news-' + onPrepareTimestamp + '"');
+        this.then('I should be on "#!/news/test-news-' + onPrepareTimestamp + '"');
         expect(element(by.binding('vm.currentNews.subject')).getText()).toEqual('Test News ' + onPrepareTimestamp);
         validateNewsProps(element(by.binding('vm.currentNews.creator.name')).getText(), 'Admin');
         expect(element(by.binding('vm.currentNews.html')).getAttribute('innerHTML')).toEqual(
             '<p><em>Test</em> Text</p>');
     })
     .then('I should see modified test news', function () {
-        this.then('I should be on "#/news/test-news-' + onPrepareTimestamp + '"');
+        this.then('I should be on "#!/news/test-news-' + onPrepareTimestamp + '"');
         expect(element(by.binding('vm.currentNews.subject')).getText()).toEqual(
             'Test News ' + onPrepareTimestamp + ' [UPDATED]');
         validateNewsProps(element(by.binding('vm.currentNews.creator.name')).getText(), 'Admin');
@@ -69,7 +69,7 @@ featureSteps('News: Admin')
             '<p><em>Test</em> Text (updated)</p>');
     })
     .then('I should not see deleted test news', function () {
-        this.given('I go to "#/news/test-news-' + onPrepareTimestamp + '"');
-        this.then('I should be on "#/404"');
+        this.given('I go to "#!/news/test-news-' + onPrepareTimestamp + '"');
+        this.then('I should be on "#!/404"');
         this.then('I should get an error "News with thus slug not found"');
     });

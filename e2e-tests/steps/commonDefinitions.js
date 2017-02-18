@@ -11,7 +11,7 @@ featureSteps()
         browser.waitForAngular();
     })
     .given('I logged in as "(.*)"/"(.*)"', function (username, password) {
-        this.given('I go to "#/login"');
+        this.given('I go to "#!/login"');
         this.when('I enter "username" = "' + username + '"');
         this.when('I enter "password" = "' + password + '"');
         this.when('I click the button "Login"');

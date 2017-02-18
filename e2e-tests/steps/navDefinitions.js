@@ -3,15 +3,15 @@ var featureSteps = require('protractor-jasmine-cucumber').featureSteps;
 featureSteps('Navigation')
     .then('I should see Anonymous navigation', function () {
         var logo = element(by.linkText('CloudletHub'));
-        expect(logo.getAttribute('href')).toEqual(browser.baseUrl + '#/index');
+        expect(logo.getAttribute('href')).toEqual(browser.baseUrl + '#!/index');
         expect(logo.isDisplayed()).toBeTruthy();
 
         var login = element(by.linkText('Login'));
-        expect(login.getAttribute('href')).toEqual(browser.baseUrl + '#/login');
+        expect(login.getAttribute('href')).toEqual(browser.baseUrl + '#!/login');
         expect(login.isDisplayed()).toBeTruthy();
 
         var register = element(by.linkText('Register'));
-        expect(register.getAttribute('href')).toEqual(browser.baseUrl + '#/register');
+        expect(register.getAttribute('href')).toEqual(browser.baseUrl + '#!/register');
         expect(register.isDisplayed()).toBeTruthy();
 
         var users = element(by.linkText('Users'));
@@ -25,7 +25,7 @@ featureSteps('Navigation')
     })
     .then('I should see User navigation', function () {
         var logo = element(by.linkText('CloudletHub'));
-        expect(logo.getAttribute('href')).toEqual(browser.baseUrl + '#/index');
+        expect(logo.getAttribute('href')).toEqual(browser.baseUrl + '#!/index');
         expect(logo.isDisplayed()).toBeTruthy();
 
         var login = element(by.linkText('Login'));
@@ -58,7 +58,7 @@ featureSteps('Navigation')
     })
     .then('I should see Admin navigation', function () {
         var logo = element(by.linkText('CloudletHub'));
-        expect(logo.getAttribute('href')).toEqual(browser.baseUrl + '#/index');
+        expect(logo.getAttribute('href')).toEqual(browser.baseUrl + '#!/index');
         expect(logo.isDisplayed()).toBeTruthy();
 
         var login = element(by.linkText('Login'));
@@ -68,7 +68,7 @@ featureSteps('Navigation')
         expect(register.isPresent()).toBeFalsy();
 
         var users = element(by.linkText('Users'));
-        expect(users.getAttribute('href')).toEqual(browser.baseUrl + '#/users');
+        expect(users.getAttribute('href')).toEqual(browser.baseUrl + '#!/users');
         expect(users.isDisplayed()).toBeTruthy();
 
         var actions = element(by.linkText('Actions'));
@@ -77,11 +77,11 @@ featureSteps('Navigation')
         actions.click();
         browser.waitForAngular();
         var addNews = element(by.linkText('Add News'));
-        expect(addNews.getAttribute('href')).toEqual(browser.baseUrl + '#/news');
+        expect(addNews.getAttribute('href')).toEqual(browser.baseUrl + '#!/news');
         expect(addNews.isDisplayed()).toBeTruthy();
 
         var addUser = element(by.linkText('Add User'));
-        expect(addUser.getAttribute('href')).toEqual(browser.baseUrl + '#/user');
+        expect(addUser.getAttribute('href')).toEqual(browser.baseUrl + '#!/user');
         expect(addUser.isDisplayed()).toBeTruthy();
 
         var username = element(by.binding('vm.currentUser.name'));

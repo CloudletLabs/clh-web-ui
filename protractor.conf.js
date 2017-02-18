@@ -1,4 +1,5 @@
 var cucumber = require('protractor-jasmine-cucumber');
+var SpecReporter = require('jasmine-spec-reporter').SpecReporter;
 
 exports.config = {
     seleniumAddress: 'http://localhost:4444/wd/hub',
@@ -14,7 +15,6 @@ exports.config = {
     },
     onPrepare: function() {
         global.onPrepareTimestamp = new Date().getTime();
-        var SpecReporter = require('jasmine-spec-reporter');
         jasmine.getEnv().addReporter(new SpecReporter({
             displayStacktrace: 'none'
         }));

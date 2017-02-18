@@ -35,12 +35,9 @@ define(['angular', 'angularMock', 'app'], function(angular) {
                     err: jasmine.createSpy('mockCallbacks.err')
                 };
                 http = {
-                    success: function (callback) {
-                        http.successCallback = callback;
-                        return http;
-                    },
-                    error: function (callback) {
-                        http.errorCallback = callback;
+                    then: function (successCallback, errorCallback) {
+                        http.successCallback = successCallback;
+                        http.errorCallback = errorCallback;
                         return http;
                     }
                 };
@@ -59,8 +56,8 @@ define(['angular', 'angularMock', 'app'], function(angular) {
                         then: function (done, err) {
                             mockDeferred.done = done;
                             mockDeferred.err = err;
-                            http.res.status ?
-                                http.errorCallback(http.res.data, http.res.status) : http.successCallback(http.res);
+                            http.res.status >= 300 ?
+                                http.errorCallback(http.res) : http.successCallback(http.res);
                         }
                     },
                     resolve: mockResolve,
@@ -91,12 +88,15 @@ define(['angular', 'angularMock', 'app'], function(angular) {
 
             var successCheck = function (name, req, callResourceService, cachedCallResourceService) {
                 it(name, function() {
-                    http.res = mockData;
+                    http.res = {
+                        status: 200,
+                        data: mockData
+                    };
                     var promise = callResourceService(ResourceService[name]);
                     expect(mockHttp).toHaveBeenCalledWith(req);
                     expect(promise).toBeDefined();
                     promise.then(mockCallbacks.done, mockCallbacks.err);
-                    expect(mockCallbacks.done).toHaveBeenCalledWith(mockData);
+                    expect(mockCallbacks.done).toHaveBeenCalledWith(http.res.data);
                     expect(mockCallbacks.err).not.toHaveBeenCalled();
                     expect(mockResolve).toHaveBeenCalledWith(mockData);
                     expect(mockReject).not.toHaveBeenCalled();
@@ -109,12 +109,15 @@ define(['angular', 'angularMock', 'app'], function(angular) {
                     mockReject.calls.reset();
                     mockWhen.calls.reset();
 
-                    http.res = mockData1;
+                    http.res = {
+                        status: 200,
+                        data: mockData1
+                    };
                     var promise = callResourceService(ResourceService[name]);
                     expect(mockHttp).toHaveBeenCalledWith(req);
                     expect(promise).toBeDefined();
                     promise.then(mockCallbacks.done, mockCallbacks.err);
-                    expect(mockCallbacks.done).toHaveBeenCalledWith(mockData1);
+                    expect(mockCallbacks.done).toHaveBeenCalledWith(http.res.data);
                     expect(mockCallbacks.err).not.toHaveBeenCalled();
                     expect(mockResolve).toHaveBeenCalledWith(mockData1);
                     expect(mockReject).not.toHaveBeenCalled();
@@ -122,12 +125,15 @@ define(['angular', 'angularMock', 'app'], function(angular) {
                 });
                 if (cachedCallResourceService) {
                     it(name + ' cached', function () {
-                        http.res = mockData;
+                        var cache = http.res = {
+                            status: 200,
+                            data: mockData
+                        };
                         var promise = cachedCallResourceService(ResourceService[name]);
                         expect(mockHttp).toHaveBeenCalledWith(req);
                         expect(promise).toBeDefined();
                         promise.then(mockCallbacks.done, mockCallbacks.err);
-                        expect(mockCallbacks.done).toHaveBeenCalledWith(mockData);
+                        expect(mockCallbacks.done).toHaveBeenCalledWith(cache.data);
                         expect(mockCallbacks.err).not.toHaveBeenCalled();
                         expect(mockResolve).toHaveBeenCalledWith(mockData);
                         expect(mockReject).not.toHaveBeenCalled();
@@ -140,12 +146,15 @@ define(['angular', 'angularMock', 'app'], function(angular) {
                         mockReject.calls.reset();
                         mockWhen.calls.reset();
 
-                        http.res = mockData1;
+                        http.res = {
+                            status: 201,
+                            data: mockData1
+                        };
                         promise = cachedCallResourceService(ResourceService[name]);
                         expect(mockHttp).not.toHaveBeenCalled();
                         expect(promise).toBeDefined();
                         promise.then(mockCallbacks.done, mockCallbacks.err);
-                        expect(mockCallbacks.done).toHaveBeenCalledWith(mockData);
+                        expect(mockCallbacks.done).toHaveBeenCalledWith(cache.data);
                         expect(mockCallbacks.err).not.toHaveBeenCalled();
                         expect(mockResolve).not.toHaveBeenCalled();
                         expect(mockReject).not.toHaveBeenCalled();
@@ -162,7 +171,7 @@ define(['angular', 'angularMock', 'app'], function(angular) {
                         expect(mockHttp).toHaveBeenCalledWith(req);
                         expect(promise).toBeDefined();
                         promise.then(mockCallbacks.done, mockCallbacks.err);
-                        expect(mockCallbacks.done).toHaveBeenCalledWith(mockData1);
+                        expect(mockCallbacks.done).toHaveBeenCalledWith(http.res.data);
                         expect(mockCallbacks.err).not.toHaveBeenCalled();
                         expect(mockResolve).toHaveBeenCalledWith(mockData1);
                         expect(mockReject).not.toHaveBeenCalled();

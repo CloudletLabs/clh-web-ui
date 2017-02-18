@@ -5,24 +5,24 @@ nav.navbar.navbar-default.no-bottom-margin(ng-controller='NavCtrl as vm', role='
             span.icon-bar
             span.icon-bar
             span.icon-bar
-        a.navbar-brand(href='#/index') CloudletHub
+        a.navbar-brand(href='#!/index') CloudletHub
     .collapse.navbar-collapse.navbar-ex1-collapse
         ul.nav.navbar-nav
             li(ng-hide='vm.isAuthenticated')
-                a(href='#/login') Login
+                a(href='#!/login') Login
             li(ng-hide='vm.isAuthenticated')
-                a(href='#/register') Register
+                a(href='#!/register') Register
             li(ng-show='vm.isAdmin')
-                a(href='#/users') Users
+                a(href='#!/users') Users
             li.dropdown(ng-show='vm.isAuthenticated')
                 a.dropdown-toggle(href='', data-toggle='dropdown')
                     | Actions
                     span.caret
                 ul.dropdown-menu(role='menu')
                     li
-                        a(ng-show='vm.isAdmin', href='#/news') Add News
+                        a(ng-show='vm.isAdmin', href='#!/news') Add News
                     li
-                        a(ng-show='vm.isAdmin', href='#/user') Add User
+                        a(ng-show='vm.isAdmin', href='#!/user') Add User
             li.dropdown(ng-show='vm.isAuthenticated')
                 a.dropdown-toggle(href='', data-toggle='dropdown')
                     | {{vm.currentUser.name}}

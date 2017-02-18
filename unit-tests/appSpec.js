@@ -478,9 +478,9 @@ define(['angular', 'angularMock', 'app'], function(angular) {
             it('should catch general errors', function() {
                 // spyOn($location, 'path');
                 spyOn(toastr, 'error');
-                $rootScope.$emit('$routeChangeError', null, null, 'test_msg');
+                $rootScope.$emit('$routeChangeError', null, null, null);
                 expect($location.path()).toBe('/404');
-                expect(toastr.error).toHaveBeenCalledWith('test_msg');
+                expect(toastr.error).toHaveBeenCalledWith('Unknown error');
             });
         });
     });
