@@ -45,7 +45,7 @@ define(['angular', 'angularEnvironment'], function (angular) {
             }
         };
 
-        // Get data from server     // method, URL, headers, data, key
+        // Get data from server     
         var _ajaxRequest = function (request, key) {
             var deferred = $q.defer();
             // Request
@@ -74,12 +74,7 @@ define(['angular', 'angularEnvironment'], function (angular) {
                
                 var basic = 'Basic ' + $window.btoa(username + ':' + password);
 
-                var header = 
-                {   
-                    "Content-Type"  : "application/json",
-                    "Accept"        : "application/json",
-                    "Authorization" : basic
-                };
+                var header = { "Authorization" : basic };
                 
                 var request = 
                 {        
@@ -291,13 +286,9 @@ define(['angular', 'angularEnvironment'], function (angular) {
             doLogin: function(username, password) {
                 // Calculate hash function for password
                 var enc_password = CryptoJS.PBKDF2(password, username, {keySize: 256 / 32});
-                var user = {
-                    username: username,
-                    password: enc_password.toString()
-                };
 
                 // Get a token
-                ResourceService.login(user.username, user.password).then(function (data) {
+                ResourceService.login(username, enc_password.toString()).then(function (data) {
                     // Got a token - save to local storage
                     localStorageService.set("auth_token", data.auth_token);
                     // Get a user for this token
