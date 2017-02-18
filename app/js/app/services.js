@@ -5,7 +5,7 @@ define(['angular', 'angularEnvironment'], function (angular) {
 
     var clhServices = angular.module('clhServices', []);
     clhServices.service('Resolver', ['$q', Resolver]);
-    clhServices.service('ResourceService', ['envService', '$q', '$http', ResourceService]);
+    clhServices.service('ResourceService', ['envService', '$q', '$http', '$window', ResourceService]);
     clhServices.service('TokenInterceptor', ['$q', '$location', 'localStorageService', TokenInterceptor]);
     clhServices.service('CryptoJSService', [CryptoJSService]);
     clhServices.service('AuthenticationService', ['$location', 'CryptoJSService', 'ResourceService', 'localStorageService', 'toastr', AuthenticationService]);
@@ -23,12 +23,12 @@ define(['angular', 'angularEnvironment'], function (angular) {
     /**
      * Resource server - query data from server and cache it
      */
-    function ResourceService(envService, $q, $http) {
+    function ResourceService(envService, $q, $http, $window) {
 
         var apiUrl = envService.read('apiUrl') + '/' + envService.read('apiVersion');
 
         var _promises = {};
-
+        
         // Save to cache
         var _genericCallback = function (key, data) {
             _promises[key] = data;
@@ -36,23 +36,31 @@ define(['angular', 'angularEnvironment'], function (angular) {
 
         // Return data from cache
         // Or if not found or specifically requested - get it from server
-        var _promisesGetter = function (method, URL, data, key, refresh) {
+        var _promisesGetter = function (request, key, refresh) {
             if (!refresh && _promises[key] !== undefined) {
                 return $q.when(_promises[key]);
             } else {
-                return _ajaxRequest(method, URL, data, key);
+
+                return _ajaxRequest(request, key);
             }
         };
 
-        // Get data from server
-        var _ajaxRequest = function (method, URL, data, key) {
+        // Get data from server     
+        var _ajaxRequest = function (request, key) {
             var deferred = $q.defer();
             // Request
-            $http({method: method, url: apiUrl + URL, data: data}).success(function (data) {
+            $http(
+                    {
+                        method  : request.method, 
+                        url     : apiUrl + request.url,
+                        headers : request.headers, 
+                        data    : request.data
+                    }
+                ).success(function (data) {
                 // Success
                 deferred.resolve(data);
                 // Save GET requests in cache
-                if (method === 'GET') _genericCallback(key, data);
+                if (request.method === 'GET') _genericCallback(key, data);
             }).error(function (data, status) {
                 // Ooops
                 deferred.reject({status: status, data: data});
@@ -62,52 +70,164 @@ define(['angular', 'angularEnvironment'], function (angular) {
 
         // Route angular services to API calls
         return {
-            login: function (user) {
-                return _ajaxRequest('POST', '/auth_token', user, null);
+            login: function (username, password) {
+               
+                var basic = 'Basic ' + $window.btoa(username + ':' + password);
+
+                var header = { "Authorization" : basic };
+                
+                var request = 
+                {        
+                    method  : 'POST',
+                    url     : '/auth_token',
+                    headers : header,
+                    data    : null
+                };
+
+                return _ajaxRequest(request, null);
             },
+           
             register: function (user) {
-                return _ajaxRequest('POST', '/users', user, null);
+                var request = 
+                {        
+                    method : 'POST',
+                    url : '/users',
+                    headers : null,
+                    data : user
+                };
+
+                return _ajaxRequest(request, null);
             },
-            getCurrentUser: function () {
-                return _promisesGetter('GET', '/user', null, "currentUser", true);
+           
+           getCurrentUser: function () {
+                var request = 
+                {        
+                    method : 'GET',
+                    url : '/user',
+                    headers : null,
+                    data : null
+                };
+
+                return _promisesGetter(request, "currentUser", true);
             },
             getUsers: function (refresh) {
-                return _promisesGetter('GET', '/users', null, "users", refresh);
+                 var request = 
+                {        
+                    method : 'GET',
+                    url : '/users',
+                    headers : null,
+                    data : null
+                };
+
+                return _promisesGetter(request, "users", refresh);
             },
+            
             getUserDetails: function (username, refresh) {
-                return _promisesGetter('GET',
-                    '/users/' + username,
-                    null,
-                    "user_" + username,
-                    refresh);
+                 var request = 
+                {        
+                    method : 'GET',
+                    url : '/users/' + username,
+                    headers : null,
+                    data : null
+                };
+
+                return _promisesGetter(request, "user_" + username, refresh);
             },
+            
             createUser: function (user) {
-                return _ajaxRequest('POST', '/users', user, null);
+                 var request = 
+                {        
+                    method : 'POST',
+                    url : '/users',
+                    headers : null,
+                    data : user
+                };
+
+                return _ajaxRequest(request, null);
             },
+            
             updateUser: function (username, user) {
-                return _ajaxRequest('PUT', '/users/' + username, user, null);
+                 var request = 
+                {        
+                    method : 'PUT',
+                    url : '/users/' + username,
+                    headers : null,
+                    data : user
+                };
+
+                return _ajaxRequest(request, null);
             },
+           
             deleteUser: function (username) {
-                return _ajaxRequest('DELETE', '/users/' + username, null, null);
+                 var request = 
+                {        
+                    method : 'DELETE',
+                    url : '/users/' + username,
+                    headers : null,
+                    data : null
+                };
+
+                return _ajaxRequest(request, null);
             },
+           
             getNews: function (refresh) {
-                return _promisesGetter('GET', '/news', null, "news", refresh);
+                 var request = 
+                {        
+                    method : 'GET',
+                    url : '/news',
+                    headers : null,
+                    data : null
+                };
+
+                return _promisesGetter(request, "news", refresh);
             },
+            
             getNewsBySlug: function (slug, refresh) {
-                return _promisesGetter('GET',
-                    '/news/' + slug,
-                    null,
-                    "news_" + slug,
-                    refresh);
+                 var request = 
+                {        
+                    method : 'GET',
+                    url : '/news/' + slug,
+                    headers : null,
+                    data : null
+                };
+
+                return _promisesGetter(request, "news_" + slug, refresh);
             },
+            
             createNews: function (news) {
-                return _ajaxRequest('POST', '/news', news, null);
+                  var request = 
+                {        
+                    method : 'POST',
+                    url : '/news',
+                    headers : null,
+                    data : news
+                };
+
+                return _ajaxRequest(request, null);
             },
+            
             updateNews: function (slug, news) {
-                return _ajaxRequest('PUT', '/news/' + slug, news, null);
+                 var request = 
+                {        
+                    method : 'PUT',
+                    url : '/news/' + slug,
+                    headers : null,
+                    data : news
+                };
+
+                return _ajaxRequest(request, null);
             },
+            
             deleteNews: function (slug) {
-                return _ajaxRequest('DELETE', '/news/' + slug, null, null);
+                 var request = 
+                {        
+                    method : 'DELETE',
+                    url : '/news/' + slug,
+                    headers : null,
+                    data : null
+                };
+
+                return _ajaxRequest(request, null);
             }
         }
     }
@@ -166,13 +286,9 @@ define(['angular', 'angularEnvironment'], function (angular) {
             doLogin: function(username, password) {
                 // Calculate hash function for password
                 var enc_password = CryptoJS.PBKDF2(password, username, {keySize: 256 / 32});
-                var user = {
-                    username: username,
-                    password: enc_password.toString()
-                };
 
                 // Get a token
-                ResourceService.login(user).then(function (data) {
+                ResourceService.login(username, enc_password.toString()).then(function (data) {
                     // Got a token - save to local storage
                     localStorageService.set("auth_token", data.auth_token);
                     // Get a user for this token
