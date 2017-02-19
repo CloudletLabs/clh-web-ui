@@ -1,0 +1,6 @@
+version: '2'
+services:
+  clh-web-ui:
+    build: .
+    ports:
+      - "8088:80"
