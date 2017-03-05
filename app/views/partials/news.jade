@@ -18,7 +18,7 @@ div(ng-include='', src="'partials/header.html'")
                                             button.btn.btn-danger.btn-sm(type='button', ng-click='vm.deleteCurrentNews()')
                                                 span.glyphicon.glyphicon-trash
                                                 |  Delete
-                                        a.col-md-6(href="#/news/{{vm.currentNews.slug}}", ng-hide='vm.currentNews.modify') {{vm.currentNews.subject}}
+                                        a.col-md-6(href="#!/news/{{vm.currentNews.slug}}", ng-hide='vm.currentNews.modify') {{vm.currentNews.subject}}
                                         span.col-md-6.pull-right {{vm.currentNews.creator.name}} || {{vm.currentNews.createDate | date:'medium'}}
                                         .col-md-1.pull-left(ng-show='vm.currentNews.modify')
                                             button.btn.btn-primary.btn-sm(type='button', ng-click='vm.updateCurrentNews()')

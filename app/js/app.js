@@ -246,10 +246,10 @@ define([
             });
             $rootScope.$on('$routeChangeError', function(event, currentRoute, previousRoute, rejection) {
                 $location.path("/404");
-                if (rejection.hasOwnProperty('data') && rejection.data.hasOwnProperty('message')) {
+                if (rejection && rejection.data && rejection.data.message) {
                     toastr.error(rejection.data.message);
                 } else {
-                    toastr.error(rejection);
+                    toastr.error('Unknown error');
                 }
             });
         }]

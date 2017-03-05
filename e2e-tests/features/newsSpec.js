@@ -2,13 +2,13 @@ var feature = require('protractor-jasmine-cucumber').feature;
 
 feature('News')
     .scenario('List')
-        .given('I go to "#/index"')
+        .given('I go to "#!/index"')
         .then('I should see a news list')
     .scenario('Slug hello-world')
-        .given('I go to "#/news/hello-world"')
+        .given('I go to "#!/news/hello-world"')
         .then('I should see a hello-world news')
     .scenario('Slug second-news')
-        .given('I go to "#/news/second-news"')
+        .given('I go to "#!/news/second-news"')
         .then('I should see a second-news news');
 
 feature('News: Admin')
@@ -30,5 +30,5 @@ feature('News: Admin')
         .given('I logged in as "admin"/"admin"')
         .when('I delete test news')
         .then('I should get a message "News successfully deleted!"')
-        .and('I should be on "#/index"')
+        .and('I should be on "#!/index"')
         .and('I should not see deleted test news');

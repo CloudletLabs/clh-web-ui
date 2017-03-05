@@ -135,17 +135,26 @@ module.exports = function (grunt) {
                 tasks: ['copy']
             }
         },
+        karma: {
+            unit: {
+                configFile: 'karma.conf.js'
+            }
+        },
         protractor_webdriver: {
-            options: {},
-            e2e: {}
+            e2e: {
+                options: {
+                    command: 'webdriver-manager update && webdriver-manager start'
+                }
+            }
         },
         protractor: {
-            options: {
-                configFile: "protractor.conf.js",
-                keepAlive: true,
-                noColor: false
-            },
-            e2e: {}
+            e2e: {
+                options: {
+                    configFile: "protractor.conf.js",
+                    keepAlive: true,
+                    noColor: false
+                }
+            }
         }
     });
     // These plugins provide necessary tasks.
@@ -155,12 +164,13 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks("grunt-contrib-watch");
+    grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-protractor-webdriver');
     grunt.loadNpmTasks('grunt-protractor-runner');
     grunt.registerTask('default', "Default task to build a package",
         ['bower', 'jade', 'copy', 'uglify']);
     grunt.registerTask('start', "Start server",
         ['bower', 'jade', 'copy', 'uglify', 'connect', 'watch']);
-    grunt.registerTask('e2e', "Run e2e",
-        ['protractor_webdriver:e2e', 'protractor:e2e']);
+    grunt.registerTask('unit-tests', "Run unit tests", ['bower', 'karma:unit']);
+    grunt.registerTask('e2e-tests', "Run e2e", ['protractor_webdriver:e2e', 'protractor:e2e']);
 };

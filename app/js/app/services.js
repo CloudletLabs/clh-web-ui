@@ -5,10 +5,10 @@ define(['angular', 'angularEnvironment'], function (angular) {
 
     var clhServices = angular.module('clhServices', []);
     clhServices.service('Resolver', ['$q', Resolver]);
-    clhServices.service('ResourceService', ['envService', '$q', '$http', '$window', ResourceService]);
+    clhServices.service('ResourceService', ['envService', '$q', '$http', ResourceService]);
     clhServices.service('TokenInterceptor', ['$q', '$location', 'localStorageService', TokenInterceptor]);
     clhServices.service('CryptoJSService', [CryptoJSService]);
-    clhServices.service('AuthenticationService', ['$location', 'CryptoJSService', 'ResourceService', 'localStorageService', 'toastr', AuthenticationService]);
+    clhServices.service('AuthenticationService', ['$location', '$window', 'CryptoJSService', 'ResourceService', 'localStorageService', 'toastr', AuthenticationService]);
 
     /**
      * Resolver service
@@ -23,7 +23,7 @@ define(['angular', 'angularEnvironment'], function (angular) {
     /**
      * Resource server - query data from server and cache it
      */
-    function ResourceService(envService, $q, $http, $window) {
+    function ResourceService(envService, $q, $http) {
 
         var apiUrl = envService.read('apiUrl') + '/' + envService.read('apiVersion');
 
@@ -40,7 +40,6 @@ define(['angular', 'angularEnvironment'], function (angular) {
             if (!refresh && _promises[key] !== undefined) {
                 return $q.when(_promises[key]);
             } else {
-
                 return _ajaxRequest(request, key);
             }
         };
@@ -49,41 +48,36 @@ define(['angular', 'angularEnvironment'], function (angular) {
         var _ajaxRequest = function (request, key) {
             var deferred = $q.defer();
             // Request
-            $http(
-                    {
-                        method  : request.method, 
-                        url     : apiUrl + request.url,
-                        headers : request.headers, 
-                        data    : request.data
-                    }
-                ).success(function (data) {
+            $http({
+                method: request.method,
+                url: apiUrl + request.url,
+                headers: request.headers,
+                data: request.data
+            }).then(function (response) {
                 // Success
+                var data = response.data;
                 deferred.resolve(data);
                 // Save GET requests in cache
-                if (request.method === 'GET') _genericCallback(key, data);
-            }).error(function (data, status) {
+                if (method === 'GET') _genericCallback(key, data);
+            }, function (response) {
                 // Ooops
-                deferred.reject({status: status, data: data});
+                deferred.reject(response);
             });
             return deferred.promise;
         };
 
         // Route angular services to API calls
         return {
-            login: function (username, password) {
-               
-                var basic = 'Basic ' + $window.btoa(username + ':' + password);
-
-                var header = { "Authorization" : basic };
-                
+            login: function (auth) {
                 var request = 
                 {        
                     method  : 'POST',
                     url     : '/auth_token',
-                    headers : header,
+                    headers : {
+                        Authorization: auth
+                    },
                     data    : null
                 };
-
                 return _ajaxRequest(request, null);
             },
            
@@ -269,7 +263,7 @@ define(['angular', 'angularEnvironment'], function (angular) {
     /**
      * Auth service - tell us is there a user and what kind of user is it
      */
-    function AuthenticationService($location, CryptoJS, ResourceService, localStorageService, toastr) {
+    function AuthenticationService($location, $window, CryptoJS, ResourceService, localStorageService, toastr) {
         var self = this;
         return {
             /**
@@ -286,9 +280,10 @@ define(['angular', 'angularEnvironment'], function (angular) {
             doLogin: function(username, password) {
                 // Calculate hash function for password
                 var enc_password = CryptoJS.PBKDF2(password, username, {keySize: 256 / 32});
+                var auth = 'Basic ' + $window.btoa(username + ':' + enc_password.toString());
 
                 // Get a token
-                ResourceService.login(username, enc_password.toString()).then(function (data) {
+                ResourceService.login(auth).then(function (data) {
                     // Got a token - save to local storage
                     localStorageService.set("auth_token", data.auth_token);
                     // Get a user for this token

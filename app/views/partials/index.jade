@@ -11,7 +11,7 @@ div(ng-include='', src="'partials/header.html'")
                                 .panel.panel-default
                                     .panel-heading
                                         .row
-                                            a(href="#/news/{{news.slug}}").col-md-6 {{news.subject}}
+                                            a(href="#!/news/{{news.slug}}").col-md-6 {{news.subject}}
                                             span.col-md-6.pull-right {{news.creator.name}} || {{news.createDate | date:'medium'}}
                                     .panel-body(ng-bind-html="news.html")
 div(ng-include='', src="'partials/footer.html'")
