@@ -17,345 +17,265 @@ define(['angular', 'angularMock', 'app'], function(angular) {
             });
         });
 
-        describe('ResourceService', function() {
-            var ResourceService;
+        describe('ResourceProvider', function() {
+            var ResourceProvider;
 
-            var mockCallbacks;
-            var mockData = {test:'test'};
-            var mockData1 = {test:'test1'};
-
-            var http;
-            var mockHttp, mockResolve, mockReject, mockWhen;
+            var $scope, $http, $httpBackend;
 
             beforeEach(function() {
                 module("clhApp");
+                inject(function(_ResourceProvider_, _$rootScope_, _$http_, _$httpBackend_) {
+                    ResourceProvider = _ResourceProvider_;
+                    $scope = _$rootScope_;
+                    $http = _$http_;
+                    $httpBackend = _$httpBackend_;
+                });
+            });
 
-                mockCallbacks = {
-                    done: jasmine.createSpy('mockCallbacks.done'),
-                    err: jasmine.createSpy('mockCallbacks.err')
+            afterEach(function() {
+                $httpBackend.verifyNoOutstandingExpectation();
+                $httpBackend.verifyNoOutstandingRequest();
+            });
+
+            it('request POST', function() {
+                var request = {
+                    method: 'POST',
+                    path: '/post',
+                    url: 'http://localhost:8087/api/current/post'
                 };
-                http = {
-                    then: function (successCallback, errorCallback) {
-                        http.successCallback = successCallback;
-                        http.errorCallback = errorCallback;
-                        return http;
-                    }
+                $httpBackend.expectPOST(request.url).respond({test: 'post'});
+                var response = null;
+                ResourceProvider(request).then(function (resp) {
+                    response = resp;
+                }, function (err) {
+                    throw err;
+                });
+                $httpBackend.flush();
+                expect(response).toEqual({test: 'post'});
+            });
+
+            it('request POST fail', function() {
+                var request = {
+                    method: 'POST',
+                    path: '/post',
+                    url: 'http://localhost:8087/api/current/post'
                 };
-                mockHttp = jasmine.createSpy('$http').and.callFake(function (req) {
-                    http.req = req;
-                    return http;
+                $httpBackend.expectPOST(request.url).respond(500, 'Test error');
+                var error = null;
+                ResourceProvider(request).then(function () {
+                    throw new Error('Expected not to receive success response');
+                }, function (err) {
+                    error = err;
                 });
-                mockResolve = jasmine.createSpy('deferred.resolve').and.callFake(function (data) {
-                    mockDeferred.done(data);
-                });
-                mockReject = jasmine.createSpy('deferred.reject').and.callFake(function (err) {
-                    mockDeferred.err(err);
-                });
-                var mockDeferred = {
-                    promise: {
-                        then: function (done, err) {
-                            mockDeferred.done = done;
-                            mockDeferred.err = err;
-                            http.res.status >= 300 ?
-                                http.errorCallback(http.res) : http.successCallback(http.res);
-                        }
-                    },
-                    resolve: mockResolve,
-                    reject: mockReject
+                $httpBackend.flush();
+                expect(error.data).toEqual('Test error');
+            });
+
+            it('request GET', function() {
+                var request = {
+                    method: 'GET',
+                    path: '/get',
+                    url: 'http://localhost:8087/api/current/get'
                 };
-                mockWhen = jasmine.createSpy('$q.when').and.callFake(function (data) {
-                    return {
-                        then: function (done, err) {
-                            done(data);
-                        }
-                    }
+                $httpBackend.expectGET(request.url).respond({test: 'get'});
+                var response = null;
+                ResourceProvider(request, 'key').then(function (resp) {
+                    response = resp;
+                }, function (err) {
+                    throw err;
                 });
-                var mockQ = {
-                    defer: function () {
-                        return mockDeferred;
-                    },
-                    when: mockWhen
-                };
+                $httpBackend.flush();
+                expect(response).toEqual({test: 'get'});
+
+                var cached = null;
+                ResourceProvider(null, 'key', true).then(function (resp) {
+                    cached = resp;
+                }, function (err) {
+                    throw err;
+                });
+                $scope.$apply();
+                expect(cached).toBe(response);
+            });
+        });
+
+        describe('ResourceService', function() {
+            var ResourceProviderMock, ResourceService;
+
+            beforeEach(function() {
+                module("clhApp");
+                ResourceProviderMock = jasmine.createSpy('ResourceProvider');
                 module(function($provide){
-                    $provide.value('$http', mockHttp);
-                    $provide.value('$q', mockQ);
+                    $provide.value('ResourceProvider', ResourceProviderMock);
                 });
-
                 inject(function(_ResourceService_) {
                     ResourceService = _ResourceService_;
                 });
             });
 
-            var successCheck = function (name, req, callResourceService, cachedCallResourceService) {
-                it(name, function() {
-                    http.res = {
-                        status: 200,
-                        data: mockData
-                    };
-                    var promise = callResourceService(ResourceService[name]);
-                    expect(mockHttp).toHaveBeenCalledWith(req);
-                    expect(promise).toBeDefined();
-                    promise.then(mockCallbacks.done, mockCallbacks.err);
-                    expect(mockCallbacks.done).toHaveBeenCalledWith(http.res.data);
-                    expect(mockCallbacks.err).not.toHaveBeenCalled();
-                    expect(mockResolve).toHaveBeenCalledWith(mockData);
-                    expect(mockReject).not.toHaveBeenCalled();
-                    expect(mockWhen).not.toHaveBeenCalled();
-
-                    mockHttp.calls.reset();
-                    mockCallbacks.done.calls.reset();
-                    mockCallbacks.err.calls.reset();
-                    mockResolve.calls.reset();
-                    mockReject.calls.reset();
-                    mockWhen.calls.reset();
-
-                    http.res = {
-                        status: 200,
-                        data: mockData1
-                    };
-                    var promise = callResourceService(ResourceService[name]);
-                    expect(mockHttp).toHaveBeenCalledWith(req);
-                    expect(promise).toBeDefined();
-                    promise.then(mockCallbacks.done, mockCallbacks.err);
-                    expect(mockCallbacks.done).toHaveBeenCalledWith(http.res.data);
-                    expect(mockCallbacks.err).not.toHaveBeenCalled();
-                    expect(mockResolve).toHaveBeenCalledWith(mockData1);
-                    expect(mockReject).not.toHaveBeenCalled();
-                    expect(mockWhen).not.toHaveBeenCalled();
-                });
-                if (cachedCallResourceService) {
-                    it(name + ' cached', function () {
-                        var cache = http.res = {
-                            status: 200,
-                            data: mockData
-                        };
-                        var promise = cachedCallResourceService(ResourceService[name]);
-                        expect(mockHttp).toHaveBeenCalledWith(req);
-                        expect(promise).toBeDefined();
-                        promise.then(mockCallbacks.done, mockCallbacks.err);
-                        expect(mockCallbacks.done).toHaveBeenCalledWith(cache.data);
-                        expect(mockCallbacks.err).not.toHaveBeenCalled();
-                        expect(mockResolve).toHaveBeenCalledWith(mockData);
-                        expect(mockReject).not.toHaveBeenCalled();
-                        expect(mockWhen).not.toHaveBeenCalled();
-
-                        mockHttp.calls.reset();
-                        mockCallbacks.done.calls.reset();
-                        mockCallbacks.err.calls.reset();
-                        mockResolve.calls.reset();
-                        mockReject.calls.reset();
-                        mockWhen.calls.reset();
-
-                        http.res = {
-                            status: 201,
-                            data: mockData1
-                        };
-                        promise = cachedCallResourceService(ResourceService[name]);
-                        expect(mockHttp).not.toHaveBeenCalled();
-                        expect(promise).toBeDefined();
-                        promise.then(mockCallbacks.done, mockCallbacks.err);
-                        expect(mockCallbacks.done).toHaveBeenCalledWith(cache.data);
-                        expect(mockCallbacks.err).not.toHaveBeenCalled();
-                        expect(mockResolve).not.toHaveBeenCalled();
-                        expect(mockReject).not.toHaveBeenCalled();
-                        expect(mockWhen).toHaveBeenCalledWith(mockData);
-
-                        mockHttp.calls.reset();
-                        mockCallbacks.done.calls.reset();
-                        mockCallbacks.err.calls.reset();
-                        mockResolve.calls.reset();
-                        mockReject.calls.reset();
-                        mockWhen.calls.reset();
-
-                        promise = callResourceService(ResourceService[name]);
-                        expect(mockHttp).toHaveBeenCalledWith(req);
-                        expect(promise).toBeDefined();
-                        promise.then(mockCallbacks.done, mockCallbacks.err);
-                        expect(mockCallbacks.done).toHaveBeenCalledWith(http.res.data);
-                        expect(mockCallbacks.err).not.toHaveBeenCalled();
-                        expect(mockResolve).toHaveBeenCalledWith(mockData1);
-                        expect(mockReject).not.toHaveBeenCalled();
-                        expect(mockWhen).not.toHaveBeenCalled();
-                    });
-                }
-            };
-
-            var failCheck = function (name, req, callResourceService) {
-                it(name + ' fail', function() {
-                    http.res = {
-                        status: 401,
-                        data: mockData
-                    };
-                    var promise = callResourceService(ResourceService[name]);
-                    expect(mockHttp).toHaveBeenCalledWith(req);
-                    expect(promise).toBeDefined();
-                    promise.then(mockCallbacks.done, mockCallbacks.err);
-                    expect(mockCallbacks.done).not.toHaveBeenCalled();
-                    expect(mockCallbacks.err).toHaveBeenCalledWith(http.res);
+            var check = function (name, req, key, refresh, call) {
+                it(name, function () {
+                    if (call) {
+                        call(ResourceService[name]);
+                    } else {
+                        ResourceService[name]();
+                    }
+                    if (refresh !== undefined) {
+                        expect(ResourceProviderMock).toHaveBeenCalledWith(req, key, !refresh);
+                    } else if (key) {
+                        expect(ResourceProviderMock).toHaveBeenCalledWith(req, key);
+                    } else {
+                        expect(ResourceProviderMock).toHaveBeenCalledWith(req);
+                    }
                 });
             };
 
-            var baseApiUrl = 'http://localhost:8087/api/current';
             [
                 {
                     name: 'login',
                     req: {
                         method: 'POST',
-                        url: baseApiUrl + '/auth_token',
-                        data: mockData
+                        path: '/auth_token',
+                        headers: {
+                            Authorization: 'Basic xyz'
+                        }
                     },
-                    callResourceService: function(resourceService) {
-                        return resourceService(mockData)
+                    call: function (resourceService) {
+                        return resourceService('Basic xyz')
                     }
                 },
                 {
                     name: 'register',
                     req: {
                         method: 'POST',
-                        url: baseApiUrl + '/users',
-                        data: mockData
+                        path: '/users',
+                        data: 'user'
                     },
-                    callResourceService: function(resourceService) {
-                        return resourceService(mockData)
+                    call: function (resourceService) {
+                        return resourceService('user')
                     }
                 },
                 {
                     name: 'getCurrentUser',
                     req: {
                         method: 'GET',
-                        url: baseApiUrl + '/user',
-                        data: null
+                        path: '/user'
                     },
-                    callResourceService: function(resourceService) {
-                        return resourceService()
-                    }
+                    key: 'currentUser'
                 },
                 {
                     name: 'getUsers',
                     req: {
                         method: 'GET',
-                        url: baseApiUrl + '/users',
-                        data: null
+                        path: '/users'
                     },
-                    callResourceService: function(resourceService) {
+                    refresh: true,
+                    key: 'users',
+                    call: function (resourceService) {
                         return resourceService(true)
-                    },
-                    cachedCallResourceService: function(resourceService) {
-                        return resourceService(false)
                     }
                 },
                 {
                     name: 'getUserDetails',
                     req: {
                         method: 'GET',
-                        url: baseApiUrl + '/users/test',
-                        data: null
+                        path: '/users/username'
                     },
-                    callResourceService: function(resourceService) {
-                        return resourceService('test', true)
-                    },
-                    cachedCallResourceService: function(resourceService) {
-                        return resourceService('test', false)
+                    refresh: true,
+                    key: 'user_username',
+                    call: function (resourceService) {
+                        return resourceService('username', true)
                     }
                 },
                 {
                     name: 'createUser',
                     req: {
                         method: 'POST',
-                        url: baseApiUrl + '/users',
-                        data: mockData
+                        path: '/users',
+                        data: 'user'
                     },
-                    callResourceService: function(resourceService) {
-                        return resourceService(mockData)
+                    call: function (resourceService) {
+                        return resourceService('user')
                     }
                 },
                 {
                     name: 'updateUser',
                     req: {
                         method: 'PUT',
-                        url: baseApiUrl + '/users/test',
-                        data: mockData
+                        path: '/users/username',
+                        data: 'user'
                     },
-                    callResourceService: function(resourceService) {
-                        return resourceService('test', mockData)
+                    call: function (resourceService) {
+                        return resourceService('username', 'user')
                     }
                 },
                 {
                     name: 'deleteUser',
                     req: {
                         method: 'DELETE',
-                        url: baseApiUrl + '/users/test',
-                        data: null
+                        path: '/users/username'
                     },
-                    callResourceService: function(resourceService) {
-                        return resourceService('test')
+                    call: function (resourceService) {
+                        return resourceService('username')
                     }
                 },
                 {
                     name: 'getNews',
                     req: {
                         method: 'GET',
-                        url: baseApiUrl + '/news',
-                        data: null
+                        path: '/news'
                     },
-                    callResourceService: function(resourceService) {
+                    refresh: true,
+                    key: 'news',
+                    call: function (resourceService) {
                         return resourceService(true)
-                    },
-                    cachedCallResourceService: function(resourceService) {
-                        return resourceService(false)
                     }
                 },
                 {
                     name: 'getNewsBySlug',
                     req: {
                         method: 'GET',
-                        url: baseApiUrl + '/news/test',
-                        data: null
+                        path: '/news/slug'
                     },
-                    callResourceService: function(resourceService) {
-                        return resourceService('test', true)
-                    },
-                    cachedCallResourceService: function(resourceService) {
-                        return resourceService('test', false)
+                    refresh: true,
+                    key: 'news_slug',
+                    call: function (resourceService) {
+                        return resourceService('slug', true)
                     }
                 },
                 {
                     name: 'createNews',
                     req: {
                         method: 'POST',
-                        url: baseApiUrl + '/news',
-                        data: mockData
+                        path: '/news',
+                        data: 'news'
                     },
-                    callResourceService: function(resourceService) {
-                        return resourceService(mockData)
+                    call: function (resourceService) {
+                        return resourceService('news')
                     }
                 },
                 {
                     name: 'updateNews',
                     req: {
                         method: 'PUT',
-                        url: baseApiUrl + '/news/test',
-                        data: mockData
+                        path: '/news/slug',
+                        data: 'news'
                     },
-                    callResourceService: function(resourceService) {
-                        return resourceService('test', mockData)
+                    call: function (resourceService) {
+                        return resourceService('slug', 'news')
                     }
                 },
                 {
                     name: 'deleteNews',
                     req: {
                         method: 'DELETE',
-                        url: baseApiUrl + '/news/test',
-                        data: null
+                        path: '/news/slug'
                     },
-                    callResourceService: function(resourceService) {
-                        return resourceService('test')
+                    call: function (resourceService) {
+                        return resourceService('slug')
                     }
                 }
-            ].forEach(function (it) {
-                successCheck(it.name, it.req,
-                    it.callResourceService, it.cachedCallResourceService);
-                failCheck(it.name, it.req, it.callResourceService);
+            ].forEach(function (its) {
+                check(its.name, its.req, its.key, its.refresh, its.call);
             });
         });
 
@@ -439,22 +359,6 @@ define(['angular', 'angularMock', 'app'], function(angular) {
                 expect(localStorageService.clearAll).toHaveBeenCalled();
                 expect($location.path).toHaveBeenCalledWith('/login');
             });
-
-            it('responseError should do nothing if 401 but request was /auth_token', function() {
-                var res = {
-                    config: {
-                        url: '/auth_token'
-                    },
-                    status: 401
-                };
-                spyOn($q, 'reject');
-                spyOn(localStorageService, 'clearAll');
-                spyOn($location, 'path');
-                TokenInterceptor.responseError(res);
-                expect($q.reject).toHaveBeenCalledWith(res);
-                expect(localStorageService.clearAll).not.toHaveBeenCalled();
-                expect($location.path).not.toHaveBeenCalled();
-            });
         });
 
         describe('CryptoJSService', function() {
@@ -479,6 +383,7 @@ define(['angular', 'angularMock', 'app'], function(angular) {
                 username: 'usr',
                 password: 'a51db16fb0b78a6cfbebe5f43a32313d251a6b89166d60586f85cc79626c1c51'
             };
+            var basicAuth = 'Basic dXNyOmE1MWRiMTZmYjBiNzhhNmNmYmViZTVmNDNhMzIzMTNkMjUxYTZiODkxNjZkNjA1ODZmODVjYzc5NjI2YzFjNTE=';
 
             beforeEach(module("clhApp"));
             beforeEach(inject(function(_$location_, _localStorageService_, _ResourceService_, _AuthenticationService_,
@@ -517,7 +422,7 @@ define(['angular', 'angularMock', 'app'], function(angular) {
                 spyOn(ResourceService, 'login').and.callFake(mockPromise({auth_token: 'test_token'}));
                 spyOn(ResourceService, 'getCurrentUser').and.callFake(mockPromise({test: 'test'}));
                 AuthenticationService.doLogin('usr', 'pwd');
-                expect(ResourceService.login).toHaveBeenCalledWith(defaultUserResponse);
+                expect(ResourceService.login).toHaveBeenCalledWith(basicAuth);
                 expect(localStorageService.set).toHaveBeenCalledWith('auth_token', 'test_token');
                 expect(localStorageService.set).toHaveBeenCalledWith('user', {test: 'test'});
                 expect($location.path).toHaveBeenCalledWith('/index');
@@ -527,7 +432,7 @@ define(['angular', 'angularMock', 'app'], function(angular) {
                 spyOn(toastr, 'error');
                 spyOn(ResourceService, 'login').and.callFake(mockPromise({status: 401}, true));
                 AuthenticationService.doLogin('usr', 'pwd');
-                expect(ResourceService.login).toHaveBeenCalledWith(defaultUserResponse);
+                expect(ResourceService.login).toHaveBeenCalledWith(basicAuth);
                 expect(toastr.error).toHaveBeenCalledWith(jasmine.any(String));
             });
 
@@ -535,7 +440,7 @@ define(['angular', 'angularMock', 'app'], function(angular) {
                 spyOn(toastr, 'error');
                 spyOn(ResourceService, 'login').and.callFake(mockPromise({data: {message: '123'}}, true));
                 AuthenticationService.doLogin('usr', 'pwd');
-                expect(ResourceService.login).toHaveBeenCalledWith(defaultUserResponse);
+                expect(ResourceService.login).toHaveBeenCalledWith(basicAuth);
                 expect(toastr.error).toHaveBeenCalledWith('123');
             });
 
@@ -547,7 +452,7 @@ define(['angular', 'angularMock', 'app'], function(angular) {
                 spyOn(ResourceService, 'login').and.callFake(mockPromise({auth_token: 'test_token'}));
                 spyOn(ResourceService, 'getCurrentUser').and.callFake(mockPromise({data: {message: '123'}}, true));
                 AuthenticationService.doLogin('usr', 'pwd');
-                expect(ResourceService.login).toHaveBeenCalledWith(defaultUserResponse);
+                expect(ResourceService.login).toHaveBeenCalledWith(basicAuth);
                 expect(localStorageService.set).toHaveBeenCalledWith('auth_token', 'test_token');
                 expect(localStorageService.clearAll).toHaveBeenCalled();
                 expect($location.path).toHaveBeenCalledWith('/login');
