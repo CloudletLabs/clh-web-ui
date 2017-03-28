@@ -1,0 +1,56 @@
+@font-face{
+	font-family: Ebrima;
+	src: url('../../img/fonts/ebrima.ttf');
+}
+@font-face{
+	font-family: EbrimaBD;
+	src: url('../../img/fonts/ebrimabd.ttf');
+}
+body{
+	font-family: Ebrima;
+	font-weight: normal;
+}
+.navbar{
+	font-family: EbrimaBD;
+	font-weight: normal;
+	background: -webkit-linear-gradient(#7386A7, #455168, #7386A7) !important;
+	background: -o-linear-gradient(#7386A7, #455168, #7386A7) !important;
+	background: linear-gradient(#7386A7, #455168, #7386A7) !important;
+}
+.navbar-brand,
+.navbar-nav li a {
+	color: #C9CFDD !important;
+	text-decoration: none !important;
+}
+.navbar-brand:hover,
+.navbar-nav li a:hover {
+	color: #fff !important;
+}
+.dropdown-menu{
+	background: #D6DBE5 !important;
+}
+.dropdown-menu li a{
+	color: #455168 !important;
+}
+.dropdown-toggle {
+	background: -webkit-linear-gradient(#7386A7, #455168, #7386A7) !important;
+	background: -o-linear-gradient(#7386A7, #455168, #7386A7) !important;
+	background: linear-gradient(#7386A7, #455168, #7386A7) !important;
+}
+.dropdown-menu li :hover {
+	background: inherit !important;
+}
+.go-guntt-block :hover{
+	background: linear-gradient(#2C6B9F 60%, #66BBFF) !important;
+}
+.go-guntt-btn{
+	position: relative;
+	top: 9px;
+	left: 20px;
+	border: 2px solid #D6DBE5;
+	padding: 4px 15px !important;
+	border-radius: 7px;
+	background: linear-gradient(#2C6B9F 60%, #2C6B9F) !important;
+}
+.go-guntt-btn span{color: #ffffff;}
+ 

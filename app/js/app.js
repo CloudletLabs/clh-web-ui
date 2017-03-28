@@ -52,6 +52,7 @@ define([
             vars: {
                 local: {
                     apiVersion: 'current',
+                    //apiUrl:  'http://192.168.99.100:8087/api',
                     apiUrl:  'http://localhost:8087/api',
                     enableDebug: true
                 },
@@ -106,7 +107,7 @@ define([
             newestOnTop: true,
             onHidden: null,
             onShown: null,
-            positionClass: 'toast-top-full-width',
+            positionClass: 'toast-top-right',
             preventDuplicates: false,
             progressBar: false,
             tapToDismiss: true,
