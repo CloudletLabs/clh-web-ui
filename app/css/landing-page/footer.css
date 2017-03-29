@@ -1,0 +1,12 @@
+.footer-main{
+    background: #455168;
+    color: #C9CFDD;
+    border-top: 1px solid #C9CFDD;
+    border-bottom: 1px solid #C9CFDD;
+    background: -webkit-linear-gradient(#7386A7, #455168, #7386A7);
+    background: -o-linear-gradient(#7386A7, #455168, #7386A7);
+    background: linear-gradient(#7386A7, #455168, #7386A7);
+}
+.footer-main span {
+    color: #C9CFDD;
+}

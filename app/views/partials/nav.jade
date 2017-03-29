@@ -30,3 +30,6 @@ nav.navbar.navbar-default.no-bottom-margin(ng-controller='NavCtrl as vm', role='
                 ul.dropdown-menu(role='menu')
                     li
                         a(href='', ng-click='vm.logout()') Logout
+            li.dropdown.go-guntt-block(ng-show='vm.isAuthenticated')
+                a.dropdown-toggle.go-guntt-btn(href='', data-toggle='dropdown')
+                    span LET'S GUNTT
