@@ -1,0 +1,108 @@
+
+.checkbox {
+  vertical-align: top;
+  margin: 0 3px 0 0;
+  width: 17px;
+  height: 17px;
+}
+.checkbox + label {
+  cursor: pointer;
+}
+.checkbox:not(checked) {
+  position: absolute;
+  opacity: 0;
+}
+.checkbox:not(checked) + label {
+  position: relative; 
+  padding: 0 0 0 60px; 
+}
+.checkbox:not(checked) + label:before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 12px;
+  width: 37px;
+  height: 15px;
+  border-radius: 8px;
+  background: #CDD1DA;
+  box-shadow: inset 0 2px 3px rgba(0,0,0,.2);
+}
+.checkbox:not(checked) + label:after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 12px;
+  width: 17px;
+  height: 17px;
+  border-radius: 10px;
+  background: #5C6B88;
+  box-shadow: 0 2px 5px rgba(0,0,0,.3);
+  transition: all .2s; 
+}
+.checkbox:checked + label:before {
+  background: #B5D88C;
+}
+.checkbox:checked + label:after {
+  left: 32px;
+  background: #fff;
+}
+.checkbox:focus + label:before {
+}
+
+
+
+
+/*Checkboxes for RADIO buttons*/
+.checkbox-r {
+  vertical-align: top;
+  margin: 0 3px 0 0;
+  width: 17px;
+  height: 17px;
+}
+.checkbox-r + label {
+  cursor: pointer;
+}
+.checkbox-r + label{
+  position: relative;
+  right: 20px;
+}
+.checkbox-r:not(checked) {
+  position: absolute;
+  opacity: 0;
+}
+.checkbox-r:not(checked) + label {
+  position: relative; 
+  padding: 0 0 0 60px; 
+}
+.checkbox-r:not(checked) + label:before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 12px;
+  width: 37px;
+  height: 15px;
+  border-radius: 8px;
+  background: #CDD1DA;
+  box-shadow: inset 0 2px 3px rgba(0,0,0,.2);
+}
+.checkbox-r:not(checked) + label:after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 12px;
+  width: 17px;
+  height: 17px;
+  border-radius: 10px;
+  background: #5C6B88;
+  box-shadow: 0 2px 5px rgba(0,0,0,.3);
+  transition: all .2s; 
+}
+.checkbox-r:checked + label:before {
+  background: #B5D88C;
+}
+.checkbox-r:checked + label:after {
+  left: 32px;
+  background: #fff;
+}
+.checkbox-r:focus + label:before {
+}

@@ -1,0 +1,376 @@
+/* RESOURCE-TYPE-GROUP-SHEDULLE MENU SECTION START*/
+.event-modal-header{
+	background: -webkit-linear-gradient(#7386A7, #455168, #7386A7);
+	background: -o-linear-gradient(#7386A7, #455168, #7386A7);
+	background: linear-gradient(#7386A7, #455168, #7386A7);
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	font-size: 150%;
+	font-weight: normal;
+	width: 450px;
+	height: 50px;
+	padding: 0 10px;
+	
+	display: -moz-box;
+	display: -webkit-box;
+	display: -o-box;
+	display: flexbox;
+	
+	box-orient: -moz-horizontal;
+	box-orient: -webkit-horizontal;
+	box-orient: -o-horizontal;
+	box-orient: horizontal;
+
+	-moz-box-align:center;
+	-webkit-box-align:center;
+	-o-box-align:center;
+	box-align:center;
+
+	-moz-box-pack: justify;
+	-webkit-box-pack: justify;
+	-o-box-pack: justify;
+	box-pack: justify;
+}
+.event-modal-body{
+	width: 450px;
+	padding: 20px 20px;
+	background: -webkit-linear-gradient(#E5E5E5 0%, #fff 10%, #E5E5E5 80%);
+	background: -o-linear-gradient(#E5E5E5 0%, #fff 10%, #E5E5E5 80%);
+	background: linear-gradient(#E5E5E5 0%, #fff 10%, #E5E5E5 80%);
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+
+}
+.event-single-modal-date-enter{
+	border-bottom: 2px solid #AEB8CB;
+	width: 410px;
+	padding-bottom: 15px;
+}
+.event-single-modal-date-enter div{
+	display: inline-block;
+}
+.event-single-modal-date-enter label{
+	font-weight: bold;
+	font-size: 129%;
+	color: #808284;
+}
+.event-single-modal-date-enter span{
+	font-weight: bold;
+	font-size: 129%;
+	color: #5D6C8B;
+	
+	margin-bottom:5px;
+	display: block;
+	
+}
+.date-block{
+	display: -moz-box;
+	display: -webkit-box;
+	display: -o-box;
+	display: flexbox;
+	
+	box-orient: -moz-horizontal;
+	box-orient: -webkit-horizontal;
+	box-orient: -o-horizontal;
+	box-orient: horizontal;
+	width: 175px;
+}
+.date-block span{
+	margin-left: 10px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	font-size: 120%;
+	margin-top: 5px;
+}
+.today-select{
+	border: 2px solid #AEB8CB;
+	border-radius: 6px;
+	height: 34px;
+	width: 128px !important;
+	padding-top: 5px;
+	background: #CEFCE7;
+	display: block;
+}
+.today-select:hover{
+	background: #DFFDBE;
+}
+.week-day-select{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border: 2px solid #AEB8CB;
+	border-radius: 6px;
+	height: 34px;
+	width: 410px !important;
+	padding-top: 3px;
+	background: #CEFCE7;
+}
+.week-day-choice{
+	width: 410px;
+	border: 2px solid #AEB8CB;
+	border-radius: 6px;
+	padding: 3px;
+	background: #F6F4FF;
+}
+.week-day-choice div{
+	display: inline-block;
+	width: 96px;
+}
+.week-day-choice div label span:first-of-type{
+	
+}
+.week-day-choice div label span{
+	font-size: 90% ;
+}
+.week-day-select:hover{
+	background: #DFFDBE;
+}
+.checkbox-week-select{
+	width: 25px;
+	cursor: pointer;
+}
+.event-single-input-date{
+	display: inline-block;
+	background: transparent;/*#E6E7E8;*/
+	border: 2px solid #AEB8CB;
+	font-size: 150%;
+	text-align: center;
+	color: #CACBCD;
+	font-weight: bold;
+
+	height: 34px;
+	width: 168px;
+	border-radius: 6px;
+}
+.event-single-input-date:focus{
+	letter-spacing: 2px;
+	color: #7386A7;
+	border: 1px solid #9BA3AF;
+	background: #fff;
+	text-shadow: 2px 2px 7px #969696;
+	box-shadow: 4px 4px 20px #BBBDC0;
+	outline: none;
+}
+.event-msg-block{
+	border-top: 2px solid #AEB8CB;
+	width: 410px;
+	padding:10px 0 10px 0px;
+}
+.book-info-input{
+	max-width: 400px;
+	min-width: 399px;
+}
+.event-msg{
+	border: 2px solid #AEB8CB;
+	border-radius: 6px;
+	background: transparent;
+	font-weight: bold;
+	font-size: 100%;
+	color: #808284;
+	outline: none;
+}
+
+/*time input panel*/
+.control > span {
+	font-weight: bold;
+	font-size: 120%;
+	color: #7A8BAD;
+}
+.time-control-main{
+	border: 2px solid #AEB8CB;
+	border-radius: 10px;
+	padding: 10px;
+}
+.time-control-main  input:not([type=button]){
+	border: 2px solid #AEB8CB;
+	border-radius: 10px;
+	padding: 10px;
+	text-align:center;
+	width: 44px;
+	height: 40px;
+	color: #808284;
+	background-color: #ECECEC;
+	font-weight: bold;
+	font-size: 100%;
+	display: inline-block;
+	outline: none;
+}
+.time-panel-header{
+	margin-top: 20px;
+	display: block;
+	font-weight: bold;
+	font-size: 129%;
+	color: #5D6C8B;
+}
+.time-control-main span{
+	font-weight: bold;
+	font-size: 129%;
+	color: #808284;
+}
+.add-event {
+	
+	margin-left: 0px;	
+}
+.add-event button{
+	position: relative;
+	top: -4px;
+	width: 32px;
+	height: 32px;
+	background: transparent;
+	border:0;
+	border-radius: 50%;
+	cursor: pointer;
+}
+.end,
+.start{
+	border: 2px solid #AEB8CB;
+	border-radius: 10px;
+	padding: 10px;
+}
+.end-main,
+.start-main,
+.add-event{
+	display: inline-block;
+}
+.succsess-msg-div{
+	text-align: center;
+	border: 2px solid #AEB8CB;
+	border-radius: 10px;
+	padding: 10px;
+}
+.succsess-msg{
+	color: #5D6C8B;
+	font-weight: bold;
+	font-size: 170%;
+	text-shadow: 2px 2px 5px #969696;
+}
+
+
+/*IVENT INFO PANEL*/
+.event-info-modal{
+	word-wrap: break-word;
+	display: block;
+	padding: 5px 5px 15px;
+	width: 410px;
+}
+.event-info-modal span{
+	font-weight: bold;
+	font-size: 129%;
+	color: #808284;
+	margin-bottom:5px;
+	display: inline-block;
+}
+.event-info-modal span span{
+	font-weight: bold;
+	font-style: italic;
+	/*color: #5D6C8B;*/
+	font-size: 110%;
+	letter-spacing: 1px;
+	margin-bottom:5px;
+	display: inline-block;
+	text-shadow: 1px 1px 4px #ABB6C9;
+}
+.single-event-info{
+	color: #EC971F !important;
+	font-size: 120% !important;
+}
+.booking-event-info{
+	color: #449D44 !important;
+	font-size: 120% !important;
+}
+.recurring-event-info{
+	color: #286090 !important;
+	font-size: 120% !important;
+}
+
+.delete-event{
+	border-top: 2px solid #AEB8CB;
+	width: 410px;
+	
+}
+.delete-event button{
+	border: 2px solid #C5C6C8;
+	border-radius: 13px;
+	background: -webkit-linear-gradient(#BBBDC0 60%, #fff);
+	background: -o-linear-gradient(#BBBDC0 60%, #fff);
+	background: linear-gradient(#BBBDC0 60%, #fff);
+	font-weight: bold;
+	padding: 0px 20px;
+	letter-spacing: 4px;
+	display: block;
+	margin: 20px auto;
+	outline: none;
+}
+.delete-event button span{
+	font-size: 120%;
+}
+.delete-event button:hover{
+	color: #fff;
+	background: -webkit-linear-gradient(#FEC1C1, #FC3535 60%, #FEC1C1);
+	background: -o-linear-gradient(#FEC1C1, #FC3535 60%, #FEC1C1);
+	background: linear-gradient(#FEC1C1, #FC3535 60%, #FEC1C1);
+	text-shadow: 0px 0px 1px #5D7092;
+	box-shadow: 1px 1px 5px #FC3535;
+}
+.delete-event-confirm{
+	border-top: 2px solid #AEB8CB;
+	width: 410px;
+}
+.delete-event-confirm button{
+	border: 2px solid #C5C6C8;
+	border-radius: 13px;
+	font-size: 100%;
+	font-weight: bold;
+	padding: 0px 5px;
+	letter-spacing: 2px;
+	display: inline-block;
+	margin: 20px 52px;
+	outline: none;
+}
+.delete-event-confirm button:first-of-type{
+   background: -webkit-linear-gradient(#FB6464 60%, #FEC1C1);
+   background: -o-linear-gradient(#FB6464 60%, #FEC1C1);
+   background: linear-gradient(#FB6464 60%, #FEC1C1);
+}
+.delete-event-confirm button:first-of-type:hover{
+	background: -webkit-linear-gradient(#FC3535 60%, #FEC1C1);
+	background: -o-linear-gradient(#FC3535 60%, #FEC1C1);
+	background: linear-gradient(#FC3535 60%, #FEC1C1);
+	text-shadow: 0px 0px 1px #5D7092;
+	box-shadow: 1px 1px 5px #FC3535;
+}
+.delete-event-confirm button:last-of-type{
+   background: -webkit-linear-gradient(#0DBE0D 60%, #B7FF8E);
+   background: -o-linear-gradient(#0DBE0D 60%, #B7FF8E);
+   background: linear-gradient(#0DBE0D 60%, #B7FF8E);
+   padding: 0px 10px;
+}
+.delete-event-confirm button:last-of-type:hover{
+	background: -webkit-linear-gradient(#00D100 60%, #B7FF8E);
+	background: -o-linear-gradient(#00D100 60%, #B7FF8E);
+	background: linear-gradient(#00D100 60%, #B7FF8E);
+	text-shadow: 0px 0px 1px #5D7092;
+	box-shadow: 1px 1px 5px #0DBE0D;
+}
+.delete-event-confirm button span{
+	font-size: 100%;
+	color: #ffffff;
+}
+.errors span {
+	font-weight: normal;
+	font-size: 129%;
+	color: #FF0000;
+	margin-bottom:5px;
+	display: block;
+	font-style: italic;
+	text-shadow: 2px 2px 4px #5D7092;
+}
+/*BOOKING EVENT MODAL*/
+.book-input{
+	
+	height: 32px;
+	width: 300px;
+	padding-left: 10px;
+	font-size: 120%;
+	margin-bottom: 5px;
+}
+/* RESOURCE-TYPE-GROUP-SHEDULLE MENU SECTION END*/

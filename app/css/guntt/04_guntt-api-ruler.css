@@ -1,0 +1,67 @@
+/*RULER SECTION START*/
+.ruler-main{
+	min-width: 86px;
+	height: 100%;
+	z-index: 2;
+	display: block;
+	border: 1px solid #000;
+	background: #000;
+	opacity: 0.5;
+	position: absolute;
+	top:50px;
+	left: 350px;
+}
+.ruler-nav {
+	padding-top: 4px;
+	padding-left: 11px;
+	text-align: left;
+}
+.ruler-nav div a{
+	text-align: center;
+	display: inline-block;
+	padding:  0px;
+	width: 24px;
+	height: 24px;
+	border-radius: 25%;
+	cursor: pointer;
+	border:  2px solid white;
+	float: left;
+	
+	margin: 0px 2px;
+	font-size: 100%;
+	font-weight: bold;
+}
+.ruler-nav div a span{
+	margin-bottom: 5px;
+	color: #fff;
+	text-shadow: 1px 2px 0px  #000;
+}
+.ruler-move{
+	
+	display: block;
+	border: 0px solid white;
+	border-radius: 0px;
+	margin: 32px auto;
+	padding-top: 46px;
+	padding-bottom:  0px;
+	
+	background: #DBDBDB;
+	color: #000;
+	font-size: 84%;
+}
+.ruler-move button{
+	cursor: move;
+	color: #fff;
+	border: 0px solid #000;
+	border-radius: 10px;
+	background: #000;
+}
+.ruler-move button:hover{
+	cursor: move;
+	color: #000;
+	border: 0px solid #000;
+	border-radius: 10px;
+	background: #fff;
+}
+
+/*RULER SECTION END*/
