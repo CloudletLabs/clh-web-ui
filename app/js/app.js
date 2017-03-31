@@ -52,8 +52,8 @@ define([
             vars: {
                 local: {
                     apiVersion: 'current',
-                    //apiUrl:  'http://192.168.99.100:8087/api',
-                    apiUrl:  'http://localhost:8087/api',
+                    apiUrl:  'http://192.168.99.100:8087/api',
+                    //apiUrl:  'http://localhost:8087/api',
                     enableDebug: true
                 },
                 dev: {
@@ -218,6 +218,13 @@ define([
                 controllerAs: 'vm',
                 access: {
                     requiredLogin: false,
+                    requiredAdmin: false
+                }
+            }).when('/guntt', {
+                templateUrl: 'partials/guntt_templates/01_guntt_main.html',
+                //controllerAs: 'vm',
+                access: {
+                    requiredLogin: true,
                     requiredAdmin: false
                 }
             }).otherwise({

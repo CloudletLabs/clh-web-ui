@@ -1,0 +1,117 @@
+
+.container-main,
+.time-line-mai{
+	padding: 0;
+}
+.table-time {
+	background-color: #F3F7D6;
+}
+.table-time tr td{
+	border: 1px solid #828287;
+	text-align: center; 
+	color: #828287;
+	font-weight: bold;
+}
+
+.time-bar-main{
+	border: 1px solid #000;
+	height: 70px;
+	padding: 0;
+	margin-top: 10px;
+
+}
+/*
+.time-bar{
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+	height: 30px;
+	margin-top:19px;
+
+}
+.time-bar div[class^='time']{
+	background: linear-gradient(#fff, #F79727, #fff );
+	border-left: 0px solid #000;
+	border-right: 0px solid #000;
+	padding: 0;
+	color: #fff;
+	font-weight: bold;
+	text-shadow: 0 0 3px #000;
+	text-align: center;
+	display: inline-block;
+	box-shadow: 0 0 0px 1px #A3A3A3 inset;
+	cursor: pointer;
+	position: relative;
+}
+
+*/
+.info p span{
+	font-weight: bold;
+	font-size: 120%;
+	padding-left: 2%;
+}
+.info button{
+	border-radius: 100%;
+	margin-left: 20px;
+	font-size: 80%;
+	font-weight: bold;
+
+	background: #fff;
+	color: #f00;
+	border: 1px solid #f00;
+}
+.info button:hover {
+	border: 1px solid #000;
+	background: #f00;
+	color: #fff;
+}
+
+.control > span {
+	font-weight: bold;
+	font-size: 120%;
+	color: #7A8BAD;
+}
+.time-control-main{
+	border: 1px solid #D3D4D6;
+	border-radius: 10px;
+	padding: 10px;
+}
+.time-control-main  input:not([type=button]){
+	border: 1px solid #D3D4D6;
+	border-radius: 10px;
+	padding: 10px;
+	text-align:center;
+	width: 40px;
+	color: #A8A9AD;
+	background-color: #ECECEC;
+	font-weight: bold;
+	font-size: 100%;
+	display: inline-block;
+}
+.time-control-main span{
+	color: #A8A9AD;
+	font-weight: bold;
+	font-size: 120%;
+}
+.add-main input{
+	border:2px solid #fff;
+	border-radius: 50%;
+	padding: 0;
+	background: #69BE66;
+	font-weight: bold;
+	font-size: 150%;
+	color: #fff;
+	width: 32px;
+	height: 32px;
+	margin-left: 5px;
+}
+.end,
+.start{
+	border: 1px solid #D3D4D6;
+	border-radius: 10px;
+	padding: 10px;
+}
+.end-main,
+.start-main,
+.add-main{
+	display: inline-block;
+}

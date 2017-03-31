@@ -1,0 +1,137 @@
+
+/*TYPE MENU*/
+.res-modal-type-name{
+	font-size: 150%;
+	color: #47566F;
+	width: 284px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+/*GROUP MENU*/
+.res-edit-category-unit-color{
+	margin: 5px 0px;
+	width: 283px;
+	display: block;	
+	border: 2px solid #D1D2D4;
+	border-radius: 5px;
+}
+.res-edit-category-unit-color div{
+	display: block;
+	width: 82px;
+	float: left;
+	margin: 5px;
+	padding: 2px;	
+}
+.gr-edit-color{
+	display:inline-block;
+	width:50px;
+	height:30px;
+	border: 2px solid #939597;
+	margin-top: 2px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+.color-label{
+	left: 0px;
+	display: block;
+	border: 2px solid #939597;
+	border-radius: 5px;
+	width: 67px;
+	font-size: 120%;
+	box-shadow: 1px 1px 5px #939597;
+}
+.color-label:hover{
+	box-shadow: 5px 5px 10px #939597;
+}
+.radio-color-edit:checked + label {
+	box-shadow: 5px 5px 10px #939597;
+	width: 100px;
+}
+.type-select-apply-color{
+	float: right;
+	margin-right: 13px;
+}
+.res-edit-selected-type-name-color,
+.grp-name-color{
+	text-shadow: 1px 1px 1px #494949;
+}
+/*ORGANIZATION MENU*/
+.org-modal-edit-body-header div:first-of-type{
+	display: -moz-box;
+	display: -webkit-box;
+	display: -o-box;
+	display: flexbox;
+	
+	box-orient: -moz-vertical;
+	box-orient: -webkit-horizontal;
+	box-orient: -o-horizontal;
+	box-orient: horizontal;
+
+	-moz-box-align:center;
+	-webkit-box-align:center;
+	-o-box-align:center;
+	box-align:center;
+}
+.org-modal-edit-body-header-name{
+	width: 229px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding-left: 21px;
+	padding-top: 10px;
+}
+.org-modal-edit-body-header-name span{
+	font-weight: bold;
+	font-size: 140%;
+}
+.org-modal-edit-body-header-role-btn button{	
+	padding: 0 13px 2px;
+	text-shadow: 0px 0px 1px #5D7092;
+	background: -webkit-linear-gradient(#5BC0DE 60%, #fff);
+	background: -o-linear-gradient(#5BC0DE 60%, #fff);
+	background: linear-gradient(#5BC0DE 60%, #fff);
+	border: 2px solid #808FAC;
+	color: #ffffff;
+	letter-spacing: 1px;
+	position: relative;
+	top: 5px;
+	left:  6px;
+}
+.org-modal-edit-body-header-role-btn button:hover{
+	color: #fff;
+	background: -webkit-linear-gradient(#58E258 60%, #fff);
+	background: -o-linear-gradient(#58E258 60%, #fff);
+	background: linear-gradient(#58E258 60%, #fff);
+	text-shadow: 0px 0px 1px #5D7092;
+	box-shadow: 1px 1px 5px #969696;
+}
+.org-modal-edit-body-header-role-form{
+	border-bottom: 2px solid #AEB8CB;
+	width: 300px;
+	padding-bottom: 5px;
+}
+.role-chbx-div {
+	list-style: none;
+}
+.org-modal-edit-body-header-back a{
+	color: #989B9E;
+	font-size: 120%;
+}
+.org-modal-edit-body-header-back a:hover {
+	color: #7386A7;
+	font-family: EbrimaBD;
+	text-shadow: 5px 5px 10px #757575;
+	text-decoration: blink;
+	cursor: pointer;
+}
+.org-modal-edit-body-header-back a:last-of-type{
+	position: relative;
+	left: 196px;
+	bottom: 15px;
+}
+.org-modal-edit-body-header-back a:first-of-type:before{
+	content: "<";
+	margin-left: 10px;
+}
+.hr-org-role-edit{
+	margin: 5px 0;
+}
