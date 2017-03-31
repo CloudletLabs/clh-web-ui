@@ -2,7 +2,9 @@
 .container-registration{
     background: radial-gradient(#fff, #455168);
     background: -webkit-radial-gradient(#fff, #455168);
-    padding: 4.7% 0;
+    height: 100%;
+    width: 100%;
+    padding: 5% 0 12% 0;
 }
 .registration-form{
     background: #EBEBEF;
