@@ -8,6 +8,7 @@ require.config({
         'newsControllers': 'js/app/controllers/newsControllers',
         'services': 'js/app/services',
         'directives': 'js/app/directives',
+        'gunttDirecrives': 'js/app/guntt/directives/01_directives',
         'filters': 'js/app/filters',
         'version': 'js/app/version',
         'angular': 'bower/angular/angular.min',
@@ -18,11 +19,19 @@ require.config({
         'angularEnvironment': 'bower/angular-environment/dist/angular-environment.min',
         'cryptojslib': 'bower/cryptojslib/rollups/pbkdf2',
         'jquery': 'bower/jquery/dist/jquery.min',
+        'jqueryUI' : 'bower/jquery-ui/jquery-ui',
         'bootstrap': 'bower/bootstrap/dist/js/bootstrap.min',
         'markdown': 'bower/markdown/lib/markdown'
     },
     shim: {
+        'jquery': {
+            exports: 'jquery'
+        },
+        'jqueryUI': {
+            deps: ['jquery'],
+        },
         'angular': {
+            deps: ['jquery'],
             exports: 'angular'
         },
         'angularRoute': {
