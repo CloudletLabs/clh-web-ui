@@ -16,6 +16,7 @@ define([
     'newsControllers',
     'services',
     'directives',
+    'gunttMainModule',
     'gunttDirecrives',
     'filters',
     'version'
@@ -37,6 +38,7 @@ define([
         'clhNewsControllers',
         'clhServices',
         'clhDirectives',
+        'gunttMainModule',
         'gunttDirectivesModule',
         'clhFilters',
         'clhVersion'

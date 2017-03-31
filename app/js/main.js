@@ -8,6 +8,8 @@ require.config({
         'newsControllers': 'js/app/controllers/newsControllers',
         'services': 'js/app/services',
         'directives': 'js/app/directives',
+        'gunttMainModule' : 'js/app/guntt/gunttMainModule',
+        'gunttUserAndResourcesCtrl': 'js/app/guntt/controllers/gunttUserAndResourceController',
         'gunttDirecrives': 'js/app/guntt/directives/01_directives',
         'filters': 'js/app/filters',
         'version': 'js/app/version',
@@ -59,7 +61,7 @@ require.config({
             deps: ['cryptojslib', 'angularEnvironment', 'loginControllers', 'usersControllers', 'newsControllers']
         },
         'app': {
-            deps: ['bootstrap', 'markdown', 'indexControllers', 'services']
+            deps: ['bootstrap', 'markdown', 'indexControllers', 'services', 'gunttMainModule']
         }
     },
     deps: ['js/bootstrap']
