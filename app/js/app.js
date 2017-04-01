@@ -17,7 +17,6 @@ define([
     'services',
     'directives',
     'gunttMainModule',
-    'gunttDirecrives',
     'filters',
     'version'
 ], function (angular) {
@@ -39,7 +38,6 @@ define([
         'clhServices',
         'clhDirectives',
         'gunttMainModule',
-        'gunttDirectivesModule',
         'clhFilters',
         'clhVersion'
     ]);
