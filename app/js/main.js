@@ -26,14 +26,12 @@ require.config({
         'markdown': 'bower/markdown/lib/markdown'
     },
     shim: {
-        'jquery': {
-            exports: 'jquery'
-        },
         'jqueryUI': {
             deps: ['jquery'],
+            exports: 'jqueryUI'
         },
         'angular': {
-            deps: ['jquery'],
+            deps: ['jqueryUI'],
             exports: 'angular'
         },
         'angularRoute': {
