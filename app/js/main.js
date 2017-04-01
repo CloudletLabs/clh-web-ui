@@ -8,6 +8,9 @@ require.config({
         'newsControllers': 'js/app/controllers/newsControllers',
         'services': 'js/app/services',
         'directives': 'js/app/directives',
+        'gunttMainModule' : 'js/app/guntt/gunttMainModule',
+        'gunttUserAndResourcesCtrl': 'js/app/guntt/controllers/gunttUserAndResourceController',
+        'gunttDirecrives': 'js/app/guntt/directives/01_directives',
         'filters': 'js/app/filters',
         'version': 'js/app/version',
         'angular': 'bower/angular/angular.min',
@@ -18,11 +21,17 @@ require.config({
         'angularEnvironment': 'bower/angular-environment/dist/angular-environment.min',
         'cryptojslib': 'bower/cryptojslib/rollups/pbkdf2',
         'jquery': 'bower/jquery/dist/jquery.min',
+        'jqueryUI' : 'bower/jquery-ui/jquery-ui',
         'bootstrap': 'bower/bootstrap/dist/js/bootstrap.min',
         'markdown': 'bower/markdown/lib/markdown'
     },
     shim: {
+        'jqueryUI': {
+            deps: ['jquery'],
+            exports: 'jqueryUI'
+        },
         'angular': {
+            deps: ['jqueryUI'],
             exports: 'angular'
         },
         'angularRoute': {
@@ -50,7 +59,7 @@ require.config({
             deps: ['cryptojslib', 'angularEnvironment', 'loginControllers', 'usersControllers', 'newsControllers']
         },
         'app': {
-            deps: ['bootstrap', 'markdown', 'indexControllers', 'services']
+            deps: ['bootstrap', 'markdown', 'indexControllers', 'services', 'gunttMainModule']
         }
     },
     deps: ['js/bootstrap']

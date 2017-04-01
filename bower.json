@@ -5,6 +5,7 @@
   "dependencies": {
     "requirejs": "=2.3.2",
     "jquery": "=3.1.1",
+    "jquery-ui": "=1.12.1",
     "bootstrap": "=3.3.7",
     "cryptojslib": "=3.1.2",
     "markdown": "=0.5.0",

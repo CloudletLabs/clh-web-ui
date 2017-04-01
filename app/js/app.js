@@ -6,6 +6,7 @@ define([
     'angularToastr',
     'angularEnvironment',
     'jquery',
+    'jqueryUI',
     'bootstrap',
     'markdown',
     'cryptojslib',
@@ -15,6 +16,7 @@ define([
     'newsControllers',
     'services',
     'directives',
+    'gunttMainModule',
     'filters',
     'version'
 ], function (angular) {
@@ -35,6 +37,7 @@ define([
         'clhNewsControllers',
         'clhServices',
         'clhDirectives',
+        'gunttMainModule',
         'clhFilters',
         'clhVersion'
     ]);
