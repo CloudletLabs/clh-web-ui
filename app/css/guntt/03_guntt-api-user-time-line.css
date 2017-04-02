@@ -17,7 +17,7 @@ section[class*=time-line-main-user] {
 	box-orient: horizontal;
 }
 .user-time-line-left-main{
-	box-shadow: 5px 5px 5px 1px #A3A3A3 ;	
+	box-shadow: 5px 5px 5px 1px #A3A3A3;
 	border: 1px solid #939597;
 	padding:0;
 	background: -webkit-linear-gradient(#E5E5E5 0%, #fff 50%, #E5E5E5 100%);

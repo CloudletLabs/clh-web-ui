@@ -119,7 +119,7 @@ define([
                 toast: 'directives/toast/toast.html',
                 progressbar: 'directives/progressbar/progressbar.html'
             },
-            timeOut: 5000,
+            timeOut: 3000,
             titleClass: 'toast-title',
             toastClass: 'toast'
         });

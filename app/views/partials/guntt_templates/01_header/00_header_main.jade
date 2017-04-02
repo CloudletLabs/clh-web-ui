@@ -1,58 +1,58 @@
 header.nav-head
-  nav.guntt-nav-head-main
-    section.logo
-      a(href="#!/index")
-        span CloudletHub
-    .nav-head-left-panel-mini.text-center.hidden-sm.hidden-xs
-      a(ng-click='')
-        img(src='../img/guntt/calendar.png', alt='calendar', width='30px', title='Calendar')
-      a(ng-click='')
-        img(src='../img/guntt/view.png', alt='view', width='30px', title='View')
-    section.nav-head-md-panel.col-md-4.col-lg-7
-      ul(directive-blind-dropdown-show='')
-        li
-        li
-        li
-      // dropdown START
-      section.nav-head-md-panel-dropdown.dropdown-g.header-dropdown-blind(hidden='')
-        div
-          div(style='', title='Show not assigned resources')
-            input#checkbox.checkbox(type='checkbox', ng-change='showUnassignegRolesUpdate(showUnassignegRoles)', ng-model='showUnassignegRoles')
-            label.text-nowrap(for='checkbox') Show not assigned resources
-          div(style='margin-top: 5px', title='Do not display me')
-            input#checkboxHide.checkbox(type='checkbox', value='', checked='', ng-model='user.isHidden')
-            label.text-nowrap(for='checkboxHide') Do not display me
-          .text-center(style='margin-top: 5px', title='collapse')
-            button.btn.btn-xs.btn-info(ng-click='collapseAll()') {{collapseStatus}}
-        div(title='Display Groups Filter', style='width: 200px')
-          .text-center.text-uppercase.bg-primary Display Groups Filter
-          .panel-body.text-left
-            ol(ng-repeat='group in userGroupCollection.userGroupList', style='list-style: none; padding-left: 0')
-              li
-                input.checkbox(id='grDisplay{{$index}}', type='checkbox', value='', checked='group.display', ng-model='group.display')
-                label.text-nowrap(for='grDisplay{{$index}}', title='{{group.groupName}}') {{group.groupName}}
-          .text-center
-            button.btn.btn-danger.btn-xs(title='Apply', ng-click='updateDisplayGroups()') Apply
-      // dropdown END
-    section.nav-head-org-main.text-center
-      a#org-head-btn(data-toggle='modal', data-target='#organizations')
-        span Organization
-      br
-      a(title='{{userOrgCollection.userCurrentOrg.orgName}}', ng-click='dropDownOrgListMenuToggle = !dropDownOrgListMenuToggle', style='text-decoration: none; cursor: pointer;')
-        span {{userOrgCollection.userCurrentOrg.orgName}}
-      .user-orgs-list.dropdown(ng-show='dropDownOrgListMenuToggle', ng-mouseleave='dropDownOrgListMenuToggle=false')
-        ul
-          li(ng-repeat='org in userOrgCollection.userOrgList')
-            a(title='{{org.orgName}}', style='text-decoration: none; cursor: pointer;', ng-click='dropDownOrgListMenuHide($index)')
-              span {{org.orgName}}
-    section.nav-head-user-panel
-      div
-        a
-          img(src='../img/guntt/person.png', alt='user-img', width='46px')
-      .user-name
-        span {{user.userName}}
-      .head-settings
-        a
-          img(src='../img/guntt/account-menu.png', alt='acc-menu', width='30px', title='Account menu')
-        a
-          img(src='../img/guntt/settings.png', alt='settings', width='25px', title='Settings')
+    nav.guntt-nav-head-main
+        section.logo
+            a(href="#!/index")
+                span CloudletHub
+        .nav-head-left-panel-mini.text-center.hidden-sm.hidden-xs
+            a(ng-click='')
+                img(src='../img/guntt/calendar.png', alt='calendar', width='30px', title='Calendar')
+            a(ng-click='')
+                img(src='../img/guntt/view.png', alt='view', width='30px', title='View')
+        section.nav-head-md-panel.col-md-4.col-lg-7
+            ul(directive-blind-dropdown-show='')
+                li
+                li
+                li
+            // dropdown START
+            section.nav-head-md-panel-dropdown.dropdown-g.header-dropdown-blind(hidden='')
+                div
+                    div(style='', title='Show not assigned resources')
+                        input#checkbox.checkbox(type='checkbox', ng-change='showUnassignegRolesUpdate(showUnassignegRoles)', ng-model='showUnassignegRoles')
+                        label.text-nowrap(for='checkbox') Show not assigned resources
+                    div(style='margin-top: 5px', title='Do not display me')
+                        input#checkboxHide.checkbox(type='checkbox', value='', checked='', ng-model='user.isHidden')
+                        label.text-nowrap(for='checkboxHide') Do not display me
+                    .text-center(style='margin-top: 5px', title='collapse')
+                        button.btn.btn-xs.btn-info(ng-click='collapseAll()') {{collapseStatus}}
+                div(title='Display Groups Filter', style='width: 200px')
+                    .text-center.text-uppercase.bg-primary Display Groups Filter
+                    .panel-body.text-left
+                        ol(ng-repeat='group in userGroupCollection.userGroupList', style='list-style: none; padding-left: 0')
+                            li
+                                input.checkbox(id='grDisplay{{$index}}', type='checkbox', value='', checked='group.display', ng-model='group.display')
+                                label.text-nowrap(for='grDisplay{{$index}}', title='{{group.groupName}}') {{group.groupName}}
+                    .text-center
+                        button.btn.btn-danger.btn-xs(title='Apply', ng-click='updateDisplayGroups()') Apply
+            // dropdown END
+        section.nav-head-org-main.text-center
+            a#org-head-btn(data-toggle='modal', data-target='#organizations')
+                span Organization
+            br
+            a(title='{{userOrgCollection.userCurrentOrg.orgName}}', ng-click='dropDownOrgListMenuToggle = !dropDownOrgListMenuToggle', style='text-decoration: none; cursor: pointer;')
+                span {{userOrgCollection.userCurrentOrg.orgName}}
+            .user-orgs-list.dropdown(ng-show='dropDownOrgListMenuToggle', ng-mouseleave='dropDownOrgListMenuToggle=false')
+                ul
+                    li(ng-repeat='org in userOrgCollection.userOrgList')
+                        a(title='{{org.orgName}}', style='text-decoration: none; cursor: pointer;', ng-click='dropDownOrgListMenuHide($index)')
+                            span {{org.orgName}}
+        section.nav-head-user-panel
+            div.ava-top
+                a
+                    img.img-circle(src='{{user.avatar}}', alt='user-img', width='40px', height='40px')
+            .user-name
+                span {{user.username}}
+            .head-settings
+                a
+                    img(src='../img/guntt/account-menu.png', alt='acc-menu', width='30px', title='Account menu')
+                a
+                    img(src='../img/guntt/settings.png', alt='settings', width='25px', title='Settings')
