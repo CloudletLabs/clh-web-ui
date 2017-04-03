@@ -7,6 +7,7 @@ module.exports = function(config) {
         files: [
             { pattern: './build/bower/requirejs/require.js', included: false },
             { pattern: './build/bower/jquery/dist/jquery.min.js', included: false },
+            { pattern: './build/bower/jquery-ui/jquery-ui.js', included: false },
             { pattern: './build/bower/bootstrap/dist/js/bootstrap.min.js', included: false },
             { pattern: './build/bower/angular/angular.min.js', included: false },
             { pattern: './bower_components/angular-mocks/angular-mocks.js', included: false },

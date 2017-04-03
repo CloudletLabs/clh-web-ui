@@ -19,6 +19,9 @@ require.config({
         'directives': 'app/js/app/directives',
         'filters': 'app/js/app/filters',
         'version': 'app/js/app/version',
+        'gunttMainModule' : 'js/app/guntt/gunttMainModule',
+        'gunttUserAndResourcesCtrl': 'js/app/guntt/controllers/gunttUserAndResourceController',
+        'gunttDirecrives': 'js/app/guntt/directives/01_directives',
         'angular': 'build/bower/angular/angular.min',
         'angularRoute': 'build/bower/angular-route/angular-route.min',
         'angularLocalStorage': 'build/bower/angular-local-storage/dist/angular-local-storage.min',
@@ -28,12 +31,18 @@ require.config({
         'angularMock': 'bower_components/angular-mocks/angular-mocks',
         'cryptojslib': 'build/bower/cryptojslib/rollups/pbkdf2',
         'jquery': 'build/bower/jquery/dist/jquery.min',
+        'jqueryUI' : 'bower/jquery-ui/jquery-ui',
         'bootstrap': 'build/bower/bootstrap/dist/js/bootstrap.min',
         'markdown': 'build/bower/markdown/lib/markdown',
         'spechelper': 'unit-tests/spechelper'
     },
     shim: {
+        'jqueryUI': {
+            dep: 'jquery',
+            exports: 'jqueryUI'
+        },
         'angular': {
+            dep : 'jqueryUI',
             exports: 'angular'
         },
         'angularRoute': {
@@ -65,7 +74,7 @@ require.config({
             deps: ['cryptojslib', 'angularMock', 'loginControllers', 'usersControllers', 'newsControllers']
         },
         'app': {
-            deps: ['bootstrap', 'markdown', 'indexControllers', 'services']
+            deps: ['bootstrap', 'markdown', 'indexControllers', 'services','gunttMainModule']
         },
         'spechelper': {
             exports: 'spechelper'
