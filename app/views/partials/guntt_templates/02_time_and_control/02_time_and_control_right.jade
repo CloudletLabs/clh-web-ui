@@ -1,0 +1,57 @@
+nav.time-head-nav-pannel(style='width:{{dateTableWidth}}px')
+    section.time-head-nav-pannel-left
+        div(style='margin-bottom: 2px')
+            button#ruler-button.btn.btn-default.active.btn-xs(ng-click='rulerGo = !rulerGo')
+                | ruler
+        #day-dropdown.btn-group.btn-group-xs(role='group')
+            button.btn.btn-default.active(tupe='button', ng-click='dayMinus()')
+                span#back-small
+            .btn-group.btn-default-xs.btn-group-xs(role='group', style='margin-right: 0;')
+                button.btn.btn-default.active(tupe='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false', style='width: 70px;')
+                    | date
+            button.btn.btn-default.active(tupe='button', ng-click='dayPlus()')
+                span#fwd-small
+        div(style='margin-bottom: 2px')
+            button#ruler-button.btn.btn-info.active.btn-xs(ng-click='goToDay()', ng-show='showToDay')
+                | ToDay!
+        div(style='margin-bottom: 2px')
+            button.btn.btn-default.active.btn-xs(ng-click='goToDateShow = !goToDateShow')
+                | Go To Date
+        .goToDateDiv.input-group(style='margin-bottom: 2px', ng-show='goToDateShow')
+            form(name='GoToDateForm', novalidate='', ng-submit='goToDateTrigger()')
+                input#goToDateInput.goToDateInput.form-control.input-group.datepick(type='text', placeholder='dd.mm.20yy', name='goToDateInput', ng-model='goToDateChoice', directive-datepicker='', ng-required='true', ng-pattern='SingleEventSatrtDatePattern')
+                .input-group-btn(style='width: 100px;')
+                    button.btn.btn-success.btn-xs(type='submit', ng-click='goToDateTrigger()', ng-disabled='GoToDateForm.$invalid') Go!
+    section.time-head-nav-pannel-center
+        a
+            span {{toDay | date: "MMMM"}}, {{toDay | date: "yyyy"}}
+section.time-line-head(style='width:{{tTableHeader}}px')
+    table.table-time.col-lg-12.col-md-12.col-sm-12(style='width:{{tTableHeader}}px')
+        tr
+            td.text-center(colspan='24')
+                | {{toDay | date: "dd"}} {{toDay | date: "EEEE"}}DATE TODAY STRING
+        tr
+            td 01
+            td 02
+            td 03
+            td 04
+            td 05
+            td 06
+            td 07
+            td 08
+            td 09
+            td 10
+            td 11
+            td 12
+            td 13
+            td 14
+            td 15
+            td 16
+            td 17
+            td 18
+            td 19
+            td 20
+            td 21
+            td 22
+            td 23
+            td 24

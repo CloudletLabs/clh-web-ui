@@ -224,8 +224,7 @@ define([
                     requiredAdmin: false
                 }
             }).when('/guntt', {
-                templateUrl: 'partials/guntt_templates/01_guntt_main.html',
-                //controllerAs: 'vm',
+                templateUrl: 'partials/guntt_templates/00_guntt_main.html',
                 access: {
                     requiredLogin: true,
                     requiredAdmin: false

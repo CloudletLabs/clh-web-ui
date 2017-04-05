@@ -1,0 +1,97 @@
+section.resource-modal-main
+    #groups.modal.fade
+        .modal-dialog.modal-lg
+            .modal-constent
+                .modal-body.resource-modal-block
+
+                    // GROUPS MODAL MENU MAIN SECTION START
+                    section.resource-main-menu
+                        .res-modal-header
+                            div
+                                span(style='color: #C9CFDD') GROUPS
+                            div
+                                a(data-dismiss='modal', style='cursor: pointer;', title='close', ng-click='groupEditMenuClose()', directive-slide-hide-gr='', directive-blind-close-gr='')
+                                    img.close-btn(src='../img/guntt/modal-menu/close-t.png', alt='close', width='24px', height='25px')
+                        .res-modal-body
+                            // res-modal-unit-block-GROUPS START
+                            .res-modal-unit-block(ng-repeat='group in userGroupCollection.userGroupList')
+                                .res-modal-unit-block-top
+                                    .res-modal-unit-name
+                                        span.grp-name-color(style='color: {{group.groupColor}}; font-weight: bold;') {{group.groupName}}
+                                    .res-modal-unit-edit
+                                        button(ng-click='groupEditMenuOpen($index)', ng-hide='groupEditMenuOpenStatus', directive-slide-show-gr='') edit
+                                    .res-modal-unit-del(ng-hide='groupEditMenuOpenStatus')
+                                        a(style='cursor: pointer;', ng-click='groupRemovePannelShow=!groupRemovePannelShow')
+                                            img.close-btn(src='../img/guntt/modal-menu/delete.png', alt='deletePanelShow', width='24px')
+                                .res-modal-unit-block-bottom.text-center(ng-show='groupRemovePannelShow')
+                                    h4 Remove this group completely?
+                                    .del-confirm-buttons
+                                        .del-confirm-cancel
+                                            a(ng-click='groupRemovePannelShow=false', title='cancel')
+                                                img.close-btn(src='../img/guntt/modal-menu/cancel-t.png', alt='cancel', width='24px', height='24px')
+                                        .del-confirm-ok
+                                            a(ng-click='removeGroup($index)', title='confirm')
+                                                img.confirm-btn(src='../img/guntt/modal-menu/ok-t.png', alt='ok', width='24px')
+                            // group-modal-unit-block-GROUP END
+                        .res-modal-footer
+                            .text-center(ng-hide='groupEditMenuOpenStatus')
+                                span add new group
+                                br
+                                input.add-res-input(type='text', name='addRes', value='', ng-model='newGroupName', ng-minlength='3', ng-maxlength='17', placeholder='')
+                            .add-res-confirm(ng-hide='groupEditMenuOpenStatus')
+                                a(ng-click='addNewGroup(newGroupName)', style='cursor: pointer;')
+                                    img.confirm-btn(src='../img/guntt/modal-menu/add.png', title='add', width='34\
+                      px')
+                    // GROUPS MODAL MENU MAIN SECTION END
+
+                    // GROUPS MODAL MENU EDIT SECTION START
+                    section.resource-main-menu-edit.slide-menu-gr(hidden='hidden')
+                        header.res-modal-edit-header
+                            div
+                                span(style='color: #C9CFDD')
+                                    | GROUP:
+                                    span(style='font-weight: bold;') {{userResourceCollection[currentResourceEditMenuOpen.resIndex].resName}}
+                                    |                                        >Edit
+                            div
+                                a(style='cursor: pointer;', directive-slide-hide-gr='', directive-blind-close-gr='', ng-click='groupEditMenuClose()')
+                                    img.close-btn(src='../img/guntt/modal-menu/close-t.png', alt='close', width='24px', height='25px')
+
+                        .res-modal-edit-body
+                            .res-modal-edit-body-header
+                                div
+                                    .res-modal-edit-body-header-name.grp-name-color
+                                        span(style='color:{{userGroupCollection.userGroupList[currentGroupEditMenuOpen.grIndex].groupColor}} ')
+                                            | {{userGroupCollection.userGroupList[currentGroupEditMenuOpen.grIndex].groupName}}
+                                    .res-modal-edit-body-header-rename-btn
+                                        button.modal-menu-btn(directive-blind-show-gr='') rename
+                                hr
+                                section.res-modal-edit-body-header-remame-form.blind-show-gr(hidden='hidden')
+                                    span(for='groupRemaneInput') Enter new group name
+                                    input#groupRemaneInput.res-remane-input(type='text', placeholder='{{userGroupCollection.userGroupList[currentGroupEditMenuOpen.grIndex].groupName}}', ng-model='newGroupRename', ng-minlength='2', ng-maxlength='17')
+                                    a(ng-click='applyGroupEditNewName(newGroupRename)', style='cursor: pointer;')
+                                        img.confirm-btn(src='../img/guntt/modal-menu/ok-t.png', alt='ok', width='30px')
+                                    .res-modal-edit-body-header-back
+                                        a(directive-blind-show-gr='')  back
+
+
+                            // group-modal-EDIT-COLOR-block START
+                            .res-modal-edit-type-block
+                                .res-modal-edit-type-block-top
+                                    .res-modal-edit-block-top-name
+                                        span
+                                            | Color :
+                                            span.res-edit-selected-type-name-color(title='', style='color: {{userGroupCollection.userGroupList[currentGroupEditMenuOpen.grIndex].groupColor}}')
+                                                | {{userGroupCollection.userGroupList[currentGroupEditMenuOpen.grIndex].groupName}}
+                                    .res-modal-unit-edit(style='position: relative;top: -7px;')
+                                        button(directive-blind-color-show='') edit
+                                section.res-modal-edit-type-block-bottom.blind-show-color(hidden='hidden')
+                                    .res-edit-category
+                                        .res-edit-category-unit-color
+                                            div(ng-repeat='color in userGroupCollection.userGroupColorsCollection')
+                                                input.checkbox-r.radio-color-edit(id='radioColor{{$index}}', type='radio', ng-model='$parent.selectedColor', ng-checked='userGroupCollection.userGroupList[currentGroupEditMenuOpen.grIndex].groupColor == color? true : false', name='types-radio-list', value='{{color}}', style='cursor: pointer;')
+                                                label.radio.category-radio-label.color-label(for='radioColor{{$index}}', style='cursor: pointer; background: {{color}}; color:{{color}} ')
+                                                    | .
+                                        .type-select-apply.type-select-apply-color
+                                            a(ng-click='applyGroupEditSelectedColor(selectedColor)', directive-blind-color-show='', style='cursor: pointer;')
+                                                img.confirm-btn(src='../img/guntt/modal-menu/ok-t.png', alt='ok', width='30px')
+                    // GROUPS MODAL MENU EDIT SECTION START
