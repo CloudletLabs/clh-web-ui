@@ -13,7 +13,7 @@ define(['angular', 'angularMock', 'app'], function (angular) {
             createController = function () {
                 return $controller('gunttUserAndResourcesCtrl', {'$scope': $scope});
             };
-        });
+        }));
 
     });
 });
