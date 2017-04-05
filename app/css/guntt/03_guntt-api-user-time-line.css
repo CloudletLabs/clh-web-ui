@@ -1,10 +1,7 @@
 /*USER TIME LINE SECTION START*/
-
 section[class*=time-line-main-user] {
-	
 	margin: 10px 0;
 	display: block;
-	
 	
 	display: -moz-box;
 	display: -webkit-box;
@@ -43,7 +40,6 @@ section[class*=time-line-main-user] {
 }
 .user-info-panel-left{
 	padding: 5px 0px 5px 2px;
-	
 	display: -moz-box;
 	display: -webkit-box;
 	display: -o-box;
@@ -57,9 +53,6 @@ section[class*=time-line-main-user] {
 	-webkit-box-flex:2.0;
 	-moz-box-flex:2.0;
 	box-flex:2.0;
-}
-.collapse-section{
-	
 }
 .avatar-section{
 	margin: auto 5px auto 5px;
@@ -122,7 +115,6 @@ section[class*=time-line-main-user] {
 	letter-spacing: 1px;
 	width: 130px;
 	display: block;
-
 }
 span[title=Owner]{
 	color: #F66708;
@@ -179,12 +171,6 @@ div[class*=gr-color]{
 	cursor: pointer;
 	box-shadow: 1px 1px 5px #939597;
 }
-/*.gr-color-1{
-	background-color: #ffa500;
-}
-.gr-color-2{
-	background-color:#9400d3;
-}*/
 div[class*=gr-name]{
     color:#5D5E5F;
     font-weight: normal;
@@ -198,12 +184,10 @@ div[class*=gr-name]{
 	overflow: hidden;
 }
 div[class*=gr-name] span{
-	
 	word-wrap: break-word;
 }
 
 /*User time-line-right*/
-
 .user-time-line-right-main{
 	box-shadow: 5px 5px 5px 1px #A3A3A3 ;
 
@@ -241,7 +225,6 @@ div[class*=gr-name] span{
 	box-align:center;
 	
 	border-right: 1px solid #939597;
-	
 	padding: 0;
 	margin: auto 0;
 	height: 86px;
@@ -272,10 +255,8 @@ div[class*=gr-name] span{
 	box-orient: -webkit-horizontal;
 	box-orient: -o-horizontal;
 	box-orient: horizontal;
-	
 }
 .time-bar{
-	
 	border-left: 0px solid #939597;
 	border-right: 0px solid #939597;
 	border-bottom: 0;
@@ -286,12 +267,10 @@ div[class*=gr-name] span{
 	font-weight: bold;
 	text-shadow: 0 0 3px #000;
 	text-align: center;
-	
 	box-shadow: 0 0 0px 1px #A3A3A3 inset;
 	cursor: pointer;
 	height: 26px;
 	position: absolute;
-	
 	width: 150px;
 }
 .time-bar-work{
@@ -340,5 +319,4 @@ div[class*=gr-name] span{
 .time-line-block-collapse-active{
 	height: 28px;
 }
-
 /*USER TIME LINE SECTION END*/

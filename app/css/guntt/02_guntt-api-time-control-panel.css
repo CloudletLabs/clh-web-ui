@@ -23,8 +23,6 @@
 	border: 1px solid #C9CFDD;
 	border-radius: 8px;
 	text-align: center;
-	
-	
 }
 .nav-panel-large,
 .nav-panel-small {
@@ -51,7 +49,6 @@
 	border: 1px solid #C9CFDD;
 	margin: 18px 4px;
 	padding: 0px 12px 4px;
-	color: ;
 }
 .nav-panel-control-main button:hover{
 	background: -webkit-linear-gradient(#B4BECF, #4F5D77, #B4BECF);
@@ -99,8 +96,6 @@
 	-webkit-box-align:center;
 	-o-box-align:center;
 	box-align:center;
-
-	
 }
 .time-head-nav-pannel a{
 	margin-bottom: 20px;
@@ -129,7 +124,6 @@
  	color: #939597;
  	font-weight: normal;
 }
-
 #day-dropdown{
 	margin-bottom: 2px;	
 }
@@ -139,7 +133,6 @@
 #fwd-small::before{
 	content: '>';
 }
-
 .goToDateDiv{
 	width: 300px;
 	height: 25px;
@@ -160,9 +153,6 @@
 	font-size: 142%;
 	letter-spacing: 1px;
 	margin-left: 20px;
-}
-.time-head-nav-pannel-center a {
-	
 }
 .time-head-nav-pannel-right{
 	display: -moz-box;
@@ -194,10 +184,7 @@
 	padding: 0;
 }
 .table-time {
-	/*background-color: #F3F7D6;*/
-
 	height: 52px;
-	/*min-width: 500px;*/
 }
 .table-time tr td{
 	border: 1px solid #828287;
@@ -206,23 +193,17 @@
 	font-weight: bold;
 	font-size: 108%;
 	letter-spacing: 1px;
-		
 }
 .table-time tr td:first-of-type{
 	border-left: 0;
 	background: -webkit-linear-gradient(290deg, #F3F7D6, #fff, #F3F7D6);
 	background: -o-linear-gradient(290deg, #F3F7D6, #fff, #F3F7D6);
 	background: linear-gradient(20deg, #F3F7D6, #fff, #F3F7D6);
-
 }
-
 .table-time tr:last-of-type td{
-	
 	background: -webkit-radial-gradient(#fff, #F3F7D6);
 	background: radial-gradient(#fff, #F3F7D6);
-	
 	font-weight: bold;
 	font-size: 100%;
-	
 }
 /*TIME AND CONTROL SECTION END*/

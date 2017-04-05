@@ -39,7 +39,6 @@
 	background: linear-gradient(#E5E5E5 0%, #fff 10%, #E5E5E5 80%);
 	border-bottom-left-radius: 15px;
 	border-bottom-right-radius: 15px;
-
 }
 .event-single-modal-date-enter{
 	border-bottom: 2px solid #AEB8CB;
@@ -58,10 +57,8 @@
 	font-weight: bold;
 	font-size: 129%;
 	color: #5D6C8B;
-	
 	margin-bottom:5px;
 	display: block;
-	
 }
 .date-block{
 	display: -moz-box;
@@ -115,9 +112,6 @@
 	display: inline-block;
 	width: 96px;
 }
-.week-day-choice div label span:first-of-type{
-	
-}
 .week-day-choice div label span{
 	font-size: 90% ;
 }
@@ -136,7 +130,6 @@
 	text-align: center;
 	color: #CACBCD;
 	font-weight: bold;
-
 	height: 34px;
 	width: 168px;
 	border-radius: 6px;
@@ -207,8 +200,7 @@
 	color: #808284;
 }
 .add-event {
-	
-	margin-left: 0px;	
+	margin-left: 0px;
 }
 .add-event button{
 	position: relative;
@@ -262,7 +254,6 @@
 .event-info-modal span span{
 	font-weight: bold;
 	font-style: italic;
-	/*color: #5D6C8B;*/
 	font-size: 110%;
 	letter-spacing: 1px;
 	margin-bottom:5px;
@@ -281,11 +272,9 @@
 	color: #286090 !important;
 	font-size: 120% !important;
 }
-
 .delete-event{
 	border-top: 2px solid #AEB8CB;
 	width: 410px;
-	
 }
 .delete-event button{
 	border: 2px solid #C5C6C8;
@@ -364,9 +353,9 @@
 	font-style: italic;
 	text-shadow: 2px 2px 4px #5D7092;
 }
+
 /*BOOKING EVENT MODAL*/
 .book-input{
-	
 	height: 32px;
 	width: 300px;
 	padding-left: 10px;

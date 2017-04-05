@@ -1,6 +1,6 @@
 /* RESOURCE MENU SECTION START*/
-
 /*RESOURCE MENU*/
+
 /*header*/
 .resource-modal-block{
 	font-weight: normal;
@@ -19,28 +19,6 @@
 	-webkit-box-pack: center;
 	-o-box-pack: center;
 	box-pack: center
-
-	/*
-	display: -moz-box;
-	display: -webkit-box;
-	display: -o-box;
-	display: flexbox;
-	
-	box-orient: -moz-vertical;
-	box-orient: -webkit-horizontal;
-	box-orient: -o-horizontal;
-	box-orient: horizontal;
-
-	-moz-box-align:center;
-	-webkit-box-align:center;
-	-o-box-align:center;
-	box-align:center;
-
-	-moz-box-pack: center;
-	-webkit-box-pack: center;
-	-o-box-pack: center;
-	box-pack: center;
-	*/
 }
 .resource-modal-block input:focus,
 .resource-modal-block button:focus{
@@ -49,7 +27,6 @@
 .resource-modal-block section{
 	margin: 5px 10px;
 }
-
 .res-modal-header{
 	background: -webkit-linear-gradient(#7386A7, #455168, #7386A7);
 	background: -o-linear-gradient(#7386A7, #455168, #7386A7);
@@ -87,7 +64,6 @@
 	background: -o-linear-gradient(#FEA3A3, #f00, #FEA3A3);
 	background: linear-gradient(#FEA3A3, #f00, #FEA3A3);
 	border-radius: 50%;
-
 }
 .close-btn:hover{
 	background: -webkit-linear-gradient(#FFFFFF, #f00, #FFFFFF);
@@ -107,6 +83,7 @@
 	background: linear-gradient(#FFFFFF, #23DB23, #FFFFFF);
 	box-shadow: 1px 1px 5px #969696;
 }
+
 /*body*/
 .res-modal-body{
 	width: 350px;
@@ -153,7 +130,6 @@
 	color: #808284;
 	font-weight: bold;
 	letter-spacing: 1px;
-
 }
 .res-modal-unit-edit button{
 	padding: 0 12px 2px;
@@ -166,7 +142,6 @@
 	text-shadow: 0px 0px 1px #5D7092;
 	box-shadow: 1px 1px 5px #969696;
 }
-
 .res-modal-unit-del{
 	margin-top: 2px;
 }
@@ -178,9 +153,7 @@
 	background: -webkit-linear-gradient(#FEA3A3, #f00, #FEA3A3);
 	background: -o-linear-gradient(#FEA3A3, #f00, #FEA3A3);
 	background: linear-gradient(#FEA3A3, #f00, #FEA3A3);
-	/*text-shadow: 0px 0px 1px #000;*/
 }
-
 .res-modal-unit-block-bottom{
 	border-bottom: 2px solid #D1D2D4;
 	padding-bottom: 10px;
@@ -194,6 +167,7 @@
 .del-confirm-buttons a{
 	cursor: pointer;
 }
+
 /*footer*/
 .res-modal-footer{
   border-top:1px solid #fff;
@@ -231,7 +205,6 @@
 	display:inline-block;
 }
 .add-res-input{
-	
 	background: -webkit-linear-gradient(#BBBDC0, #CACCCD);
 	background: -o-linear-gradient(#BBBDC0, #CACCCD);
 	background: linear-gradient(#BBBDC0, #CACCCD);
@@ -293,15 +266,12 @@
 	box-pack: justify;
 }
 .res-modal-edit-header div{
-	
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
-	
 	height: 32px;
 	width: 300px;
 	display: block;
-
 }
 .res-modal-edit-body{
 	background: -webkit-linear-gradient(#E5E5E5 0%, #fff 10%, #E5E5E5 80%);
@@ -309,10 +279,8 @@
 	background: linear-gradient(#E5E5E5 0%, #fff 10%, #E5E5E5 80%);
 	width: 350px;
 	padding: 20px 20px;
-
 	border-bottom-left-radius: 15px;
 	border-bottom-right-radius: 15px;
-
 }
 .res-modal-edit-body div{
 	display: inline-block;
@@ -321,6 +289,7 @@
 	border: 1px solid #AEB8CB;
 	margin-top: 10px;
 }
+
 /*RENAME*/
 .res-modal-edit-body-header div:first-of-type{
 	display: -moz-box;
@@ -347,12 +316,10 @@
 	color: #808284;
 	font-weight: bold;
 	font-size: 170%;
-
 }
 .res-modal-edit-body-header-rename-btn button{	
 	padding: 0 13px 2px;
 }
-
 .res-modal-edit-body-header-rename-btn button:hover{
 	color: #fff;
 	background: -webkit-linear-gradient(#BBBDC0 60%, #fff);
@@ -374,7 +341,6 @@
 	padding-left: 10px;
 	color: #CACBCD;
 	font-weight: bold;
-
 	height: 34px;
 	width: 240px;
 	border-radius: 6px;
@@ -383,7 +349,6 @@
 	letter-spacing: 2px;
 	color: #7386A7;
 	border: 1px solid #9BA3AF;
-	/*background: linear-gradient(#E6E7E8, #DFE0E1);*/
 	background: #fff;
 	text-shadow: 2px 2px 7px #969696;
 	box-shadow: 4px 4px 20px #BBBDC0;
@@ -419,11 +384,9 @@
 	content: "<";
 }
 
-
 /*TYPE EDIT*/
 .res-modal-edit-type-block{
 	margin-bottom: 0px;
-	
 }
 .res-modal-edit-type-block-top{
 	border-bottom: 2px solid #D1D2D4;
@@ -438,7 +401,6 @@
 	box-orient: -webkit-horizontal;
 	box-orient: -o-horizontal;
 	box-orient: horizontal;
-
 }
 .res-modal-edit-block-top-name{
 	font-size: 150%;
@@ -453,7 +415,6 @@
 }
 .res-modal-edit-block-top-name > span >span{
 	font-weight: bold;
-	color: ;
 }
 .res-modal-edit-type-block-bottom{
 	border-bottom: 2px solid #D1D2D4;
@@ -484,7 +445,6 @@
 	color: #B7B7B7;
 	letter-spacing: 1px;
 }
-
 
 /*GROUP EDIT*/
 .res-modal-edit-group-block{
@@ -543,8 +503,4 @@
 	padding-bottom: 10px;
 	width: 300px;
 }
-
-
-
-
 /* RESOURCE MENU SECTION END*/

@@ -5,7 +5,8 @@ define(['angular'], function (angular) {
     var gunttTimeAndDateCtrlModule = angular.module('gunttDateAndTimeCtrlModule', ['clhServices']);
 
     /*TIME AND DATE APP CONTROLLER **START** */
-    gunttTimeAndDateCtrlModule.controller('gunttDateAndTimeCtrl', function ($scope, $interval, $log, toastr, $window, $document) {
+    gunttTimeAndDateCtrlModule.controller('gunttDateAndTimeCtrl',
+        function ($scope, $interval, $log, toastr, $window, $document) {
 
         //$scope.test = toastr.success('Time And Date Ctrl successfully loaded');
 

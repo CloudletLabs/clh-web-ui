@@ -26,7 +26,6 @@
 	cursor: pointer;
 	border:  2px solid white;
 	float: left;
-	
 	margin: 0px 2px;
 	font-size: 100%;
 	font-weight: bold;
@@ -37,14 +36,12 @@
 	text-shadow: 1px 2px 0px  #000;
 }
 .ruler-move{
-	
 	display: block;
 	border: 0px solid white;
 	border-radius: 0px;
 	margin: 32px auto;
 	padding-top: 46px;
 	padding-bottom:  0px;
-	
 	background: #DBDBDB;
 	color: #000;
 	font-size: 84%;
@@ -63,5 +60,4 @@
 	border-radius: 10px;
 	background: #fff;
 }
-
 /*RULER SECTION END*/
