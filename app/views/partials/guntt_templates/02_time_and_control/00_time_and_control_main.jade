@@ -1,15 +1,12 @@
-section.time-and-control-main()
-    // TIME AND CONTROL *LEFT* SECTION START
+section.time-and-control-main(ng-controller='gunttDateAndTimeCtrl')
+    // TIME AND CONTROL *LEFT* SECTION
     nav.nav-panel-control-main
         div(ng-include='', src="'partials/guntt_templates/02_time_and_control/01_time_and_control_left.html'")
-    // TIME AND CONTROL *LEFT* SECTION END
 
-    // TIME AND CONTROL *RIGHT* SECTION START
-    nav.nav-time-control-main.col-lg-10.col-md-10.col-sm-10(style='width:{{dateTableWidth}}px')
+    // TIME AND CONTROL *RIGHT* SECTION
+    nav.nav-time-control-main.col-lg-10.col-md-8.col-sm-8.col-xs-8(style='width:{{dateTableWidth}}px')
         div(ng-include='', src="'partials/guntt_templates/02_time_and_control/02_time_and_control_right.html'")
-    // TIME AND CONTROL *RIGHT* SECTION END
 
-    // TIME RULER START
+    // TIME RULER
     section.ruler-main.text-center(ng-if='false', ng-show='rulerGo', directive-resizable='')
         div(ng-include='', src="'partials/guntt_templates/02_time_and_control/03_time_and_control_ruler.html'")
-    // TIME RULER END

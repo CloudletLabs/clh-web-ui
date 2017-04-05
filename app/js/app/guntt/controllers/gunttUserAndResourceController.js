@@ -1,7 +1,7 @@
 define(['angular'], function (angular) {
     'use strict';
 
-    /* DEFINE USER AND RESOURCES CONTROLLER MODULE */
+    /* DEFINE GUNTT USER AND RESOURCES CONTROLLER MODULE */
     var gunttUserAndResourcesCtrlModule = angular.module('gunttUserAndResourcesCtrlModule', ['clhServices']);
 
     /*USER AND RESOURCES APP CONTROLLER **START** */
