@@ -8,8 +8,6 @@ define(['angular'], function (angular) {
     gunttTimeAndDateCtrlModule.controller('gunttDateAndTimeCtrl',
         function ($scope, $interval, $log, toastr, $window, $document) {
 
-        //$scope.test = toastr.success('Time And Date Ctrl successfully loaded');
-
     });
     /*TIME AND DATE APP CONTROLLER **END** */
 
