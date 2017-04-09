@@ -7,15 +7,22 @@ define(['angular'], function (angular) {
     /*USER AND RESOURCES APP CONTROLLER **START** */
     gunttUserAndResourcesCtrlModule.controller('gunttUserAndResourcesCtrl',
         function ($scope, $window, $document, $log, toastr, ResourceService) {
-            //INIT LOCAL VAR'S
-            $scope.user = new Object();
 
-            //GET USER DATA MODEL
-            $scope.gunttUserData = ResourceService.getCurrentUser().then(function (data) {
-                $scope.user = data;
-                $log.log(data);
-                return data;
-            });
+            //User constructor
+            function GunttUser() {
+                this.initData = null;
+            }
+            //User constructor methods
+            GunttUser.prototype.getUserInitData = function () {
+                var self = this;
+                ResourceService.getCurrentUser().then(function (data) {
+                    self.initData = data;
+                });
+            };
+
+            //create user
+            $scope.user = new GunttUser();
+            $scope.user.getUserInitData();
 
         });
     /*USER AND RESOURCES APP CONTROLLER **END** */

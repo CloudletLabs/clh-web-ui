@@ -48,9 +48,9 @@ header.nav-head
         section.nav-head-user-panel
             div.ava-top
                 a
-                    img.img-circle(src='{{user.avatar}}', alt='user-img', width='40px', height='40px')
+                    img.img-circle(src='{{user.initData.avatar}}', alt='user-img', width='40px', height='40px')
             .user-name
-                span {{user.username}}
+                span {{user.initData.username}}
             .head-settings
                 a
                     img(src='../img/guntt/account-menu.png', alt='acc-menu', width='30px', title='Account menu')
