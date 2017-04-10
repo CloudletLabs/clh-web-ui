@@ -2,6 +2,7 @@ define([
     'angular',
     'gunttUserAndResourcesCtrl',
     'gunttDateAndTimeCtrl',
+    'gunttConstructorServices',
     'gunttDirecrives'
 ], function (angular) {
     'use strict';
@@ -10,6 +11,7 @@ define([
     var gunttMainModule = angular.module('gunttMainModule', [
         'gunttUserAndResourcesCtrlModule',
         'gunttDateAndTimeCtrlModule',
+        'gunttConstructorServicesModule',
         'gunttDirectivesModule'
     ]);
 

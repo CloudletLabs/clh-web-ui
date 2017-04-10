@@ -22,6 +22,7 @@ require.config({
         'gunttMainModule' : 'app/js/app/guntt/gunttMainModule',
         'gunttUserAndResourcesCtrl': 'app/js/app/guntt/controllers/gunttUserAndResourceController',
         'gunttDateAndTimeCtrl': 'app/js/app/guntt/controllers/gunttTimeAndDateController',
+        'gunttConstructorServices': 'app/js/app/guntt/services/gunttConstructorServices',
         'gunttDirecrives': 'app/js/app/guntt/directives/01_directives',
         'angular': 'build/bower/angular/angular.min',
         'angularRoute': 'build/bower/angular-route/angular-route.min',
