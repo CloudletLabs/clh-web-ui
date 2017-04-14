@@ -1,0 +1,42 @@
+section.type-modal-main
+    #type.modal.fade
+        .modal-dialog.modal-lg
+            .modal-constent
+                .modal-body.resource-modal-block
+                    // TYPE MODAL MENU MAIN SECTION START
+                    section.resource-main-menu
+                        .res-modal-header
+                            div
+                                span(style='color: #C9CFDD') TYPES
+                            div
+                                a(data-dismiss='modal', style='cursor: pointer;')
+                                    img.close-btn(src='../img/guntt/modal-menu/close-t.png', alt='close', width='24px', height='25px', title='close')
+                        .res-modal-body
+                            // res-modal-unit-block-TYPE START
+                            .res-modal-unit-block(ng-repeat='type in userTypeCollection.userTypesList')
+                                .res-modal-unit-block-top
+                                    .res-modal-type-name
+                                        span(title='{{type}}', style='font-weight: bold;') {{type}}
+                                    .res-modal-unit-edit(ng-hide='true')
+                                        button(ng-click='resourceEditMenuOpen($index, resource.resName)', title='edit') edit
+                                    .res-modal-unit-del(ng-hide='$first')
+                                        a(style='cursor: pointer;', ng-click='typeRemovePannelShow=!typeRemovePannelShow')
+                                            img.close-btn(src='../img/guntt/modal-menu/delete.png', alt='deletePanelShow', width='24px')
+                                .res-modal-unit-block-bottom.text-center(ng-show='typeRemovePannelShow')
+                                    h4 Remove this type completely?
+                                    .del-confirm-buttons
+                                        .del-confirm-cancel
+                                            a(ng-click='typeRemovePannelShow=false', title='cancel')
+                                                img.close-btn(src='../img/guntt/modal-menu/cancel-t.png', alt='cancel', width='24px', height='24px')
+                                        .del-confirm-ok
+                                            a(ng-click='removeType($index)', title='confirm')
+                                                img.confirm-btn(src='../img/guntt/modal-menu/ok-t.png', alt='ok', width='24px')
+                        .res-modal-footer
+                            .text-center
+                                span add new type
+                                br
+                                input.add-res-input(type='text', name='addRes', value='', ng-model='newTypeName', ng-minlength='2', ng-maxlength='10', placeholder='')
+                            .add-res-confirm
+                                a(ng-click='addNewType(newTypeName)', style='cursor: pointer;', title='add')
+                                    img.confirm-btn(src='../img/guntt/modal-menu/add.png', width='34px')
+                    // TYPE MODAL MENU MAIN SECTION END

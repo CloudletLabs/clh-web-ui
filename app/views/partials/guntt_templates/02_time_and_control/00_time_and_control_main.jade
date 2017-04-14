@@ -1,0 +1,68 @@
+section.time-and-control-main(ng-controller='gunttDateAndTimeCtrl')
+    // TIME AND CONTROL *LEFT* SECTION
+    nav.nav-panel-control-main
+        div(ng-include='', src="'partials/guntt_templates/02_time_and_control/01_time_and_control_left.html'")
+
+    // TIME AND CONTROL *RIGHT* SECTION
+    nav.nav-time-control-main.col-lg-10.col-md-8.col-sm-8.col-xs-8(style='width:{{dateTableWidth}}px')
+        nav.time-head-nav-pannel(style='width:{{dateTableWidth}}px')
+            section.time-head-nav-pannel-left
+                div(style='margin-bottom: 2px')
+                    button#ruler-button.btn.btn-default.active.btn-xs(ng-click='rulerGo = !rulerGo')
+                        | ruler
+                #day-dropdown.btn-group.btn-group-xs(role='group')
+                    button.btn.btn-default.active(type='button', ng-click='GunttDate.dateChange(-1)')
+                        span#back-small
+                    .btn-group.btn-default-xs.btn-group-xs(role='group', style='margin-right: 0;')
+                        button.btn.btn-default.active(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false', style='width: 70px;')
+                            | date
+                    button.btn.btn-default.active(type='button', ng-click='GunttDate.dateChange(1)')
+                        span#fwd-small
+                div(style='margin-bottom: 2px')
+                    button#ruler-button.btn.btn-info.active.btn-xs(ng-click='GunttDate.goToDay()', ng-show='GunttDate.showToDay')
+                        | Back today!
+                div(style='margin-bottom: 2px')
+                    button.btn.btn-default.active.btn-xs(ng-click='GunttDate.goToDateShow = !GunttDate.goToDateShow')
+                        | Go To Date
+                .goToDateDiv.input-group(style='margin-bottom: 2px', ng-show='GunttDate.goToDateShow')
+                    form(name='GoToDateForm', novalidate='', ng-submit='GunttDate.goToDateTrigger()')
+                        input#goToDateInput.goToDateInput.form-control.input-group.datepick(type='text', placeholder='dd.mm.20yy', name='goToDateInput', ng-model='GunttDate.goToDateChoice', directive-datepicker='', ng-required='true', ng-pattern='GunttDate.DateInputPattern')
+                        .input-group-btn(style='width: 100px;')
+                            button.btn.btn-success.btn-xs(type='submit', ng-click='GunttDate.goToDateTrigger()', ng-disabled='GoToDateForm.$invalid') Go!
+            section.time-head-nav-pannel-center
+                a
+                    span {{GunttDate.toDay | date: "MMMM"}}, {{GunttDate.toDay | date: "yyyy"}}
+        section.time-line-head(style='width:{{tTableHeader}}px')
+            table.table-time.col-lg-12.col-md-12.col-sm-12.col-xs-12(style='width:{{tTableHeader}}px')
+                tr
+                    td.text-center(colspan='24')
+                        | {{GunttDate.toDay | date: "dd"}} {{GunttDate.toDay | date: "EEEE"}}
+                tr
+                    td 01
+                    td 02
+                    td 03
+                    td 04
+                    td 05
+                    td 06
+                    td 07
+                    td 08
+                    td 09
+                    td 10
+                    td 11
+                    td 12
+                    td 13
+                    td 14
+                    td 15
+                    td 16
+                    td 17
+                    td 18
+                    td 19
+                    td 20
+                    td 21
+                    td 22
+                    td 23
+                    td 24
+
+    // TIME RULER
+    section.ruler-main.text-center(ng-if='false', ng-show='rulerGo', directive-resizable='')
+        div(ng-include='', src="'partials/guntt_templates/02_time_and_control/03_time_and_control_ruler.html'")

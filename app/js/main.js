@@ -10,6 +10,8 @@ require.config({
         'directives': 'js/app/directives',
         'gunttMainModule' : 'js/app/guntt/gunttMainModule',
         'gunttUserAndResourcesCtrl': 'js/app/guntt/controllers/gunttUserAndResourceController',
+        'gunttDateAndTimeCtrl': 'js/app/guntt/controllers/gunttTimeAndDateController',
+        'gunttConstructorServices' : 'js/app/guntt/services/gunttConstructorServices',
         'gunttDirecrives': 'js/app/guntt/directives/01_directives',
         'filters': 'js/app/filters',
         'version': 'js/app/version',

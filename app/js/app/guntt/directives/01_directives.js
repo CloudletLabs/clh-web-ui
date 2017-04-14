@@ -2,6 +2,7 @@ define(['angular'], function (angular) {
 
     var directivesModule = angular.module('gunttDirectivesModule', []);
 
+    //DatePicker Directive
     directivesModule.directive('directiveDatepicker', function () {
         return {
             require: 'ngModel',
@@ -23,12 +24,12 @@ define(['angular'], function (angular) {
             }
         }
     });
+
+    //Resizable Directive
     directivesModule.directive('directiveResizable', function () {
         return {
-
             link: function (scope, element, attrs) {
                 jQuery(element).resizable();
-
             }
         }
     });
@@ -43,6 +44,7 @@ define(['angular'], function (angular) {
             }
         }
     });
+
     //SLIDE CLOSE for EDIT sub-menu's in MAIN MENU
     directivesModule.directive('directiveSlideHide', function () {
         return {
@@ -53,7 +55,6 @@ define(['angular'], function (angular) {
             }
         }
     });
-
     ///////////////////////////////////////////SUB-MENU's in MENU/////////////////////////////////////////
 
     //BLIND OPEN/CLOSE for RENAME sub-menu's in EDIT MENU
@@ -102,7 +103,7 @@ define(['angular'], function (angular) {
         }
     });
 
-    // ============== CLOSE ALL for CLOSE MENU's BTN's =================
+    // ============== "CLOSE ALL" for CLOSE MENU's BTN's =================
     directivesModule.directive('directiveBlindClose', function () {
         return {
             link: function (scope, element, attrs) {
@@ -124,7 +125,6 @@ define(['angular'], function (angular) {
 
                 element.on('click', function () {
                     menu = angular.element(document.querySelector('.header-dropdown-blind'));
-
                     menu.toggle('blind', 150);
 
                     menu.on('mouseleave', function () {
@@ -145,6 +145,7 @@ define(['angular'], function (angular) {
             }
         }
     });
+
     //SLIDE CLOSE for EDIT sub-menu's in MAIN MENU
     directivesModule.directive('directiveSlideHideGr', function () {
         return {
@@ -192,6 +193,7 @@ define(['angular'], function (angular) {
             }
         }
     });
+
     //SLIDE OPEN for EDIT sub-menu's in MAIN MENU
     directivesModule.directive('directiveSlideShowOrg', function () {
         return {
@@ -202,6 +204,7 @@ define(['angular'], function (angular) {
             }
         }
     });
+
     //SLIDE CLOSE for EDIT sub-menu's in MAIN MENU
     directivesModule.directive('directiveSlideHideOrg', function () {
         return {
@@ -214,7 +217,6 @@ define(['angular'], function (angular) {
     });
 
     ///////////////////////////////////////////SUB-MENU's in MENU/////////////////////////////////////////
-
 
     //BLIND OPEN/CLOSE for RENAME sub-menu's in EDIT MENU
     directivesModule.directive('directiveBlindShowOrg', function () {
@@ -238,7 +240,7 @@ define(['angular'], function (angular) {
         }
     });
 
-    // ============== CLOSE ALL for CLOSE MENU's BTN's =================
+    // ============== "CLOSE ALL" for CLOSE MENU's BTN's =================
     directivesModule.directive('directiveBlindCloseOrg', function () {
         return {
             link: function (scope, element, attrs) {
@@ -249,7 +251,7 @@ define(['angular'], function (angular) {
             }
         }
     });
+    /* **DIRECTIVES END** */
 
     return directivesModule;
 });
-  

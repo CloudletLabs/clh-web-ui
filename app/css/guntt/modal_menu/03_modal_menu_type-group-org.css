@@ -1,4 +1,3 @@
-
 /*TYPE MENU*/
 .res-modal-type-name{
 	font-size: 150%;
@@ -7,6 +6,7 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
 /*GROUP MENU*/
 .res-edit-category-unit-color{
 	margin: 5px 0px;
@@ -55,6 +55,7 @@
 .grp-name-color{
 	text-shadow: 1px 1px 1px #494949;
 }
+
 /*ORGANIZATION MENU*/
 .org-modal-edit-body-header div:first-of-type{
 	display: -moz-box;

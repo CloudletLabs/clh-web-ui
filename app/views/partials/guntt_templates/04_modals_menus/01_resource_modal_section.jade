@@ -1,0 +1,157 @@
+section.resource-modal-main
+    #resource.modal.fade
+        .modal-dialog.modal-lg
+            .modal-constent
+                .modal-body.resource-modal-block
+
+                    // RESOURCE MODAL MENU MAIN SECTION START
+                    section.resource-main-menu
+                        .res-modal-header
+                            div
+                                span RESOURCES
+                            div
+                                a(data-dismiss='modal', style='cursor: pointer;', directive-slide-hide='', directive-blind-close='')
+                                    img.close-btn(src='../img/guntt/modal-menu/close-t.png', alt='close', width='24px', height='25px', ng-click='resourceEditMenuClose()', title='close')
+                        .res-modal-body
+
+                            // res-modal-unit-block-MAIN USER START
+                            .res-modal-unit-block
+                                .res-modal-unit-block-top
+                                    .res-modal-unit-name
+                                        span(style='font-weight: bold;') {{user.userName}}
+                                    .res-modal-unit-edit(ng-show='false')
+                                        button(title='edit') edit
+
+
+                            // res-modal-unit-block-RESOURCES START
+                            .res-modal-unit-block(ng-repeat='resource in userResourceCollection')
+                                .res-modal-unit-block-top
+                                    .res-modal-unit-name
+                                        span(style='font-weight: bold;') {{resource.resName}}
+                                    .res-modal-unit-edit
+                                        button(directive-slide-show='', ng-click='resourceEditMenuOpen($index, resource.resName)', ng-hide='resourceEditMenuOpenStatus', title='edit') edit
+                                    .res-modal-unit-del
+                                        a(style='cursor: pointer;', ng-click='resRemovePannelShow=!resRemovePannelShow', title='delete', ng-hide='resourceEditMenuOpenStatus')
+                                            img.close-btn(src='../img/guntt/modal-menu/delete.png', alt='deletePanelShow', width='24px')
+                                .res-modal-unit-block-bottom.text-center(ng-show='resRemovePannelShow')
+                                    h4 Remove this resource completely?
+                                    .del-confirm-buttons
+                                        .del-confirm-cancel
+                                            a(ng-click='resRemovePannelShow=false', title='cancel')
+                                                img.close-btn(src='../img/guntt/modal-menu/cancel-t.png', alt='cancel', width='24px', height='24px')
+                                        .del-confirm-ok
+                                            a(ng-click='removeResource($index)')
+                                                img.confirm-btn(src='../img/guntt/modal-menu/ok-t.png', alt='ok', width='24px', title='delete')
+
+
+                        .res-modal-footer
+                            .text-center(ng-hide='resourceEditMenuOpenStatus')
+                                span add new resource
+                                br
+                                input.add-res-input(type='text', name='addRes', value='', ng-model='newResourseName', ng-minlength='2', ng-maxlength='25', placeholder='')
+                            .add-res-confirm(ng-hide='resourceEditMenuOpenStatus')
+                                a(ng-click='addNewResource(newResourseName)', style='cursor: pointer;')
+                                    img.confirm-btn(src='../img/guntt/modal-menu/add.png', title='add', width='34\
+                    px')
+                    // RESOURCE MODAL MENU MAIN SECTION END
+
+                    // RESOURCE MODAL MENU EDIT SECTION START
+                    section.resource-main-menu-edit.slide-menu(hidden='hidden')
+                        header.res-modal-edit-header
+                            div
+                                span
+                                    | RESOURCE:
+                                    span(style='font-weight: bold;') {{userResourceCollection[currentResourceEditMenuOpen.resIndex].resName}}
+                                    |                                        >Edit
+                            div
+                                a(style='cursor: pointer;', ng-click='resourceEditMenuClose()', title='close edit menu', directive-slide-hide='', directive-blind-close='')
+                                    img.close-btn(src='../img/guntt/modal-menu/close-t.png', alt='close', width='24px', height='25px')
+
+                        .res-modal-edit-body
+                            .res-modal-edit-body-header
+                                div
+                                    .res-modal-edit-body-header-name
+                                        span {{userResourceCollection[currentResourceEditMenuOpen.resIndex].resName}}
+                                    .res-modal-edit-body-header-rename-btn
+                                        button.modal-menu-btn(ng-click='renameBtnTrigger=!renameBtnTrigger', title='rename', directive-blind-show='')
+                                            | rename
+                                hr
+                                section.res-modal-edit-body-header-remame-form.blind-show(hidden='hidden')
+                                    span(for='resRemaneInput') Enter new resourse name
+                                    input#resRemaneInput.res-remane-input(type='text', placeholder='{{userResourceCollection[currentResourceEditMenuOpen.resIndex].resName}}', ng-model='newResName', ng-minlength='2', ng-maxlength='25')
+                                    a(ng-click='applyResEditNewName(newResName)', style='cursor: pointer;', title='apply')
+                                        img.confirm-btn(src='../img/guntt/modal-menu/ok-t.png', alt='ok', width='30px')
+                                    .res-modal-edit-body-header-back
+                                        a(directive-blind-show='')  back
+
+
+                            // res-modal-EDIT-TYPE-block START
+                            .res-modal-edit-type-block
+                                .res-modal-edit-type-block-top
+                                    .res-modal-edit-block-top-name
+                                        span
+                                            | Type:
+                                            span.res-edit-selected-type-name(title='{{userResourceCollection[currentResourceEditMenuOpen.resIndex].resType}}')
+                                                | {{userResourceCollection[currentResourceEditMenuOpen.resIndex].resType}}
+                                    .res-modal-unit-edit(style='position: relative;top: -7px;')
+                                        button(directive-blind-types-show='', title='edit') edit
+                                section.res-modal-edit-type-block-bottom.blind-show-types(hidden='hidden')
+                                    .res-edit-category
+                                        .res-edit-category-unit
+                                            ul(style='list-style: none;')
+                                                li(ng-repeat='type in userTypeCollection.userTypesList')
+                                                    input.checkbox-r(type='radio', id='radio-type{{$index}}', ng-model='$parent.resEditSelectedType', ng-checked='userResourceCollection[currentResourceEditMenuOpen.resIndex].resType == type? true : false', name='types-radio-list', value='{{type}}', style='cursor: pointer;')
+                                                    label.radio.category-radio-label(title='{{type}}', for='radio-type{{$index}}', style='cursor: pointer;') {{type}}
+                                        .type-select-apply
+                                            a(ng-click='applyResEditSelectedType(resEditSelectedType)', style='cursor: pointer;', title='apply', directive-blind-types-show='')
+                                                img.confirm-btn(src='../img/guntt/modal-menu/ok-t.png', alt='ok', width='30px')
+                            // res-modal-EDIT-TYPE-block END
+
+                            // res-modal-EDIT-GROUP-block START
+                            .res-modal-edit-group-block
+                                .res-modal-edit-group-block-top
+                                    .res-modal-edit-block-top-name
+                                        span Group:
+                                    .res-modal-unit-edit(style='position: relative;top: -1px;')
+                                        button(directive-blind-groups-show='', title='edit') edit
+                                    div
+                                        ul.res-edit-selected-group-name(ng-repeat='group in userResourceCollection[currentResourceEditMenuOpen.resIndex].resGroup', ng-if='group.isMember')
+                                            li.grp-name-color(style='color:{{group.groupColor}};')
+                                                | {{group.groupName}}
+                                section.res-modal-edit-group-block-bottom.blind-show-groups(hidden='hidden')
+                                    .res-edit-category
+                                        .res-edit-category-unit(style='margin-top: 10px')
+                                            ul(style='list-style: none;')
+                                                li(ng-repeat='group in userResourceCollection[currentResourceEditMenuOpen.resIndex].resGroup')
+                                                    input.checkbox(type='checkbox', id='checkbox{{$index}}', ng-model='group.isMember')
+                                                    label.text-nowrap.grp-name-color(for='checkbox{{$index}}', style='color: {{group.groupColor}}')
+                                                        | {{group.groupName}}
+                                        .type-select-apply
+                                            a(directive-blind-groups-show='', style='cursor: pointer;', title='apply', ng-click='applyResEditSelectedGroup()')
+                                                img.confirm-btn(src='../img/guntt/modal-menu/ok-t.png', alt='ok', width='30px')
+                            // res-modal-EDIT-GROUP-block END
+
+                            // res-modal-EDIT-ORGS-block START
+                            .res-modal-edit-orgs-block
+                                .res-modal-edit-orgs-block-top
+                                    .res-modal-edit-block-top-name
+                                        span Organization:
+                                    .res-modal-unit-edit(style='position: relative;top: -1px;')
+                                        button(directive-blind-orgs-show='', title='edit') edit
+                                    div
+                                        ul.res-edit-selected-orgs-name(ng-repeat='org in userResourceCollection[currentResourceEditMenuOpen.resIndex].resOrg', ng-if=" org.orgRole !='not assigned' ")
+                                            li(style='color: #7386A7')  {{org.orgName}}
+                                section.res-modal-edit-orgs-block-bottom.blind-show-orgs(hidden='hidden')
+                                    .res-edit-category
+                                        .res-edit-category-unit(style='margin-top: 10px')
+                                            ul(style='list-style: none; padding-left: 0')
+                                                li(ng-repeat='org in userResourceCollection[currentResourceEditMenuOpen.resIndex].resOrg')
+                                                    input.checkbox(type='checkbox', id='checkbox2{{$index}}', ng-checked='resOrgMembershipCheck($index)', ng-model='org.isMember')
+                                                    label.text-nowrap(for='checkbox2{{$index}}', style='color: #7386A7')
+                                                        | {{org.orgName}},
+                                                        span(title='{{org.orgRole}}') {{org.orgRole}}
+                                        .type-select-apply
+                                            a(ng-click='resOrgMembershipSetup()', directive-blind-orgs-show='', style='cursor: pointer;', title='apply')
+                                                img.confirm-btn(src='../img/guntt/modal-menu/ok-t.png', alt='ok', width='30px')
+                            // res-modal-EDIT-ORGS-block END
+                    // RESOURCE MODAL MENU EDIT SECTION END

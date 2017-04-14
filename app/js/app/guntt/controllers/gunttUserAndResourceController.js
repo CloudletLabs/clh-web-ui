@@ -1,18 +1,19 @@
 define(['angular'], function (angular) {
     'use strict';
 
-    /* DEFINE USER AND RESOURCES CONTROLLER MODULE */
-   var gunttUserAndResourcesCtrlModule = angular.module('gunttUserAndResourcesCtrlModule',[]);
+    /* DEFINE GUNTT USER AND RESOURCES CONTROLLER MODULE */
+    var gunttUserAndResourcesCtrlModule = angular.module('gunttUserAndResourcesCtrlModule', ['clhServices', 'gunttConstructorServicesModule']);
 
-   /*USER AND RESOURCES APP CONTROLLER **START** */
-   gunttUserAndResourcesCtrlModule.controller('gunttUserAndResourcesCtrl', function ($scope, $window, $document, $log, toastr) {
+    /*USER AND RESOURCES APP CONTROLLER **START** */
+    gunttUserAndResourcesCtrlModule.controller('gunttUserAndResourcesCtrl',
+        function ($scope, $window, $document, $log, toastr, ResourceService, GunttUserService) {
 
-        toastr.success('TEST: Wellcome to Guntt!');
+            //create user
+            $scope.user = GunttUserService;
+            $scope.user.getUserInitData();
 
-
+        });
     /*USER AND RESOURCES APP CONTROLLER **END** */
 
     return gunttUserAndResourcesCtrlModule;
-    /*END*/
-    });
 });
