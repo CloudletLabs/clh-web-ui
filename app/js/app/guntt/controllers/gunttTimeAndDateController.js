@@ -11,6 +11,7 @@ define(['angular'], function (angular) {
 
             /*GUNTT DATE CONSTRUCTOR **START** */
             function GunttDateConstructor() {
+                this.ToDayFixed = new Date();
                 this.toDay = new Date();
                 this.DateInputPattern = new RegExp('[0-3]{1}[0-9]{1}.[0-1]{1}[0-9]{1}.(20)[0-9]{1}[0-9]{1}');
                 this.showToDay = false;
@@ -22,8 +23,7 @@ define(['angular'], function (angular) {
 
             //'Go Back ToDAY!' button display conditions
             GunttDateConstructor.prototype._goToDayDisplay = function () {
-                var trueToDay = new Date();
-                (this.toDay < trueToDay.setHours(0, 0) || this.toDay > trueToDay.setHours(23, 59))
+                (this.toDay < this.ToDayFixed.setHours(0, 0) || this.toDay > this.ToDayFixed.setHours(23, 59))
                     ? this.showToDay = true
                     : this.showToDay = false;
             };
@@ -55,7 +55,7 @@ define(['angular'], function (angular) {
             };
             /*GUNTT DATE CONSTRUCTOR **END** */
 
-            //init GunttDate Obj.
+            /* Init GunttDate Obj. */
             $scope.GunttDate = new GunttDateConstructor();
 
             /*DISPLAY DATE TABLE OPERATIONS **END** */
